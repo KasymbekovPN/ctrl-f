@@ -22,7 +22,8 @@ public final class TagCreationController implements RequestController<TagCreatio
 	@MessageMapping("/tagCreationRequest/{sessionId}")
 	@SendTo("/topic/tagCreationResponse/{sessionId}")
 	public Result<Tag> response(@DestinationVariable String sessionId, Request request) {
-		return tagService.save(new Tag(null, request.getName()));
+		Result<Tag> result = tagService.save(new Tag(null, request.getName()));
+		return result;
 	}
 
 	@Getter
