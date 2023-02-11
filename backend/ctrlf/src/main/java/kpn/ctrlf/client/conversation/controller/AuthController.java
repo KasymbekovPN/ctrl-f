@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.function.Function;
 
+// TODO: 11.02.2023 remake returned
 @Controller
 @RequiredArgsConstructor
 public final class AuthController implements RequestController<AuthController.Request, AuthController.Response>{

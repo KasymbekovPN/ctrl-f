@@ -21,9 +21,9 @@ class ResponseConverterImplTest {
 	@Test
 	void shouldCheckConversion_ifResultSuccessIsFalse() {
 		ImmutableResult<Integer> result = ImmutableResult.<Integer>bFail(CODE).arg(ARG).build();
-		ResponseConverterImpl converter = new ResponseConverterImpl(createValueConverter(), createErrorConverter());
+		ResponseConverterImpl converter = new ResponseConverterImpl();
 
-		Response response = converter.convert(result);
+		Response response = converter.convert(result, createValueConverter(), createErrorConverter());
 		assertThat(response.isSuccess()).isFalse();
 		assertThat(response.getValue()).isNull();
 		assertThat(response.getCode()).isEqualTo(CODE);
@@ -35,9 +35,9 @@ class ResponseConverterImplTest {
 	@Test
 	void shouldCheckConversion_ifResultSuccessIsTrue() {
 		ImmutableResult<Integer> result = ImmutableResult.<Integer>ok(VALUE);
-		ResponseConverterImpl converter = new ResponseConverterImpl(createValueConverter(), createErrorConverter());
+		ResponseConverterImpl converter = new ResponseConverterImpl();
 
-		Response response = converter.convert(result);
+		Response response = converter.convert(result, createValueConverter(), createErrorConverter());
 		assertThat(response.isSuccess()).isTrue();
 		assertThat(response.getCode()).isNull();
 		assertThat(response.getArgs()).isNull();

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.Map;
 
+// TODO: 11.02.2023 remake returned
 @Controller
 @RequiredArgsConstructor
 public final class I18nController implements RequestController<I18nController.Request, I18nController.Response> {

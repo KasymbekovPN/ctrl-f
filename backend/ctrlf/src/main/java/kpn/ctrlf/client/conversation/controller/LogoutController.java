@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+// TODO: 11.02.2023 remake returned
 @Controller
 public final class LogoutController implements RequestController<LogoutController.Request, LogoutController.Response> {
 

@@ -6,14 +6,13 @@ import kpn.ctrlf.client.conversation.response.converter.args.ErrorArgsConverter;
 import kpn.ctrlf.client.conversation.response.converter.value.ValueConverter;
 import kpn.lib.result.Result;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public final class ResponseConverterImpl implements ResponseConverter {
-	private final ValueConverter valueConverter;
-	private final ErrorArgsConverter errorArgsConverter;
-
 	@Override
-	public Response convert(Result<?> input) {
+	public Response convert(Result<?> input, ValueConverter valueConverter, ErrorArgsConverter errorArgsConverter) {
 		return input.isSuccess()
 			? new ResponseImpl(valueConverter.convert(input.getValue()))
 			: new ResponseImpl(
