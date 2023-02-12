@@ -5,7 +5,7 @@ import kpn.ctrlf.client.conversation.response.value.Value;
 
 public interface Response {
 	boolean isSuccess();
-	Value getValue();
-	String getCode();
-	ErrorArgs getArgs();
+	default Value getValue() {return null;};
+	default String getCode() {return null;};
+	default ErrorArgs getArgs() {return null;};
 }
