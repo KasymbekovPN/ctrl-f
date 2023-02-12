@@ -1,6 +1,9 @@
 package kpn.ctrlf.client.conversation.controller;
 
-import kpn.ctrlf.client.conversation.controller.ClientParamsController;
+import kpn.ctrlf.client.conversation.request.EmptyRequest;
+import kpn.ctrlf.client.conversation.response.OkResponse;
+import kpn.ctrlf.client.conversation.response.factory.ResponseFactoryImpl;
+import kpn.ctrlf.client.conversation.response.value.ClientParamsControllerValue;
 import kpn.ctrlf.client.params.ClientParams;
 import org.junit.jupiter.api.Test;
 
@@ -9,21 +12,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ClientParamsControllerTest {
 
 	@Test
-	void shouldCheckResponseLocaleGetting() {
-		String expectedLocale = "en";
-		String locale = new ClientParamsController.Response(expectedLocale).getLocale();
-
-		assertThat(locale).isEqualTo(expectedLocale);
-	}
-
-	@Test
 	void shouldCheckResponseMethod() {
 		String expectedLocale = "en";
 		ClientParams clientParams = new ClientParams(expectedLocale);
-		ClientParamsController.Response response
-			= new ClientParamsController(clientParams).response("", new ClientParamsController.Request());
+		OkResponse response = (OkResponse) new ClientParamsController(
+			new ResponseFactoryImpl(),
+			clientParams
+		).response("", new EmptyRequest());
 
-		assertThat(response.getClass()).isEqualTo(ClientParamsController.Response.class);
-		assertThat(response.getLocale()).isEqualTo(expectedLocale);
+		assertThat(response.isSuccess()).isTrue();
+		assertThat(response.getValue().getClass()).isEqualTo(ClientParamsControllerValue.class);
+		ClientParamsControllerValue castValue = (ClientParamsControllerValue) response.getValue();
+		assertThat(castValue.getLocale()).isEqualTo(expectedLocale);
 	}
 }

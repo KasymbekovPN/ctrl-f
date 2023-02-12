@@ -7,7 +7,11 @@ import { NOTIFICATION } from "../../sconst/notification";
 
 const processClientParamsSubscription = ({dispatch}, response) => {
 	const clientParams = JSON.parse(response.body);
-	dispatch(I18N.SET.LOCALE, clientParams.locale);
+	//<
+	console.log('--- client params ---');
+	console.log(clientParams);
+	//<
+	dispatch(I18N.SET.LOCALE, clientParams.value.locale);
 	dispatch(CONNECTION.SEND, {
 		destination: config.requests.i18n,
 		headers: {},

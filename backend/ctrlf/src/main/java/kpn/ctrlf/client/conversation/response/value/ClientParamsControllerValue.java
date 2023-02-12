@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public final class TagCreationControllerValue implements Value {
-	private final Long id; // TODO: 12.02.2023 is it need ???
-	private final String name;
+public class ClientParamsControllerValue implements Value{
+	private final String locale;
 }

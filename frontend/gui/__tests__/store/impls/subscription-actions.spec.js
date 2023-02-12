@@ -15,7 +15,7 @@ import { NOTIFICATION } from "../../../src/sconst/notification";
 describe('subscription-actions.js', () => {
 
 	const response = {
-		body: '{\"locale\":\"en\"}'
+		body: '{\"value\": {\"locale\":\"en\"}}'
 	};
 
 	let dispatchResult = {};
@@ -30,7 +30,7 @@ describe('subscription-actions.js', () => {
 	test('should check clientParams subscription action ', () => {
 		const clientParams = JSON.parse(response.body);
 		const expectedDispatchResult = {
-			[I18N.SET.LOCALE]: clientParams.locale,
+			[I18N.SET.LOCALE]: clientParams.value.locale,
 			[CONNECTION.SEND]: {
 				destination: config.requests.i18n,
 				headers: {},
@@ -95,13 +95,15 @@ describe('subscription-actions.js', () => {
 	})
 
 	test('should check tag creation subscription action if fail', () => {
-		const seed = {code: 'some.code'};
+		const code = 'some.code';
+		const args = {arg0: 'value0'};
 		const expectedDispatchResult = {
-			[NOTIFICATION.ERROR]: seed
+			[NOTIFICATION.ERROR]: {code, args}
 		};
 		const body = {
 			success: false,
-			seed
+			code,
+			args
 		};
 		const response = {
 			body: JSON.stringify(body)
