@@ -15,7 +15,7 @@ import java.util.function.Function;
 // TODO: 11.02.2023 remake returned
 @Controller
 @RequiredArgsConstructor
-public final class AuthController implements RequestController<AuthController.Request, AuthController.Response>{
+public final class AuthController implements RequestControllerOlf<AuthController.Request, AuthController.Response> {
 	private final UserSecureService<User> userSecureService;
 
 	// TODO: 04.02.2023 del

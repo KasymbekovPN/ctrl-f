@@ -64,6 +64,8 @@
 			onSaveButtonClick: function() {
 				this.sendNewTag({name: this.name});
 				this.$emit('close-modal');
+				this.name = '';
+				this.id = undefined;
 			},
 			onDeleteButtonClick: function() {}
 		}

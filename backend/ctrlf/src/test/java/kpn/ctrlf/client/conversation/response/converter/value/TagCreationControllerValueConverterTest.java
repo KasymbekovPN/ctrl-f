@@ -12,12 +12,14 @@ class TagCreationControllerValueConverterTest {
 	@Test
 	void shouldCheckConversion() {
 		String expectedName = "some.name";
-		Tag tag = new Tag(0L, expectedName);
+		long expectedId = 123L;
+		Tag tag = new Tag(expectedId, expectedName);
 
 		Value value = new TagCreationControllerValueConverter().convert(tag);
 
 		assertThat(value.getClass()).isEqualTo(TagCreationControllerValue.class);
 		TagCreationControllerValue castValue = (TagCreationControllerValue) value;
 		assertThat(castValue.getName()).isEqualTo(expectedName);
+		assertThat(castValue.getId()).isEqualTo(expectedId);
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 // TODO: 11.02.2023 remake returned
 @Controller
 @RequiredArgsConstructor
-public final class ClientParamsController implements RequestController<ClientParamsController.Request, ClientParamsController.Response> {
+public final class ClientParamsController implements RequestControllerOlf<ClientParamsController.Request, ClientParamsController.Response> {
 
 	private final ClientParams clientParams;
 

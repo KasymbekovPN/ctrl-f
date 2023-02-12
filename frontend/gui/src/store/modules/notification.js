@@ -5,10 +5,11 @@ const state = {};
 const getters = {};
 
 const actions = {
-	[NOTIFICATION.ERROR]: ({dispatch}, seed) => {
+	[NOTIFICATION.ERROR]: ({dispatch}, {code, args}) => {
 		//<
 		console.log(dispatch);
-		console.log(seed);
+		console.log(code);
+		console.log(args);
 		//<
 		//< impl it
 	}

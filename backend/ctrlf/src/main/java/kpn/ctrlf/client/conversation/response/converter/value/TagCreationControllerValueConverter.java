@@ -13,6 +13,6 @@ public final class TagCreationControllerValueConverter implements ValueConverter
 	@Override
 	public Value convert(Object input) {
 		Tag tag = (Tag) input;
-		return new TagCreationControllerValue(tag.getName());
+		return new TagCreationControllerValue(tag.getId(), tag.getName());
 	}
 }

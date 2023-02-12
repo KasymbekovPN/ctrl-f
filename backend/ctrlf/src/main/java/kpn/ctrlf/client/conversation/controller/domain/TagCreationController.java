@@ -19,9 +19,10 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-// TODO: 11.02.2023 remake returned
 @Controller
-public final class TagCreationController implements RequestController<TagCreationController.Request, Result<Tag>> {
+@Setter
+public final class TagCreationController implements RequestController<TagCreationController.Request> {
+
 	@Autowired
 	private FakeTagService tagService;
 
@@ -39,19 +40,9 @@ public final class TagCreationController implements RequestController<TagCreatio
 	@Override
 	@MessageMapping("/tagCreationRequest/{sessionId}")
 	@SendTo("/topic/tagCreationResponse/{sessionId}")
-	public Result<Tag> response(@DestinationVariable String sessionId, Request request) {
-		// TODO: 11.02.2023 del
-		System.out.println(valueConverter);
-		System.out.println(errorArgsConverter);
-		//<
-
+	public Response response(@DestinationVariable String sessionId, Request request) {
 		Result<Tag> result = tagService.save(new Tag(null, request.getName()));
-
-		// TODO: 11.02.2023 temp
-		Response response = responseConverter.convert(result, valueConverter, errorArgsConverter);
-		//<
-
-		return result;
+		return responseConverter.convert(result, valueConverter, errorArgsConverter);
 	}
 
 	@Getter
