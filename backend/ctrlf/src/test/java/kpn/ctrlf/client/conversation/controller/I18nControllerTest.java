@@ -1,11 +1,15 @@
 package kpn.ctrlf.client.conversation.controller;
 
-import kpn.ctrlf.client.conversation.controller.I18nController;
+import kpn.ctrlf.client.conversation.request.EmptyRequest;
+import kpn.ctrlf.client.conversation.response.OkResponse;
+import kpn.ctrlf.client.conversation.response.factory.ResponseFactoryImpl;
+import kpn.ctrlf.client.conversation.response.value.I18nControllerValue;
 import kpn.ctrlf.client.i18n.I18nSource;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class I18nControllerTest {
 
@@ -19,8 +23,11 @@ class I18nControllerTest {
 		);
 
 		I18nSource source = I18nSource.create(init);
-		I18nController.Response response = new I18nController(source).response("", new I18nController.Request());
+		OkResponse response = (OkResponse) new I18nController(new ResponseFactoryImpl(), source).response("", new EmptyRequest());
 
-		Assertions.assertThat(response.getTemplates()).isEqualTo(expected);
+		assertThat(response.isSuccess()).isTrue();
+		assertThat(response.getValue().getClass()).isEqualTo(I18nControllerValue.class);
+		I18nControllerValue castValue = (I18nControllerValue) response.getValue();
+		assertThat(castValue.getTemplates()).isEqualTo(expected);
 	}
 }

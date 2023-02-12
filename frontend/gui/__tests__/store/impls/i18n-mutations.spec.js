@@ -14,8 +14,10 @@ describe('i18n-mutations.js', () => {
 
 	test('should check mutateOnSetTemplates', () => {
 		const data = {
-			templates : {
-				'some.code' : {'en' : 'enTr', 'ru': 'ruTr'}
+			value: {
+				templates : {
+					'some.code' : {'en' : 'enTr', 'ru': 'ruTr'}
+				}
 			}
 		};
 

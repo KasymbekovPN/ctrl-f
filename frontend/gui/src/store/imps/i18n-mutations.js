@@ -7,8 +7,8 @@ const mutateOnSetLocale = (state, locale) => {
 
 const mutateOnSetTemplates = (state, data) => {
 	const i18n = new I18n();
-	for(const code in data.templates){
-		const result = createTrTemplates(code, data.templates[code]);
+	for(const code in data.value.templates){
+		const result = createTrTemplates(code, data.value.templates[code]);
 		if (result.success){
 			i18n.addTemplate(result.value);
 		}

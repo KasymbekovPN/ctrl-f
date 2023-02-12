@@ -17,6 +17,10 @@ const processClientParamsSubscription = ({dispatch}, response) => {
 
 const processI18nSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
+	//<
+	console.log('--- i18n ---');
+	console.log(data);
+	//<
 	dispatch(I18N.SET.TEMPLATES, data);
 };
 
