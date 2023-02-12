@@ -1,7 +1,7 @@
 package kpn.ctrlf.client.conversation.controller.domain;
 
+import kpn.ctrlf.client.conversation.response.OkResponse;
 import kpn.ctrlf.client.conversation.response.Response;
-import kpn.ctrlf.client.conversation.response.ResponseImpl;
 import kpn.ctrlf.client.conversation.response.converter.ResponseConverter;
 import kpn.ctrlf.client.conversation.response.value.Value;
 import kpn.ctrlf.data.domain.Tag;
@@ -29,7 +29,7 @@ class TagCreationControllerTest {
 		controller.setTagService(createTagService());
 		controller.setResponseConverter(createResponseConverter());
 
-		Response response = controller.response("", request);
+		OkResponse response = (OkResponse) controller.response("", request);
 		assertThat(response.getValue().getClass()).isEqualTo(TestValue.class);
 		TestValue castValue = (TestValue) response.getValue();
 		assertThat(castValue.getName()).isEqualTo(NAME);
@@ -48,7 +48,7 @@ class TagCreationControllerTest {
 		TestResponseConverter converter = Mockito.mock(TestResponseConverter.class);
 		Mockito
 			.when(converter.convert(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject()))
-			.thenReturn(new ResponseImpl(new TestValue(NAME)));
+			.thenReturn(new OkResponse(new TestValue(NAME)));
 
 		return converter;
 	}
