@@ -1,29 +1,18 @@
 package kpn.ctrlf.client.conversation.controller;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
+import kpn.ctrlf.client.conversation.request.EmptyRequest;
+import kpn.ctrlf.client.conversation.response.Response;
+import kpn.ctrlf.client.conversation.response.ResponseImpl;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-// TODO: 11.02.2023 remake returned
 @Controller
-public final class LogoutController implements RequestControllerOlf<LogoutController.Request, LogoutController.Response> {
-
+public final class LogoutController implements RequestController<EmptyRequest> {
 	@Override
 	@MessageMapping("/logoutRequest/{sessionId}")
 	@SendTo("/topic/logoutResponse/{sessionId}")
-	public Response response(@DestinationVariable String sessionId,
-							 Request request){
-		return new Response(true);
-	}
-
-	public static class Request {}
-
-	@RequiredArgsConstructor
-	@Getter
-	public static class Response {
-		private final boolean success;
+	public Response response(String sessionId, EmptyRequest request) {
+		return new ResponseImpl(null);
 	}
 }

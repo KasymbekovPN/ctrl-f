@@ -4,6 +4,7 @@ import kpn.ctrlf.client.conversation.response.args.ErrorArgs;
 import kpn.ctrlf.client.conversation.response.value.Value;
 import lombok.Getter;
 
+// TODO: 12.02.2023 one private constructor, + static public methods which are creators
 @Getter
 public final class ResponseImpl implements Response {
 	private final boolean success;

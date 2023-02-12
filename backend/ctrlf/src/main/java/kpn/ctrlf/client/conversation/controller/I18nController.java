@@ -22,6 +22,8 @@ public final class I18nController implements RequestControllerOlf<I18nController
 	@SendTo("/topic/i18nResponse/{sessionId}")
 	public Response response(@DestinationVariable String sessionId,
 							 Request request){
+		// TODO: 12.02.2023 del
+		System.out.println(this);
 		return new Response(i18nSource.get());
 	}
 	public static  class Request {}

@@ -25,6 +25,9 @@ public final class AuthController implements RequestControllerOlf<AuthController
 	@MessageMapping("/authRequest/{sessionId}")
 	@SendTo("/topic/authResponse/{sessionId}")
 	public Response response(@DestinationVariable String sessionId, Request request) {
+		// TODO: 12.02.2023 del
+		System.out.println(this);
+
 		// TODO: 04.02.2023 del
 //		System.out.println(template);
 

@@ -27,6 +27,10 @@ const processAuthRequestSubscription = ({dispatch}, response) => {
 
 const processLogoutRequestSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
+	//< del
+	console.log('logout');
+	console.log(data);
+	//<
 	dispatch(AUTH.LOGOUT.RESPONSE, data);
 };
 

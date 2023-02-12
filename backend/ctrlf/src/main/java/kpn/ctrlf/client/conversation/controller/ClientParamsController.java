@@ -19,6 +19,8 @@ public final class ClientParamsController implements RequestControllerOlf<Client
 	@SendTo("/topic/clientParamsResponse/{sessionId}")
 	public Response response(@DestinationVariable String sessionId,
 							 Request request){
+		// TODO: 12.02.2023 del
+		System.out.println(this);
 		return new Response(clientParams.getLocale());
 	}
 

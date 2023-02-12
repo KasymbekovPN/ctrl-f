@@ -1,27 +1,20 @@
 package kpn.ctrlf.client.conversation.controller;
 
-import kpn.ctrlf.client.conversation.controller.LogoutController;
+import kpn.ctrlf.client.conversation.request.EmptyRequest;
+import kpn.ctrlf.client.conversation.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LogoutControllerTest {
-
-	@Test
-	void shouldCheckResponseIsSuccessMethod_ifFalse() {
-		LogoutController.Response response = new LogoutController.Response(false);
-		assertThat(response.isSuccess()).isFalse();
-	}
-
-	@Test
-	void shouldCheckResponseIsSuccessMethod_ifTrue() {
-		LogoutController.Response response = new LogoutController.Response(true);
-		assertThat(response.isSuccess()).isTrue();
-	}
-
 	@Test
 	void shouldCheckResponseMethod() {
-		LogoutController.Response response = new LogoutController().response("", new LogoutController.Request());
+		LogoutController controller = new LogoutController();
+		Response response = controller.response("", new EmptyRequest());
+
 		assertThat(response.isSuccess()).isTrue();
+		assertThat(response.getValue()).isNull();
+		assertThat(response.getCode()).isNull();
+		assertThat(response.getArgs()).isNull();
 	}
 }
