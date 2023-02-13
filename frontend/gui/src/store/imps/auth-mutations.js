@@ -5,11 +5,11 @@ const mutateOnLoginRequest = state => {
 	state.authStatus = AUTH.STATUS.LOADING;
 };
 
-const mutateOnLoginSuccess = (state, ls, response) => {
-	ls.setItem(LOCAL_STORAGE_KEYS.USER_TOKEN, response.token);
+const mutateOnLoginSuccess = (state, ls, value) => {
+	ls.setItem(LOCAL_STORAGE_KEYS.USER_TOKEN, value.token);
 	state.authenticated = true;
 	state.authStatus = AUTH.STATUS.SUCCESS;
-	state.token = response.token;
+	state.token = value.token;
 };
 
 const mutateOnLoginError = (state, ls) => {

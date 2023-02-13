@@ -6,7 +6,7 @@ import kpn.ctrlf.client.conversation.response.value.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ResponseFactoryImpl implements ResponseFactory {
+public final class ResponseFactoryImpl implements ResponseFactory {
 	@Override
 	public Response createSimpleResponse(boolean success) {
 		return new SimpleResponse(success);

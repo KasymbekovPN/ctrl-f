@@ -52,25 +52,26 @@ describe('auth-actions.js', () => {
 	test('should check responseLogin-actions if response is fail', () => {
 		const response = {success: false};
 		const expectedCommitResult = {command: AUTH.LOGIN.ERROR};
-		const expectedDispatchResult = {
-			command: USER.PROFILE.SET,
-			data: response
-		};
 		const router = new Router();
 
 		responseLogin({commit, dispatch, router}, response);
 		expect(commitResult).toStrictEqual(expectedCommitResult);
-		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
 		expect(router.path).toBe(config.paths.home);
 		reset();
 	});
 
 	test('should check responseLogin-actions', () => {
-		const response = {success: true};
-		const expectedCommitResult = {command: AUTH.LOGIN.SUCCESS, data: response};
+		const response = {
+			success: true,
+			value: {
+				token: 'some token',
+				username: 'some username'
+			}
+		};
+		const expectedCommitResult = {command: AUTH.LOGIN.SUCCESS, data: response.value};
 		const expectedDispatchResult = {
 			command: USER.PROFILE.SET,
-			data: response
+			data: response.value
 		};
 		const router = new Router();
 

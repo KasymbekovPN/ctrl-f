@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class ClientParamsControllerValue implements Value{
+public final class ClientParamsControllerValue implements Value{
 	private final String locale;
 }

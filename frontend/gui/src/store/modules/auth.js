@@ -43,7 +43,7 @@ const actions = {
 
 const mutations = {
 	[AUTH.LOGIN.REQUEST]: mutateOnLoginRequest,
-	[AUTH.LOGIN.SUCCESS]: (state, response) => { mutateOnLoginSuccess(state, localStorage, response); },
+	[AUTH.LOGIN.SUCCESS]: (state, value) => { mutateOnLoginSuccess(state, localStorage, value); },
 	[AUTH.LOGIN.ERROR]: state => { mutateOnLoginError(state, localStorage); },
 	[AUTH.LOGOUT.REQUEST]: mutateOnLogoutRequest,
 	[AUTH.LOGOUT.SUCCESS]: state => { mutateOnLogoutSuccess(state, localStorage); },

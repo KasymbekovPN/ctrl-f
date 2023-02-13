@@ -7,10 +7,6 @@ import { NOTIFICATION } from "../../sconst/notification";
 
 const processClientParamsSubscription = ({dispatch}, response) => {
 	const clientParams = JSON.parse(response.body);
-	//<
-	console.log('--- client params ---');
-	console.log(clientParams);
-	//<
 	dispatch(I18N.SET.LOCALE, clientParams.value.locale);
 	dispatch(CONNECTION.SEND, {
 		destination: config.requests.i18n,
@@ -21,10 +17,6 @@ const processClientParamsSubscription = ({dispatch}, response) => {
 
 const processI18nSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
-	//<
-	console.log('--- i18n ---');
-	console.log(data);
-	//<
 	dispatch(I18N.SET.TEMPLATES, data);
 };
 
@@ -35,18 +27,11 @@ const processAuthRequestSubscription = ({dispatch}, response) => {
 
 const processLogoutRequestSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
-	//< del
-	console.log('logout');
-	console.log(data);
-	//<
 	dispatch(AUTH.LOGOUT.RESPONSE, data);
 };
 
 const processTagCreationSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
-	//<
-	console.log(data);
-	//<
 	if (data.success){
 		dispatch(TAG.CREATED, data.value);
 	} else {

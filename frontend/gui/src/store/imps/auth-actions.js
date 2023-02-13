@@ -14,11 +14,11 @@ const requestLogin = ({commit, dispatch}, user) => {
 
 const responseLogin = ({commit, dispatch, router}, response) => {
 	if (response.success){
-		commit(AUTH.LOGIN.SUCCESS, response);
+		commit(AUTH.LOGIN.SUCCESS, response.value);
+		dispatch(USER.PROFILE.SET, response.value);
 	} else {
 		commit(AUTH.LOGIN.ERROR);
 	}
-	dispatch(USER.PROFILE.SET, response);
 	router.push(config.paths.home);
 };
 

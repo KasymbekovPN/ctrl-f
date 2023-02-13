@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public final class TagCreationControllerValue implements Value {
-	private final Long id;
-	private final String name;
+public final class AuthControllerValue implements Value{
+	private final String token;
+	private final String username;
 }
