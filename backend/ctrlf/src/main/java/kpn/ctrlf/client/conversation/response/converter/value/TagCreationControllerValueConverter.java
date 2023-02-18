@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 @ControllerConverter(Controllers.TAG_CREATION)
 @Component
-@Qualifier(ValueConverters.TAG_CREATION) // TODO: 18.02.2023 del value
 public final class TagCreationControllerValueConverter implements ValueConverter {
 	@Override
 	public Value convert(Object input) {

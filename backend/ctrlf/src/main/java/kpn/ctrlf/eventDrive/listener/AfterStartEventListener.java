@@ -1,6 +1,8 @@
 package kpn.ctrlf.eventDrive.listener;
 
+import kpn.ctrlf.client.conversation.controller.binding.ConverterControllerBinder;
 import kpn.ctrlf.eventDrive.event.AfterStartEvent;
+import kpn.lib.result.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -11,13 +13,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public final class AfterStartEventListener {
 	private final ApplicationContext context;
+	private final ConverterControllerBinder binder;
 
 	@EventListener
 	public void processEvent(AfterStartEvent event){
-		// TODO: 14.02.2023 add bean-checker for ArgsConverters
-		// TODO: 14.02.2023 add bean-checker for ValuesConverters
-
-		System.out.println("---- processEvent");
-//		((ConfigurableApplicationContext) context).close();
+		Result<Void> result = binder.bind();
+		if (!result.isSuccess()){
+			((ConfigurableApplicationContext) context).close();
+		}
 	}
 }
