@@ -1,8 +1,6 @@
 package kpn.ctrlf.client.conversation.controller.domain;
 
-import kpn.ctrlf.client.conversation.controller.ArgsConverters;
-import kpn.ctrlf.client.conversation.controller.RequestController;
-import kpn.ctrlf.client.conversation.controller.ValueConverters;
+import kpn.ctrlf.client.conversation.controller.*;
 import kpn.ctrlf.client.conversation.response.Response;
 import kpn.ctrlf.client.conversation.response.converter.ResponseConverter;
 import kpn.ctrlf.client.conversation.response.converter.args.ErrorArgsConverter;
@@ -19,6 +17,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+@ControllerConverter(Controllers.TAG_CREATION)
 @Controller
 @Setter
 public final class TagCreationController implements RequestController<TagCreationController.Request> {

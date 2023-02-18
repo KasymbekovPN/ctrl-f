@@ -1,5 +1,7 @@
 package kpn.ctrlf.client.conversation.response.converter.value;
 
+import kpn.ctrlf.client.conversation.controller.ControllerConverter;
+import kpn.ctrlf.client.conversation.controller.Controllers;
 import kpn.ctrlf.client.conversation.controller.ValueConverters;
 import kpn.ctrlf.client.conversation.response.value.TagCreationControllerValue;
 import kpn.ctrlf.client.conversation.response.value.Value;
@@ -7,8 +9,9 @@ import kpn.ctrlf.data.domain.Tag;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+@ControllerConverter(Controllers.TAG_CREATION)
 @Component
-@Qualifier(ValueConverters.TAG_CREATION)
+@Qualifier(ValueConverters.TAG_CREATION) // TODO: 18.02.2023 del value
 public final class TagCreationControllerValueConverter implements ValueConverter {
 	@Override
 	public Value convert(Object input) {
