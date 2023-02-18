@@ -24,7 +24,7 @@ class ConverterControllerBinderImplTest {
 	@SneakyThrows
 	@Test
 	void shouldCheckControllerAddition_ifControllerWithoutAnnotation() {
-		ConverterControllerBinder binder = new ConverterControllerBinderImpl();
+		ConverterControllerHolder binder = new ConverterControllerBinderImpl();
 		binder.addController(new TestRequestControllerWithoutAnnotation());
 
 		Field field = binder.getClass().getDeclaredField("controllers");
@@ -38,7 +38,7 @@ class ConverterControllerBinderImplTest {
 	@Test
 	void shouldCheckControllerAddition() {
 		TestRequestController controller = new TestRequestController();
-		ConverterControllerBinder binder = new ConverterControllerBinderImpl();
+		ConverterControllerHolder binder = new ConverterControllerBinderImpl();
 		binder.addController(controller);
 
 		Field field = binder.getClass().getDeclaredField("controllers");
@@ -54,7 +54,7 @@ class ConverterControllerBinderImplTest {
 	@SneakyThrows
 	@Test
 	void shouldCheckValueConverterAddition_ifConverterWithoutAnnotation() {
-		ConverterControllerBinder binder = new ConverterControllerBinderImpl();
+		ConverterControllerHolder binder = new ConverterControllerBinderImpl();
 		binder.addValueConverter(new TestValueConverterWithoutAnnotation());
 
 		Field field = binder.getClass().getDeclaredField("valueConverters");
@@ -68,7 +68,7 @@ class ConverterControllerBinderImplTest {
 	@Test
 	void shouldCheckValueConverterAddition() {
 		TestValueConverter converter = new TestValueConverter();
-		ConverterControllerBinder binder = new ConverterControllerBinderImpl();
+		ConverterControllerHolder binder = new ConverterControllerBinderImpl();
 		binder.addValueConverter(converter);
 
 		Field field = binder.getClass().getDeclaredField("valueConverters");
@@ -84,7 +84,7 @@ class ConverterControllerBinderImplTest {
 	@SneakyThrows
 	@Test
 	void shouldCheckErrorArgsAddition_ifConverterWithoutAnnotation() {
-		ConverterControllerBinder binder = new ConverterControllerBinderImpl();
+		ConverterControllerHolder binder = new ConverterControllerBinderImpl();
 		binder.addErrorArgsConverter(new TestErrorArgsConverterWithoutAnnotation());
 
 		Field field = binder.getClass().getDeclaredField("errorArgsConverters");
@@ -98,7 +98,7 @@ class ConverterControllerBinderImplTest {
 	@Test
 	void shouldCheckErrorArgsConverterAddition() {
 		TestErrorArgsConverter converter = new TestErrorArgsConverter();
-		ConverterControllerBinder binder = new ConverterControllerBinderImpl();
+		ConverterControllerHolder binder = new ConverterControllerBinderImpl();
 		binder.addErrorArgsConverter(converter);
 
 		Field field = binder.getClass().getDeclaredField("errorArgsConverters");

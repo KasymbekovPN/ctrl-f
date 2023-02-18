@@ -11,7 +11,6 @@ import kpn.lib.result.Result;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -24,18 +23,10 @@ public final class TagCreationController implements RequestController<TagCreatio
 
 	@Autowired
 	private FakeTagService tagService;
-
 	@Autowired
 	private ResponseConverter responseConverter;
 
-	// TODO: 18.02.2023 del
-//	@Autowired
-//	@Qualifier(ValueConverters.TAG_CREATION)
 	private ValueConverter valueConverter;
-
-	// TODO: 18.02.2023 del
-//	@Autowired
-//	@Qualifier(ArgsConverters.TAG_CREATION)
 	private ErrorArgsConverter errorArgsConverter;
 
 	@Override

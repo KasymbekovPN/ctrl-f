@@ -1,6 +1,6 @@
 package kpn.ctrlf.eventDrive.listener;
 
-import kpn.ctrlf.client.conversation.controller.binding.ConverterControllerBinder;
+import kpn.ctrlf.client.conversation.controller.binding.Binder;
 import kpn.ctrlf.eventDrive.event.AfterStartEvent;
 import kpn.lib.result.ImmutableResult;
 import lombok.Getter;
@@ -22,7 +22,7 @@ class AfterStartEventListenerTest {
 		assertThat(context.isClosed()).isFalse();
 	}
 
-	private ConverterControllerBinder createSuccessBinder() {
+	private Binder createSuccessBinder() {
 		TestBinder binder = Mockito.mock(TestBinder.class);
 		Mockito
 			.when(binder.bind())
@@ -40,7 +40,7 @@ class AfterStartEventListenerTest {
 		assertThat(context.isClosed()).isTrue();
 	}
 
-	private ConverterControllerBinder createFailBinder() {
+	private Binder createFailBinder() {
 		TestBinder binder = Mockito.mock(TestBinder.class);
 		Mockito
 			.when(binder.bind())
@@ -49,7 +49,7 @@ class AfterStartEventListenerTest {
 		return binder;
 	}
 
-	private static abstract class TestBinder implements ConverterControllerBinder {}
+	private static abstract class TestBinder implements Binder {}
 
 	private static class TestContext extends AnnotationConfigReactiveWebServerApplicationContext {
 		@Getter

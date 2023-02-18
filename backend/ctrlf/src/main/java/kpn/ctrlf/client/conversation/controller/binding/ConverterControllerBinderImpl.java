@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ConverterControllerBinderImpl implements ConverterControllerBinder {
+public class ConverterControllerBinderImpl implements ConverterControllerHolder, Binder {
 	private static final Map<Integer, String> FAIL_INJECTION_TEMPLATES = new HashMap<>(){{
 		put(1, "Controller %s: fail attempt of ValueConverter injection");
 		put(2, "Controller %s: fail attempt of ErrorArgsConverter injection");

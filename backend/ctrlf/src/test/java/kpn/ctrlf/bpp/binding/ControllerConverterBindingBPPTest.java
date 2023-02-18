@@ -1,13 +1,12 @@
 package kpn.ctrlf.bpp.binding;
 
 import kpn.ctrlf.client.conversation.controller.RequestController;
-import kpn.ctrlf.client.conversation.controller.binding.ConverterControllerBinder;
+import kpn.ctrlf.client.conversation.controller.binding.ConverterControllerHolder;
 import kpn.ctrlf.client.conversation.response.Response;
 import kpn.ctrlf.client.conversation.response.args.ErrorArgs;
 import kpn.ctrlf.client.conversation.response.converter.args.ErrorArgsConverter;
 import kpn.ctrlf.client.conversation.response.converter.value.ValueConverter;
 import kpn.ctrlf.client.conversation.response.value.Value;
-import kpn.lib.result.Result;
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
 
@@ -72,7 +71,7 @@ class ControllerConverterBindingBPPTest {
 		TestValueConverter valueConverter = new TestValueConverter();
 		TestErrorConverter errorConverter = new TestErrorConverter();
 
-		TestBinder binder = new TestBinder();
+		TestHolder binder = new TestHolder();
 		ControllerConverterBindingBPP bpp = new ControllerConverterBindingBPP();
 		bpp.setBinder(binder);
 
@@ -112,7 +111,7 @@ class ControllerConverterBindingBPPTest {
 		public ErrorArgs convert(Object... input) { return null; }
 	}
 
-	private static class TestBinder implements ConverterControllerBinder {
+	private static class TestHolder implements ConverterControllerHolder {
 		@Getter
 		private final List<Object> objects = new ArrayList<>();
 
@@ -130,8 +129,5 @@ class ControllerConverterBindingBPPTest {
 		public void addErrorArgsConverter(ErrorArgsConverter converter) {
 			this.objects.add(converter);
 		}
-
-		@Override
-		public Result<Void> bind() { return null; }
 	}
 }

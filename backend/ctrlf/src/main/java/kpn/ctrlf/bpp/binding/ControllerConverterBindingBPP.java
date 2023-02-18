@@ -1,7 +1,7 @@
 package kpn.ctrlf.bpp.binding;
 
 import kpn.ctrlf.client.conversation.controller.RequestController;
-import kpn.ctrlf.client.conversation.controller.binding.ConverterControllerBinder;
+import kpn.ctrlf.client.conversation.controller.binding.ConverterControllerHolder;
 import kpn.ctrlf.client.conversation.response.converter.args.ErrorArgsConverter;
 import kpn.ctrlf.client.conversation.response.converter.value.ValueConverter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public final class ControllerConverterBindingBPP implements BeanPostProcessor {
 	@Autowired
 	@Setter
-	private ConverterControllerBinder binder;
+	private ConverterControllerHolder binder;
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
