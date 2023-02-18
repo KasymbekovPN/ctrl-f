@@ -112,14 +112,14 @@ class ConverterControllerBinderImplTest {
 	}
 
 	@Test
-	void shouldCheckBondingAttempt_ifValueConverterIsAbsent() {
+	void shouldCheckBindingAttempt_ifValueConverterIsAbsent() {
 		TestErrorArgsConverter converter = new TestErrorArgsConverter();
 		TestRequestController controller = new TestRequestController();
 		ConverterControllerBinderImpl binder = new ConverterControllerBinderImpl();
 		binder.addController(controller);
 		binder.addErrorArgsConverter(converter);
 
-		String code = "Controller " + Controllers.TAG_CREATION.name() + ": value converter is absent";
+		String code = "Controller " + Controllers.TAG_CREATION.name() + ": ValueConverter is absent";
 		ImmutableResult<Void> expectedResult = ImmutableResult.<Void>fail(code);
 
 		Result<Void> result = binder.bind();
@@ -134,7 +134,7 @@ class ConverterControllerBinderImplTest {
 		binder.addController(controller);
 		binder.addValueConverter(converter);
 
-		String code = "Controller " + Controllers.TAG_CREATION.name() + ": error converter is absent";
+		String code = "Controller " + Controllers.TAG_CREATION.name() + ": ErrorArgsConverter is absent";
 		ImmutableResult<Void> expectedResult = ImmutableResult.<Void>fail(code);
 
 		Result<Void> result = binder.bind();
@@ -147,7 +147,7 @@ class ConverterControllerBinderImplTest {
 		ConverterControllerBinderImpl binder = new ConverterControllerBinderImpl();
 		binder.addController(controller);
 
-		String code = "Controller " + Controllers.TAG_CREATION.name() + ": value & error converters is absent";
+		String code = "Controller " + Controllers.TAG_CREATION.name() + ": ValueConverter & ErrorArgsConverter is absent";
 		ImmutableResult<Void> expectedResult = ImmutableResult.<Void>fail(code);
 
 		Result<Void> result = binder.bind();
@@ -195,7 +195,19 @@ class ConverterControllerBinderImplTest {
 
 	@Test
 	void shouldCheckBinding() {
+		TestValueConverter valueConverter = new TestValueConverter();
+		TestErrorArgsConverter errorArgsConverter = new TestErrorArgsConverter();
+		TestRequestController controller = new TestRequestController();
 
+		ConverterControllerBinderImpl binder = new ConverterControllerBinderImpl();
+		binder.addController(controller);
+		binder.addValueConverter(valueConverter);
+		binder.addErrorArgsConverter(errorArgsConverter);
+		Result<Void> result = binder.bind();
+
+		assertThat(result).isEqualTo(ImmutableResult.<Void>ok(null));
+		assertThat(controller.getValueConverter()).isEqualTo(valueConverter);
+		assertThat(controller.getErrorArgsConverter()).isEqualTo(errorArgsConverter);
 	}
 
 	@ControllerConverter(Controllers.TAG_CREATION)
