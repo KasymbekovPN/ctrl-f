@@ -31,9 +31,7 @@
 		name: 'v-notification-item',
 		components: {},
 		props: {
-			id: String,
-			seed: Object,
-			level: String
+			data: Object
 		},
 		data() {
 			return {}
@@ -43,16 +41,16 @@
 				'translate'
 			]),
 			message: function(){
-				return this.translate(this.seed.code, this.seed.args);
+				return this.translate(this.data.seed.code, this.data.seed.args);
 			},
 			icon: function() {
-				return getIcon(this.level);
+				return getIcon(this.data.level);
 			}
 		},
 		methods: {
 			onClose: function() {
 				//<
-				console.log(`v-notivication-item onClic id=${this.id}`);
+				console.log(`v-notivication-item onClic id=${this.data.id}`);
 			}
 		}
 	}

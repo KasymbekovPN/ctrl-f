@@ -1,42 +1,42 @@
 <template>
-  <transition name="modal-fade">
-    <div
-		class="modal-overlay"
-		@click="$emit('close-modal')"
-	>
-    <div
-		class="modal"
-		@click.stop
-	>
-		<p class="modal-title">{{ translate('dialog.tag.title') }}</p>
-		<hr>
-		<input
-			class="modal-name-input"
-			v-model="name"
-			:placeholder="[[ translate('dialog.tag.input.placeholder') ]]"
-		/>
-		<div class="modal-buttons">
-			<button
-				class="modal-btn-save"
-				@click="onSaveButtonClick"
+	<transition name="modal-fade">
+		<div
+			class="modal-overlay"
+			@click="onClose"
+		>
+			<div
+				class="modal"
+				@click.stop
 			>
-				{{ translate('dialog.btn.save.name') }}
-			</button>
-			<button
-				class="modal-btn-close"
-				@click="$emit('close-modal')"
-			>
-				{{ translate('dialog.btn.close.name') }}
-			</button>
-			<!-- //< v-if!!! -->
-			<button
-				class="modal-btn-delete"
-				@click="onDeleteButtonClick"
-			>{{ translate('dialog.btn.delete.name') }}</button>
+				<p class="modal-title">{{ translate('dialog.tag.title') }}</p>
+				<hr>
+				<input
+					class="modal-name-input"
+					v-model="name"
+					:placeholder="[[ translate('dialog.tag.input.placeholder') ]]"
+				/>
+				<div class="modal-buttons">
+					<button
+						class="modal-btn-save"
+						@click="onSaveButtonClick"
+					>
+						{{ translate('dialog.btn.save.name') }}
+					</button>
+					<button
+						class="modal-btn-close"
+						@click="onClose"
+					>
+						{{ translate('dialog.btn.close.name') }}
+					</button>
+					<!-- //< v-if!!! -->
+					<button
+						class="modal-btn-delete"
+						@click="onDeleteButtonClick"
+					>{{ translate('dialog.btn.delete.name') }}</button>
+				</div>
+			</div>
 		</div>
-      </div>
-    </div>
-  </transition>
+	</transition>
 </template>
 
 <script>
@@ -63,6 +63,9 @@
 			}),
 			onSaveButtonClick: function() {
 				this.sendNewTag({name: this.name});
+				this.onClose();
+			},
+			onClose: function(){
 				this.$emit('close-modal');
 				this.name = '';
 				this.id = undefined;
