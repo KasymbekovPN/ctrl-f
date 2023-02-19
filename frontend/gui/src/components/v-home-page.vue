@@ -10,6 +10,7 @@
 	//< tmp
 	// import vNotificationItem from './notification/v-notification-item';
 	// import { NOTIFICATION } from '../sconst/notification';
+	// import vNotification from './notification/v-notification';
 	//<
 
 	export default {
@@ -18,6 +19,7 @@
 			//< tmp
 			// vNotificationItem
 			//<
+			// vNotification
 		},
 		props: {},
 		data() {

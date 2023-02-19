@@ -15,6 +15,9 @@
 		<div v-if="!isConnected" class="v-main-container__disconnected">
 			<v-disconnection-page></v-disconnection-page>
 		</div>
+
+		<!-- //< -->
+		<!-- <v-notification v-if="!isConnected || isConnected"/> -->
 	</div>
 </template>
 
@@ -26,12 +29,17 @@
 	import vMenu from './v-menu';
 	import { ROUTE } from '../sconst/route';
 
+	//<
+	// import vNotification from './notification/v-notification';
+
 	export default {
 		name: 'v-main-container',
 		components: {
 			vDisconnectionPage,
 			vHeader,
-			vMenu
+			vMenu,
+			//<
+			// vNotification
 		},
 		props: {},
 		data() {
