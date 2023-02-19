@@ -32,6 +32,15 @@
 		components: {},
 		props: {
 			datum: Object
+			//<
+			// {
+			// 	id: String,
+			// 	level: String,
+			// 	seed: {
+			// 		code: String,
+			// 		args: Object
+			// 	}
+			// }
 		},
 		data() {
 			return {}
