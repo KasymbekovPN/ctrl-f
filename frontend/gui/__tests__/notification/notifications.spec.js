@@ -39,13 +39,18 @@ describe('notifications.js', () => {
 	});
 
 	test('should check get if data is not empty', () => {
+		const firstNotificationId = 0;
+		const secondNotificationId = 1;
 		const firstNotification = { arg: 'first' };
 		const secondNotification = { arg: 'second' };
-		const expected = [firstNotification, secondNotification];
+		const expected = [
+			Object.assign({id: firstNotificationId}, firstNotification),
+			Object.assign({id: secondNotificationId}, secondNotification)
+		];
 
 		const notifications = new Notifications(delay, size);
-		notifications.put(0, firstNotification);
-		notifications.put(1, secondNotification);
+		notifications.put(firstNotificationId, firstNotification);
+		notifications.put(secondNotificationId, secondNotification);
 
 		expect(notifications.get()).toStrictEqual(expected);
 	});

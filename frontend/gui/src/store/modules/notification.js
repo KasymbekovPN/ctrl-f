@@ -1,40 +1,41 @@
+import config from '../../../config';
+import Notifications from "../..//notification/notifications";
 import { NOTIFICATION } from "../../sconst/notification";
+import {
+	actOnNotificationClear,
+	actOnNotificationError,
+	actOnNotificationInfo,
+	actOnNotificationWarning
+} from "../imps/notification-actions";
+import {
+	getNotifications,
+	isNotificationVisible
+} from "../imps/notification-getters";
+import {
+	mutateOnNotificationClear,
+	mutateOnNotificationNotify
+} from "../imps/notification-mutations";
 
 const state = {
-	notifications: undefined,
+	notifications: new Notifications(config.notification.delay, config.notification.size),
 	nextId: Number.MIN_SAFE_INTEGER
 };
 
 const getters = {
-	//<
-	// isNotificationVisible: state => {},
-	// getNotifications: state => {},
+	isNotificationVisible: isNotificationVisible,
+	getNotifications: getNotifications
 };
 
 const actions = {
-	//<
-	// [NOTIFICATION.ERROR]: ({dispatch}, {code, args}) => {
-	// 	//<
-	// 	console.log(dispatch);
-	// 	console.log(code);
-	// 	console.log(args);
-	// 	//<
-	// 	//< impl it
-	// }
-	//<
-	// ERROR: 'NOTIFICATION_ERROR',
-	// INFO: 'NOTIFICATION_INFO',
-	// WARNING: 'NOTIFICATION_WARNING',
-	// CLEAR: 'NOTIFICATION_CLIER'
-
+	[NOTIFICATION.ERROR]: actOnNotificationError,
+	[NOTIFICATION.INFO]: actOnNotificationInfo,
+	[NOTIFICATION.WARNING]: actOnNotificationWarning,
+	[NOTIFICATION.CLEAR]: actOnNotificationClear
 };
 
 const mutations = {
-	//<
-	// ERROR: 'NOTIFICATION_ERROR',
-	// INFO: 'NOTIFICATION_INFO',
-	// WARNING: 'NOTIFICATION_WARNING',
-	// CLEAR: 'NOTIFICATION_CLIER'
+	[NOTIFICATION.NOTIFY]: mutateOnNotificationNotify,
+	[NOTIFICATION.CLEAR]: mutateOnNotificationClear
 };
 
 export default {

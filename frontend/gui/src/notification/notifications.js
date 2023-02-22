@@ -16,10 +16,21 @@ export default class Notifications {
 			this._data.set(notificationId, notification);
 			this._timerIds.set(notificationId, timerId);
 		}
+		//<
+		console.log('-------');
+		console.log('put');
+		console.log(notificationId);
+		console.log(notification);
+		//<
 	}
 
 	get(){
-		return Array.from(this._data.values());
+		let result = [];
+		for (let [id, valye] of this._data){
+			result.push(Object.assign({id}, valye));
+		}
+
+		return result;
 	}
 
 	remove(notificationId) {
