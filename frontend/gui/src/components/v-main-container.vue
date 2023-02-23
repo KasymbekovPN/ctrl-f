@@ -6,6 +6,7 @@
 			:messages="messages"
 		/>
 
+		<!-- //< del  -->
 		<button @click="testClick">Click</button>
 
 		<div v-if="isConnected" class="v-main-container__connected">
@@ -73,12 +74,12 @@
 			//< tmp
 			testClick: function() {
 				console.log('++++');
-				// const name = Date.now().toLocaleString();
+				const name = Date.now().toLocaleString();
 				this.messages.unshift({
 					id: Date.now().toLocaleString(),
 					level: 'NOTIFICATION_INFO',
 					seed: {
-						code: 'some code some code some code some code some code some code some code some code some code some code some code',
+						code: name + ' some code some code some code some code some code some code some code some code some code',
 						args: {}
 					}
 				});

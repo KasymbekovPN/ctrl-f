@@ -1,7 +1,5 @@
-<!-- //< del -->
-
 <template>
-	<div class="v-notification-item">
+	<div :class="getNotificationItemClass">
 		<div class="v-notification-item-top">
 			<button
 				class="v-notification-item-close-btn"
@@ -17,7 +15,7 @@
 		<div class="v-notification-item-bottom">
 			<img
 				class="v-notification-item-level-img"
-				:src="require(`../../assets/icons/${icon}.svg`)"
+				:src="require(`../../assets/icons/notification.svg`)"
 				alt=""
 			>
 			<p class="v-notification-item-content">{{ message }}</p>
@@ -45,7 +43,10 @@
 			// }
 		},
 		data() {
-			return {}
+			return {
+				//< tmp
+				level: 'info'
+			}
 		},
 		computed: {
 			...mapGetters([
@@ -56,6 +57,13 @@
 			},
 			icon: function() {
 				return getIcon(this.datum.level);
+			},
+			getNotificationItemClass: function() {
+				const c = `v-notification-item__${this.level}`;
+				//<
+				console.log(`notification-utem: ${c}`);
+				//<
+				return c;
 			}
 		},
 		methods: {
@@ -67,14 +75,24 @@
 	}
 </script>
 
-
 <style lang="scss">
 	.v-notification-item {
 		height: 75px;
 		border: solid $notificationItemBorderColor 1px;
 		border-radius: 4px;
 		margin: 0px;
-		background: green;
+		&__success {
+			background: #2bab2bdb;
+		}
+		&__info {
+			background: #006180ad;
+		}
+		&__warning {
+			background: #e4b404fc;
+		}
+		&__error {
+			background: #e73232d9;
+		}
 	}
 
 	.v-notification-item-top {
@@ -88,10 +106,9 @@
 		width: 20px;
 		height: 20px;
 		border-width: 0px;
-		cursor: $buttonCursor;
 		margin-left: 5px;
 		padding: 0px;
-		background: green;
+		background: #00000000;
 	}
 
 	.v-notification-item-close-img {

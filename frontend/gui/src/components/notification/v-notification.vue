@@ -1,24 +1,13 @@
 <template>
 <div class='v-notification'>
-	<!-- <transition-group
-	name="v-transition-animate"
-	class="messages_list"
-	> -->
 	<transition-group
 		name="v-transition-animate"
 	>
-		<!-- <div
-		class="v-notification__content"
-		v-for="message in messages"
-		:key="message.id"
-		:class="message.icon"
-		> -->
 		<div
 			class="v-notification__content"
 			v-for="message in messages"
 			:key="message.id"
 		>
-
 			<v-notification-item
 				class="v-notification-item"
 				:key="message.id"
@@ -45,24 +34,27 @@ export default {
 				return []
 			}
 		},
-		rightButton: {
-			type: String,
-			default: ''
-		},
-		leftButton: {
-			type: String,
-			default: ''
-		},
-		timeout: {
-			type: Number,
-			default: 3000
-		}
+		//< del
+		// rightButton: {
+		// 	type: String,
+		// 	default: ''
+		// },
+		// leftButton: {
+		// 	type: String,
+		// 	default: ''
+		// },
+		// timeout: {
+		// 	type: Number,
+		// 	default: 3000
+		// }
 	},
 	data() {
 		return {}
 	},
 	methods: {
 		hideNotification() {
+			//< del ???
+
 			//<
 			console.log('hideNotification');
 			//<
@@ -76,10 +68,18 @@ export default {
 	},
 	watch: {
 		messages() {
+			//< del ???
+			//<
+			console.log(" ----- messages");
+			//<
 			this.hideNotification()
 		}
 	},
 	mounted() {
+		//< del ???
+		//<
+		console.log(' ---- mounted');
+		//<
 		this.hideNotification()
 	}
 }
@@ -92,10 +92,7 @@ export default {
     top: 80px;
     right: 0px;
     z-index: 10;
-    &__messages_list {
-      display: flex;
-      flex-direction: column-reverse;
-    }
+
     &__content {
       padding: 16px;
       border-radius: 4px;
@@ -104,23 +101,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       height: 50px;
-      background: red;
-      &.error {
-        background: red;
-      }
-      &.warning {
-        background: orange;
-      }
-      &.check_circle {
-        background: red;
-      }
-    }
-    .content {
-      &__text {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
     }
   }
   .v-transition-animate {
@@ -151,79 +131,3 @@ export default {
     }
   }
 </style>
-
-<!-- <template>
-	<div class="v-notification">
-		<transition-group
-			name="v-transition-animate"
-			class="messages_list"
-		>
-			<div
-				class="v-notification__content"
-				v-for="message in messages"
-				:key="message.id"
-			>
-				<div class="content__text">
-					<span> {{ message.name }} </span>
-				</div>
-				<div class="content__buttons">
-					<button v-if="rightButton.length">{{ rightButton }}</button>
-					<button v-if="leftButton.length">{{ leftButton }}</button>
-				</div>
-			</div>
-		</transition-group>
-	</div>
-</template> -->
-
-<!-- <script>
-	export default {
-		name: 'v-notification',
-		components: {},
-		props: {
-			messages: {
-				type: Array,
-				default: () => { return []; }
-			},
-			rightButton: {
-				type: String,
-				default: ''
-			},
-			leftButton: {
-				type: String,
-				default: ''
-			}
-		},
-		data() {
-			return {}
-		},
-		computed: {},
-		methods: {}
-	}
-</script> -->
-
-<!-- <style lang="scss">
-	.v-notification {
-		position: fixed;
-		top: 80px;
-		right: 16px;
-		z-index: 10;
-
-		&__messages_list{
-			display: flex;
-			flex-direction: column-reverse;
-		}
-
-		&__content {
-			padding: 16px;
-			border-radius: 4px;
-			color: #ffffff;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			height: 50px;
-			margin-bottom: 16px;
-
-			background: green;
-		}
-	}
-</style> -->
