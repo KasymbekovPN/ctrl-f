@@ -33,20 +33,7 @@ export default {
 			default: () => {
 				return []
 			}
-		},
-		//< del
-		// rightButton: {
-		// 	type: String,
-		// 	default: ''
-		// },
-		// leftButton: {
-		// 	type: String,
-		// 	default: ''
-		// },
-		// timeout: {
-		// 	type: Number,
-		// 	default: 3000
-		// }
+		}
 	},
 	data() {
 		return {}

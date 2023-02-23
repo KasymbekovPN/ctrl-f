@@ -3,6 +3,7 @@ import {
 	actOnNotificationClear,
 	actOnNotificationError,
 	actOnNotificationInfo,
+	actOnNotificationSuccess,
 	actOnNotificationWarning
 } from "../../../src/store/imps/notification-actions";
 
@@ -19,6 +20,17 @@ describe('notification-actions.js', () => {
 
 	const code = "some.code";
 	const args = {arg: 'value'};
+
+	test('should check actOnNotificationSuccess', () => {
+		actOnNotificationSuccess({commit}, {code, args});
+
+		const expected = {
+			command: NOTIFICATION.NOTIFY,
+			data: { level: NOTIFICATION.SUCCESS, code, args }
+		};
+		expect(commitResult).toStrictEqual(expected);
+		reset();
+	});
 
 	test('should check actOnNotificationError', () => {
 		actOnNotificationError({commit}, {code, args});

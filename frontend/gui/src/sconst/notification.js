@@ -1,4 +1,5 @@
-export const NOTIFICATION = {
+const NOTIFICATION = {
+	SUCCESS: 'NOTIFICATION_SUCCESS',
 	ERROR: 'NOTIFICATION_ERROR',
 	INFO: 'NOTIFICATION_INFO',
 	WARNING: 'NOTIFICATION_WARNING',
@@ -6,16 +7,23 @@ export const NOTIFICATION = {
 	CLEAR: 'NOTIFICATION_CLIER'
 };
 
-const errorIcon = 'error';
-const warningIcon = 'warning';
-const infoIcon = 'info';
-const defaultIcon = infoIcon;
-const icons = {
-	[NOTIFICATION.ERROR]: errorIcon,
-	[NOTIFICATION.WARNING]: warningIcon,
-	[NOTIFICATION.INFO]: infoIcon
+const successAlias = 'success';
+const errorAlias = 'error';
+const warningAlias = 'warning';
+const infoAlias = 'info';
+const defaultAlias = infoAlias;
+const aliases = {
+	[NOTIFICATION.SUCCESS]: successAlias,
+	[NOTIFICATION.ERROR]: errorAlias,
+	[NOTIFICATION.WARNING]: warningAlias,
+	[NOTIFICATION.INFO]: infoAlias
 };
 
-export const getIcon = (level) => {
-	return icons[level] !== undefined ? icons[level] : defaultIcon;
+const getAlias = (level) => {
+	return aliases[level] !== undefined ? aliases[level] : defaultAlias;
+};
+
+export {
+	NOTIFICATION,
+	getAlias
 };

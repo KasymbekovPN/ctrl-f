@@ -1,6 +1,6 @@
 import each from "jest-each";
 import {
-	getIcon,
+	getAlias,
 	NOTIFICATION
 } from "../../src/sconst/notification";
 
@@ -8,10 +8,11 @@ import {
 describe('notification.js', () => {
 	each([
 		[undefined, 'info'],
+		[NOTIFICATION.SUCCESS, 'success'],
 		[NOTIFICATION.INFO, 'info'],
 		[NOTIFICATION.WARNING, 'warning'],
 		[NOTIFICATION.ERROR, 'error']
-	]).it('when level is %s getIcon must return %s', (level, expected) => {
-		expect(getIcon(level)).toBe(expected);
+	]).it('when level is %s getAlias must return %s', (level, expected) => {
+		expect(getAlias(level)).toBe(expected);
 	})
 });

@@ -1,5 +1,9 @@
 import { NOTIFICATION } from "../../sconst/notification";
 
+const actOnNotificationSuccess = ({commit}, {code, args}) => {
+	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.SUCCESS});
+};
+
 const actOnNotificationError = ({commit}, {code, args}) => {
 	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.ERROR});
 };
@@ -17,6 +21,7 @@ const actOnNotificationClear = ({commit}, notificationId) => {
 };
 
 export {
+	actOnNotificationSuccess,
 	actOnNotificationError,
 	actOnNotificationInfo,
 	actOnNotificationWarning,

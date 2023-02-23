@@ -25,7 +25,7 @@
 
 <script>
 	import { mapGetters } from 'vuex';
-	import { getIcon } from '../../sconst/notification';
+	import { getAlias } from '../../sconst/notification';
 
 	export default {
 		name: 'v-notification-item',
@@ -43,10 +43,7 @@
 			// }
 		},
 		data() {
-			return {
-				//< tmp
-				level: 'info'
-			}
+			return {}
 		},
 		computed: {
 			...mapGetters([
@@ -55,15 +52,8 @@
 			message: function(){
 				return this.translate(this.datum.seed.code, this.datum.seed.args);
 			},
-			icon: function() {
-				return getIcon(this.datum.level);
-			},
 			getNotificationItemClass: function() {
-				const c = `v-notification-item__${this.level}`;
-				//<
-				console.log(`notification-utem: ${c}`);
-				//<
-				return c;
+				return `v-notification-item__${getAlias(this.datum.level)}`
 			}
 		},
 		methods: {
