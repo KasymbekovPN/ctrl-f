@@ -67,31 +67,31 @@
 	}
 </script>
 
+
 <style lang="scss">
 	.v-notification-item {
-		height: 100px;
-		width: 400px;
+		height: 75px;
 		border: solid $notificationItemBorderColor 1px;
-		border-radius: 20px;
-		box-shadow: 10px 5px 5px $notificationItemShadowColor;
+		border-radius: 4px;
+		margin: 0px;
+		background: green;
 	}
 
 	.v-notification-item-top {
 		display: flex;
 		justify-content: flex-end;
-		height: 30px;
-		margin-right: 5px;
+		height: 16px;
+		margin-right: 0px;
 	}
 
 	.v-notification-item-close-btn {
 		width: 20px;
 		height: 20px;
-		background: #ffffff;
 		border-width: 0px;
 		cursor: $buttonCursor;
-		margin-top: 5px;
 		margin-left: 5px;
 		padding: 0px;
+		background: green;
 	}
 
 	.v-notification-item-close-img {

@@ -24,6 +24,16 @@ public final class FakeTagServiceImpl implements FakeTagService {
 		this.storage = storage;
 	}
 
+
+//				<!-- <div class="content__text">
+//	<span>{{message.name}}</span>
+//				<!-- <i class="material-icons">{{message.icon}}</i> -->
+//			<!-- </div>
+//			<div class="content_buttons">
+//				<button v-if="rightButton.length">{{rightButton}}</button>
+//				<button v-if="leftButton.length">{{leftButton}}</button>
+//			</div> -->
+
 	public Result<Tag> save(Tag tag) {
 		return ImmutableResult.<Tag>bFail("domain.creation.tag.error.already-exist").arg(tag.getName()).build();
 		// TODO: 06.02.2023 ??
