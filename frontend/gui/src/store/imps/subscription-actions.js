@@ -36,6 +36,9 @@ const processTagCreationSubscription = ({dispatch}, response) => {
 		dispatch(TAG.CREATED, data.value);
 	} else {
 		const {code, args} = data;
+		//< del
+		console.log(' --- processTagCreationSubscription');
+		//<
 		dispatch(NOTIFICATION.ERROR, {code, args});
 	}
 };

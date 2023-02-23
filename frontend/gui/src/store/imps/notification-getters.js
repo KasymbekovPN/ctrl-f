@@ -1,6 +1,9 @@
 
 const isNotificationVisible = state => {
-	return !(state.notifications === undefined || state.notifications.isEmpty());
+	// return !(state.notifications === undefined || state.notifications.isEmpty());
+	//<
+	console.log(state);
+	return true;
 };
 
 const getNotifications = state => {

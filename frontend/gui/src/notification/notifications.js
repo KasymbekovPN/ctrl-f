@@ -34,6 +34,9 @@ export default class Notifications {
 	}
 
 	remove(notificationId) {
+		//<
+		console.log('------- removing: ', notificationId);
+		//<
 		if (this._timerIds.has(notificationId)){
 			clearTimeout(this._timerIds.get(notificationId));
 		}

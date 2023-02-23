@@ -1,115 +1,226 @@
 <template>
-	<div class="v-notification">
-		<div class="v-notification-top">
-			<button
-				class="v-notification-close-btn"
-				@click="onClose"
-			>
-				<img
-					class="v-notification-close-img"
-					:src="require(`../../assets/icons/close-cross.svg`)"
-					alt=""
-				>
-			</button>
-		</div>
-		<div class="v-notification-main">
-			<v-notification-item
-				class="v-notification-item"
-				v-for="datum in data"
-				:key="datum.id"
-				:datum="datum"
-			/>
-		</div>
-	</div>
+  <div class='v-notification'>
+    <!-- <transition-group
+        name="v-transition-animate"
+        class="messages_list"
+    > -->
+    <transition-group
+        name="v-transition-animate"
+    >
+
+      <!-- <div
+          class="v-notification__content"
+          v-for="message in messages"
+          :key="message.id"
+          :class="message.icon"
+      > -->
+      <div
+          class="v-notification__content"
+          v-for="message in messages"
+          :key="message.id"
+      >
+        <div class="content__text">
+          <span>{{message.name}}</span>
+          <i class="material-icons">{{message.icon}}</i>
+        </div>
+        <div class="content_buttons">
+          <button v-if="rightButton.length">{{rightButton}}</button>
+          <button v-if="leftButton.length">{{leftButton}}</button>
+        </div>
+      </div>
+    </transition-group>
+  </div>
 </template>
 
 <script>
-	import vNotificationItem from './v-notification-item';
-	import { NOTIFICATION } from '../../sconst/notification';
-
-	export default {
-		name: 'v-notification',
-		components: {
-			vNotificationItem
-		},
-		props: {},
-		data() {
-			return {
-				//< tmp
-				data: [
-					{
-						id: '0',
-						level: NOTIFICATION.INFO,
-						seed: {code: '{arg0} some.code {arg1}', args: { arg0: 'value0', arg1: 'value1'}}
-					},
-					{
-						id: '1',
-						level: NOTIFICATION.INFO,
-						seed: {code: '{arg0} some.code {arg1}',args: {arg0: 'value10',arg1: 'value11'}}
-					},
-					{
-						id: '2',
-						level: NOTIFICATION.INFO,
-						seed: {code: '{arg0} some.code {arg1}',args: {arg0: 'value10',arg1: 'value11'}}
-					},
-					{
-						id: '3',
-						level: NOTIFICATION.INFO,
-						seed: {code: '{arg0} some.code {arg1}',args: {arg0: 'value10',arg1: 'value11'}}
-					},
-					{
-						id: '4',
-						level: NOTIFICATION.INFO,
-						seed: {code: '{arg0} some.code {arg1}',args: {arg0: 'value10',arg1: 'value11'}}
-					}
-				]
-			}
-		},
-		computed: {},
-		methods: {
-			onClose: function(){
-				//<
-				console.log(' --- v-notification onClose');
-			}
-		}
-	}
+  export default {
+    name: "v-notification",
+    props: {
+      messages: {
+        type: Array,
+        default: () => {
+          return []
+        }
+      },
+      rightButton: {
+        type: String,
+        default: ''
+      },
+      leftButton: {
+        type: String,
+        default: ''
+      },
+      timeout: {
+        type: Number,
+        default: 3000
+      }
+    },
+    data() {
+      return {}
+    },
+    methods: {
+      hideNotification() {
+        let vm = this;
+        if (this.messages.length) {
+          setTimeout(function () {
+            vm.messages.splice(vm.messages.length - 1, 1)
+          }, vm.timeout)
+        }
+      }
+    },
+    watch: {
+      messages() {
+        this.hideNotification()
+      }
+    },
+    mounted() {
+      this.hideNotification()
+    }
+  }
 </script>
 
 <style lang="scss">
-	.v-notification {
-		height: 580px;
-		width: 420px;
-		border: solid $notificationItemBorderColor 1px;
-		border-radius: 20px;
-		box-shadow: 10px 5px 5px $notificationItemShadowColor;
-	}
-
-	.v-notification-top {
-		display: flex;
-		justify-content: flex-end;
-		height: 30px;
-		margin-right: 5px;
-	}
-
-	.v-notification-close-btn {
-		width: 20px;
-		height: 20px;
-		background: #ffffff;
-		border-width: 0px;
-		cursor: $buttonCursor;
-		margin-top: 5px;
-		margin-left: 5px;
-		padding: 0px;
-	}
-
-	.v-notification-close-img {
-		width: 20px;
-		height: 20px;
-		margin: 0px;
-	}
-
-	.v-notification-item {
-		margin-top: 5px;
-		margin-left: 5px;
-	}
+  .v-notification {
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    z-index: 10;
+    &__messages_list {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    &__content {
+      padding: 16px;
+      border-radius: 4px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+      margin-bottom: 16px;
+      background: green;
+      &.error {
+        background: red;
+      }
+      &.warning {
+        background: orange;
+      }
+      &.check_circle {
+        background: green;
+      }
+    }
+    .content {
+      &__text {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .material-icons {
+      margin-left: 16px;
+    }
+  }
+  .v-transition-animate {
+    &-enter {
+      transform: translateX(120px);
+      opacity: 0;
+    }
+    &-enter-active {
+      transition: all .6s ease;
+    }
+    &-enter-to {
+      opacity: 1;
+    }
+    &-leave {
+      height: 50px;
+      opacity: 1;
+    }
+    &-leave-active {
+      transition: transform .6s ease, opacity .6s, height .6s .2s;
+    }
+    &-leave-to {
+      height: 0;
+      transform: translateX(120px);
+      opacity: 0;
+    }
+    &-move {
+      transition: transform .6s ease;
+    }
+  }
 </style>
+
+<!-- <template>
+	<div class="v-notification">
+		<transition-group
+			name="v-transition-animate"
+			class="messages_list"
+		>
+			<div
+				class="v-notification__content"
+				v-for="message in messages"
+				:key="message.id"
+			>
+				<div class="content__text">
+					<span> {{ message.name }} </span>
+				</div>
+				<div class="content__buttons">
+					<button v-if="rightButton.length">{{ rightButton }}</button>
+					<button v-if="leftButton.length">{{ leftButton }}</button>
+				</div>
+			</div>
+		</transition-group>
+	</div>
+</template> -->
+
+<!-- <script>
+	export default {
+		name: 'v-notification',
+		components: {},
+		props: {
+			messages: {
+				type: Array,
+				default: () => { return []; }
+			},
+			rightButton: {
+				type: String,
+				default: ''
+			},
+			leftButton: {
+				type: String,
+				default: ''
+			}
+		},
+		data() {
+			return {}
+		},
+		computed: {},
+		methods: {}
+	}
+</script> -->
+
+<!-- <style lang="scss">
+	.v-notification {
+		position: fixed;
+		top: 80px;
+		right: 16px;
+		z-index: 10;
+
+		&__messages_list{
+			display: flex;
+			flex-direction: column-reverse;
+		}
+
+		&__content {
+			padding: 16px;
+			border-radius: 4px;
+			color: #ffffff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 50px;
+			margin-bottom: 16px;
+
+			background: green;
+		}
+	}
+</style> -->

@@ -25,17 +25,17 @@ public final class FakeTagServiceImpl implements FakeTagService {
 	}
 
 	public Result<Tag> save(Tag tag) {
-//		return ImmutableResult.<Tag>bFail("domain.creation.tag.error.already-exist").arg(tag.getName()).build();
+		return ImmutableResult.<Tag>bFail("domain.creation.tag.error.already-exist").arg(tag.getName()).build();
 		// TODO: 06.02.2023 ??
-		String name = tag.getName();
-		if (names.contains(name)){
-			return ImmutableResult.<Tag>bFail("domain.tag.saving.fail").arg(name).build();
-		}
-
-		long id = storage.size();
-		Tag newTag = new Tag(id, name);
-		storage.put(id, newTag);
-
-		return ImmutableResult.<Tag>ok(newTag);
+//		String name = tag.getName();
+//		if (names.contains(name)){
+//			return ImmutableResult.<Tag>bFail("domain.tag.saving.fail").arg(name).build();
+//		}
+//
+//		long id = storage.size();
+//		Tag newTag = new Tag(id, name);
+//		storage.put(id, newTag);
+//
+//		return ImmutableResult.<Tag>ok(newTag);
 	}
 }
