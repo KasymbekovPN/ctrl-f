@@ -5,11 +5,11 @@ import {
 	actOnNotificationClear,
 	actOnNotificationError,
 	actOnNotificationInfo,
+	actOnNotificationSuccess,
 	actOnNotificationWarning
 } from "../imps/notification-actions";
 import {
-	getNotifications,
-	isNotificationVisible
+	getNotifications
 } from "../imps/notification-getters";
 import {
 	mutateOnNotificationClear,
@@ -22,11 +22,11 @@ const state = {
 };
 
 const getters = {
-	isNotificationVisible: isNotificationVisible,
 	getNotifications: getNotifications
 };
 
 const actions = {
+	[NOTIFICATION.SUCCESS]: actOnNotificationSuccess,
 	[NOTIFICATION.ERROR]: actOnNotificationError,
 	[NOTIFICATION.INFO]: actOnNotificationInfo,
 	[NOTIFICATION.WARNING]: actOnNotificationWarning,

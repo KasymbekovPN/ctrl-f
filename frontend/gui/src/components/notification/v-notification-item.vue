@@ -32,15 +32,6 @@
 		components: {},
 		props: {
 			datum: Object
-			//<
-			// {
-			// 	id: String,
-			// 	level: String,
-			// 	seed: {
-			// 		code: String,
-			// 		args: Object
-			// 	}
-			// }
 		},
 		data() {
 			return {}
@@ -50,7 +41,7 @@
 				'translate'
 			]),
 			message: function(){
-				return this.translate(this.datum.seed.code, this.datum.seed.args);
+				return this.translate(this.datum.code, this.datum.args);
 			},
 			getNotificationItemClass: function() {
 				return `v-notification-item__${getAlias(this.datum.level)}`
@@ -67,6 +58,7 @@
 
 <style lang="scss">
 	.v-notification-item {
+		width: 420px;
 		height: 75px;
 		border: solid $notificationItemBorderColor 1px;
 		border-radius: 4px;

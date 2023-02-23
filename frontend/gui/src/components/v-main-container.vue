@@ -1,14 +1,6 @@
 <template>
 	<div class="v-main-container">
-
-		<!-- //< -->
-		<v-notification
-			:messages="messages"
-		/>
-
-		<!-- //< del  -->
-		<button @click="testClick">Click</button>
-
+		<v-notification/>
 		<div v-if="isConnected" class="v-main-container__connected">
 			<v-header v-if="isAuthenticated"/>
 			<div class="v-main-container__connected__main">
@@ -24,8 +16,6 @@
 		<div v-if="!isConnected" class="v-main-container__disconnected">
 			<v-disconnection-page></v-disconnection-page>
 		</div>
-		<!-- //< -->
-		<!-- <v-notification v-if="isNotificationVisible"/> -->
 	</div>
 </template>
 
@@ -36,7 +26,6 @@
 	import vHeader from './v-header';
 	import vMenu from './v-menu';
 	import { ROUTE } from '../sconst/route';
-	//<
 	import vNotification from './notification/v-notification';
 
 	export default {
@@ -45,46 +34,21 @@
 			vDisconnectionPage,
 			vHeader,
 			vMenu,
-			//<
 			vNotification
 		},
 		props: {},
 		data() {
 			return {
-				items: config.menu.items,
-				//<
-				messages: [
-					//< del
-					// {
-					// 	id: Date.now().toLocaleString(),
-					// 	name: 'notification name'
-					// }
-				]
+				items: config.menu.items
 			}
 		},
 		computed: {
 			...mapGetters([
 				'isConnected',
-				'isAuthenticated',
-				//<
-				// 'isNotificationVisible'
+				'isAuthenticated'
 			])
 		},
-		methods: {
-			//< tmp
-			testClick: function() {
-				console.log('++++');
-				const name = Date.now().toLocaleString();
-				this.messages.unshift({
-					id: Date.now().toLocaleString(),
-					level: 'NOTIFICATION_INFO',
-					seed: {
-						code: name + ' some code some code some code some code some code some code some code some code some code',
-						args: {}
-					}
-				});
-			}
-		},
+		methods: {},
 		watch: {
 			$route: function(to, /*from*/){
 				this.$store.dispatch(ROUTE.ON.CHANGING, to.path);

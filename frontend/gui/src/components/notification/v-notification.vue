@@ -5,7 +5,7 @@
 	>
 		<div
 			class="v-notification__content"
-			v-for="message in messages"
+			v-for="message in getNotifications"
 			:key="message.id"
 		>
 			<v-notification-item
@@ -21,6 +21,7 @@
 <script>
 
 import vNotificationItem from './v-notification-item';
+import { mapGetters } from 'vuex';
 
 export default {
 	name: "v-notification",
@@ -38,37 +39,12 @@ export default {
 	data() {
 		return {}
 	},
-	methods: {
-		hideNotification() {
-			//< del ???
-
-			//<
-			console.log('hideNotification');
-			//<
-			let vm = this;
-			if (this.messages.length) {
-				setTimeout(function () {
-					vm.messages.splice(vm.messages.length - 1, 1)
-				}, vm.timeout)
-			}
-		}
+	computed: {
+		...mapGetters([
+			'getNotifications'
+		])
 	},
-	watch: {
-		messages() {
-			//< del ???
-			//<
-			console.log(" ----- messages");
-			//<
-			this.hideNotification()
-		}
-	},
-	mounted() {
-		//< del ???
-		//<
-		console.log(' ---- mounted');
-		//<
-		this.hideNotification()
-	}
+	methods: {}
 }
 </script>
 

@@ -1,35 +1,8 @@
 import {
-	getNotifications,
-	isNotificationVisible
+	getNotifications
 } from "../../../src/store/imps/notification-getters";
 
 describe('auth-getters.js', () => {
-
-	test('should check isNotificationVisible if state.notification is undefined', () => {
-		const state = {};
-		const result = isNotificationVisible(state);
-		expect(result).toBe(false);
-	});
-
-	test('should check isNotificationVisible if state.notification.isEmpty() == false', () => {
-		class Notifications {
-			isEmpty(){ return false; }
-		}
-
-		const state = {notifications: new Notifications()};
-		const result = isNotificationVisible(state);
-		expect(result).toBe(true);
-	});
-
-	test('should check isNotificationVisible if state.notification.isEmpty() == true', () => {
-		class Notifications {
-			isEmpty(){ return true; }
-		}
-
-		const state = {notifications: new Notifications()};
-		const result = isNotificationVisible(state);
-		expect(result).toBe(false);
-	});
 
 	test('should check getNotifications if state.notification is undefined', () => {
 		const state = {};
