@@ -2,9 +2,6 @@ import config from "../../../config";
 import { CONNECTION } from "../../sconst/connection";
 
 const processTagCreationRequest = ({dispatch}, {name}) => {
-	//<
-	console.log(`processTagCreationRequest : name = '${name}'`);
-	//<
 	dispatch(CONNECTION.SEND, {
 		destination: config.requests.tag.create,
 		headers: {},

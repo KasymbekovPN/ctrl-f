@@ -9,6 +9,7 @@ import {
 import { AUTH } from "../../../src/sconst/auth";
 import { CONNECTION } from "../../../src/sconst/connection";
 import { USER } from "../../../src/sconst/userProfile";
+import { NOTIFICATION } from "../../../src/sconst/notification";
 
 describe('auth-actions.js', () => {
 
@@ -52,9 +53,16 @@ describe('auth-actions.js', () => {
 	test('should check responseLogin-actions if response is fail', () => {
 		const response = {success: false};
 		const expectedCommitResult = {command: AUTH.LOGIN.ERROR};
+		const expectedDispatchResult = {
+			command: NOTIFICATION.ERROR,
+			data: {
+				code: 'login-page.state.error'
+			}
+		};
 		const router = new Router();
 
 		responseLogin({commit, dispatch, router}, response);
+		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
 		expect(commitResult).toStrictEqual(expectedCommitResult);
 		expect(router.path).toBe(config.paths.home);
 		reset();

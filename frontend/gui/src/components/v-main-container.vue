@@ -1,10 +1,5 @@
 <template>
 	<div class="v-main-container">
-		<button @click="clickTest">value</button>
-		<!-- <v-notification
-			:messages="messages"
-		/> -->
-		<!-- //< -->
 		<v-notification
 			:messages="getNotifications"
 		/>
@@ -34,7 +29,6 @@
 	import vMenu from './v-menu';
 	import { ROUTE } from '../sconst/route';
 	import vNotification from './notification/v-notification';
-	import { NOTIFICATION } from '../sconst/notification';
 
 	export default {
 		name: 'v-main-container',
@@ -47,9 +41,7 @@
 		props: {},
 		data() {
 			return {
-				items: config.menu.items,
-				//<
-				messages: []
+				items: config.menu.items
 			}
 		},
 		computed: {
@@ -59,21 +51,7 @@
 				'getNotifications'
 			])
 		},
-		methods: {
-			clickTest: function() {
-				const id = Date.now().toLocaleString();
-				const code = `${id} some code`;
-				const args = {value: '123'};
-				this.$store.dispatch(NOTIFICATION.INFO, {code, args});
-				//<
-				// this.messages.unshift({
-				// 	id: id,
-				// 	level: 'NOTIFICATION_INFO',
-				// 	code: `${id} some code`,
-				// 	args: {value: '123'}
-				// });
-			}
-		},
+		methods: {},
 		watch: {
 			$route: function(to, /*from*/){
 				this.$store.dispatch(ROUTE.ON.CHANGING, to.path);

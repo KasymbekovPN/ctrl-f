@@ -34,9 +34,6 @@
 						{{ translate('login-page.button.login') }}
 					</button>
 				</div>
-				<div>
-					<p>{{ loginStatus }}</p>
-				</div>
 			</div>
 		</form>
 	</div>
@@ -56,12 +53,8 @@
 		},
 		computed: {
 			...mapGetters([
-				'translate',
-				'authStatus'
-			]),
-			loginStatus: function(){
-				return this.authStatus === AUTH.STATUS.ERROR ? this.translate('login-page.state.error') : '';
-			}
+				'translate'
+			])
 		},
 		methods: {
 			login: function() {

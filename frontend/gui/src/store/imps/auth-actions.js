@@ -1,3 +1,4 @@
+import { NOTIFICATION } from "../../sconst/notification";
 import config from "../../../config";
 import { AUTH } from "../../sconst/auth";
 import { CONNECTION } from "../../sconst/connection";
@@ -17,6 +18,7 @@ const responseLogin = ({commit, dispatch, router}, response) => {
 		commit(AUTH.LOGIN.SUCCESS, response.value);
 		dispatch(USER.PROFILE.SET, response.value);
 	} else {
+		dispatch(NOTIFICATION.ERROR, {code: 'login-page.state.error'});
 		commit(AUTH.LOGIN.ERROR);
 	}
 	router.push(config.paths.home);

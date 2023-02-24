@@ -25,7 +25,7 @@
 
 <script>
 	import { mapGetters } from 'vuex';
-	import { getAlias } from '../../sconst/notification';
+	import { getAlias, NOTIFICATION } from '../../sconst/notification';
 
 	export default {
 		name: 'v-notification-item',
@@ -49,8 +49,7 @@
 		},
 		methods: {
 			onClose: function() {
-				//<
-				console.log(`v-notivication-item onClick id=${this.datum.id}`);
+				this.$store.dispatch(NOTIFICATION.CLEAR, this.datum.id);
 			}
 		}
 	}
@@ -91,6 +90,7 @@
 		margin-left: 5px;
 		padding: 0px;
 		background: #00000000;
+		cursor: $buttonCursor;
 	}
 
 	.v-notification-item-close-img {
