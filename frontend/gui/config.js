@@ -87,7 +87,7 @@ export default {
 		]
 	},
 	notification: {
-		delay: 60_000,
+		delay: 30_000,
 		size: 5
 	}
 };

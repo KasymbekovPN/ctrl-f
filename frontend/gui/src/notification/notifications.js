@@ -26,10 +26,15 @@ export default class Notifications {
 
 	get(){
 		let result = [];
-		for (let [id, valye] of this._data){
-			result.push(Object.assign({id}, valye));
+		for (let [id, value] of this._data){
+			// result.push(Object.assign({id}, valye));
+			//<
+			result.unshift(Object.assign({id}, value));
 		}
 
+		//<
+		console.log(`get <> size: ${result.length}`);
+		//<
 		return result;
 	}
 
