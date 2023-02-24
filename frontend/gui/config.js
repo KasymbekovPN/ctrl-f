@@ -88,6 +88,6 @@ export default {
 	},
 	notification: {
 		delay: 30_000,
-		size: 5
+		size: 9
 	}
 };
