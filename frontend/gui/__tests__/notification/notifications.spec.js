@@ -32,6 +32,21 @@ describe('notifications.js', () => {
 		expect(notifications._data).toStrictEqual(expected);
 	});
 
+	test('should check put if data is filled', () => {
+		const firstNotificationId = 0;
+		const secondNotificationId = 1;
+		const firstNotification = {arg: 'first'};
+		const secondNotification = {arg: 'second'};
+		const expected = new Map();
+		expected.set(secondNotificationId, secondNotification);
+
+		const notifications = new Notifications(delay, 1);
+		notifications.put(firstNotificationId, firstNotification);
+		notifications.put(secondNotificationId, secondNotification);
+
+		expect(notifications._data).toStrictEqual(expected);
+	});
+
 	test('should check get if data is empty', () => {
 		const notifications = new Notifications(delay, size);
 
@@ -44,8 +59,8 @@ describe('notifications.js', () => {
 		const firstNotification = { arg: 'first' };
 		const secondNotification = { arg: 'second' };
 		const expected = [
-			Object.assign({id: firstNotificationId}, firstNotification),
-			Object.assign({id: secondNotificationId}, secondNotification)
+			Object.assign({id: secondNotificationId}, secondNotification),
+			Object.assign({id: firstNotificationId}, firstNotification)
 		];
 
 		const notifications = new Notifications(delay, size);

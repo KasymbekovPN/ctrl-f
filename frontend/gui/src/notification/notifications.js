@@ -3,45 +3,35 @@ export default class Notifications {
 
 	constructor(delay, size){
 		this._delay = delay;
-		this._size = size;
+		this._size = size > 0 ? size : 1;
 		this._data = new Map();
 		this._timerIds = new Map();
 	}
 
 	put(notificationId, notification) {
 		if (!this._data.has(notificationId)){
+			if (this._data.size >= this._size){
+				const id = this._data.entries().next().value[0];
+				this.remove(id);
+			}
+
 			const timerId = setTimeout(() => {
 				this.remove(notificationId);
 			}, this._delay);
 			this._data.set(notificationId, notification);
 			this._timerIds.set(notificationId, timerId);
 		}
-		//<
-		console.log('-------');
-		console.log('put');
-		console.log(notificationId);
-		console.log(notification);
-		//<
 	}
 
 	get(){
 		let result = [];
 		for (let [id, value] of this._data){
-			// result.push(Object.assign({id}, valye));
-			//<
 			result.unshift(Object.assign({id}, value));
 		}
-
-		//<
-		console.log(`get <> size: ${result.length}`);
-		//<
 		return result;
 	}
 
 	remove(notificationId) {
-		//<
-		console.log('------- removing: ', notificationId);
-		//<
 		if (this._timerIds.has(notificationId)){
 			clearTimeout(this._timerIds.get(notificationId));
 		}
