@@ -54,7 +54,7 @@ describe('auth-actions.js', () => {
 		const response = {success: false};
 		const expectedCommitResult = {command: AUTH.LOGIN.ERROR};
 		const expectedDispatchResult = {
-			command: NOTIFICATION.ERROR,
+			command: NOTIFICATION.LEVEL.ERROR,
 			data: {
 				code: 'login-page.state.error'
 			}

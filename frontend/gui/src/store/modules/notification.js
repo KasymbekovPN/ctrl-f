@@ -2,7 +2,8 @@ import config from '../../../config';
 import Notifications from "../..//notification/notifications";
 import { NOTIFICATION } from "../../sconst/notification";
 import {
-	actOnNotificationClear,
+	actOnNotificationClearAll,
+	actOnNotificationClearById,
 	actOnNotificationError,
 	actOnNotificationInfo,
 	actOnNotificationSuccess,
@@ -12,7 +13,8 @@ import {
 	getNotifications
 } from "../imps/notification-getters";
 import {
-	mutateOnNotificationClear,
+	mutateOnNotificationClearAll,
+	mutateOnNotificationClearById,
 	mutateOnNotificationNotify
 } from "../imps/notification-mutations";
 
@@ -26,16 +28,18 @@ const getters = {
 };
 
 const actions = {
-	[NOTIFICATION.SUCCESS]: actOnNotificationSuccess,
-	[NOTIFICATION.ERROR]: actOnNotificationError,
-	[NOTIFICATION.INFO]: actOnNotificationInfo,
-	[NOTIFICATION.WARNING]: actOnNotificationWarning,
-	[NOTIFICATION.CLEAR]: actOnNotificationClear
+	[NOTIFICATION.LEVEL.SUCCESS]: actOnNotificationSuccess,
+	[NOTIFICATION.LEVEL.ERROR]: actOnNotificationError,
+	[NOTIFICATION.LEVEL.INFO]: actOnNotificationInfo,
+	[NOTIFICATION.LEVEL.WARNING]: actOnNotificationWarning,
+	[NOTIFICATION.CLEAR.ID]: actOnNotificationClearById,
+	[NOTIFICATION.CLEAR.ALL]: actOnNotificationClearAll
 };
 
 const mutations = {
 	[NOTIFICATION.NOTIFY]: mutateOnNotificationNotify,
-	[NOTIFICATION.CLEAR]: mutateOnNotificationClear
+	[NOTIFICATION.CLEAR.ID]: mutateOnNotificationClearById,
+	[NOTIFICATION.CLEAR.ALL]: mutateOnNotificationClearAll
 };
 
 export default {

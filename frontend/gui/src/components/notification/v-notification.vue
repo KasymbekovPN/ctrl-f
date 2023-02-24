@@ -1,5 +1,20 @@
 <template>
 	<div class='v-notification'>
+		<div
+			v-if="messages.length"
+			class="v-notification-top"
+		>
+			<button
+				class="v-notification-close-btn"
+				@click="onClose"
+			>
+				<img
+					class="v-notification-close-img"
+					:src="require(`../../assets/icons/close-cross-black.svg`)"
+					alt=""
+				>
+			</button>
+		</div>
 		<transition-group
 			name="v-transition-animate"
 		>
@@ -20,6 +35,7 @@
 
 <script>
 	import vNotificationItem from './v-notification-item';
+	import { NOTIFICATION } from '../../sconst/notification';
 
 	export default {
 		name: "v-notification",
@@ -32,6 +48,11 @@
 				default: () => {
 					return []
 				}
+			}
+		},
+		methods: {
+			onClose: function() {
+				this.$store.dispatch(NOTIFICATION.CLEAR.ALL);
 			}
 		},
 		data() {
@@ -84,5 +105,28 @@
 		&-move {
 			transition: transform .6s ease;
 		}
+	}
+
+	.v-notification-top {
+		display: flex;
+		justify-content: flex-end;
+		height: 16px;
+		margin-right: 0px;
+	}
+
+	.v-notification-close-btn {
+		width: 20px;
+		height: 20px;
+		border-width: 0px;
+		margin-left: 5px;
+		padding: 0px;
+		background: #00000000;
+		cursor: $buttonCursor;
+	}
+
+	.v-notification-close-img {
+		width: 20px;
+		height: 20px;
+		margin: 0px;
 	}
 </style>

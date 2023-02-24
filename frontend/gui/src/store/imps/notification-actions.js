@@ -1,23 +1,27 @@
 import { NOTIFICATION } from "../../sconst/notification";
 
 const actOnNotificationSuccess = ({commit}, {code, args}) => {
-	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.SUCCESS});
+	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.LEVEL.SUCCESS});
 };
 
 const actOnNotificationError = ({commit}, {code, args}) => {
-	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.ERROR});
+	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.LEVEL.ERROR});
 };
 
 const actOnNotificationInfo = ({commit}, {code, args}) => {
-	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.INFO});
+	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.LEVEL.INFO});
 };
 
 const actOnNotificationWarning = ({commit}, {code, args}) => {
-	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.WARNING});
+	commit(NOTIFICATION.NOTIFY, {code, args, level: NOTIFICATION.LEVEL.WARNING});
 };
 
-const actOnNotificationClear = ({commit}, notificationId) => {
-	commit(NOTIFICATION.CLEAR, notificationId);
+const actOnNotificationClearById = ({commit}, notificationId) => {
+	commit(NOTIFICATION.CLEAR.ID, notificationId);
+};
+
+const actOnNotificationClearAll = ({commit}) => {
+	commit(NOTIFICATION.CLEAR.ALL);
 };
 
 export {
@@ -25,5 +29,6 @@ export {
 	actOnNotificationError,
 	actOnNotificationInfo,
 	actOnNotificationWarning,
-	actOnNotificationClear
+	actOnNotificationClearById,
+	actOnNotificationClearAll
 };

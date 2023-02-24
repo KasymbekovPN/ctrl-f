@@ -8,10 +8,10 @@ import {
 describe('notification.js', () => {
 	each([
 		[undefined, 'info'],
-		[NOTIFICATION.SUCCESS, 'success'],
-		[NOTIFICATION.INFO, 'info'],
-		[NOTIFICATION.WARNING, 'warning'],
-		[NOTIFICATION.ERROR, 'error']
+		[NOTIFICATION.LEVEL.SUCCESS, 'success'],
+		[NOTIFICATION.LEVEL.INFO, 'info'],
+		[NOTIFICATION.LEVEL.WARNING, 'warning'],
+		[NOTIFICATION.LEVEL.ERROR, 'error']
 	]).it('when level is %s getAlias must return %s', (level, expected) => {
 		expect(getAlias(level)).toBe(expected);
 	})

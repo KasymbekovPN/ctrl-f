@@ -49,7 +49,7 @@
 		},
 		methods: {
 			onClose: function() {
-				this.$store.dispatch(NOTIFICATION.CLEAR, this.datum.id);
+				this.$store.dispatch(NOTIFICATION.CLEAR.ID, this.datum.id);
 			}
 		}
 	}

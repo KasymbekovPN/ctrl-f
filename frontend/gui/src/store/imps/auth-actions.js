@@ -18,7 +18,7 @@ const responseLogin = ({commit, dispatch, router}, response) => {
 		commit(AUTH.LOGIN.SUCCESS, response.value);
 		dispatch(USER.PROFILE.SET, response.value);
 	} else {
-		dispatch(NOTIFICATION.ERROR, {code: 'login-page.state.error'});
+		dispatch(NOTIFICATION.LEVEL.ERROR, {code: 'login-page.state.error'});
 		commit(AUTH.LOGIN.ERROR);
 	}
 	router.push(config.paths.home);

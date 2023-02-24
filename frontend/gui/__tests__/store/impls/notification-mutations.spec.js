@@ -1,4 +1,8 @@
-import { mutateOnNotificationClear, mutateOnNotificationNotify } from "../../../src/store/imps/notification-mutations";
+import {
+	mutateOnNotificationClearAll,
+	mutateOnNotificationClearById,
+	mutateOnNotificationNotify
+} from "../../../src/store/imps/notification-mutations";
 
 describe('notification-mutations.js', () => {
 
@@ -24,7 +28,7 @@ describe('notification-mutations.js', () => {
 		expect(state.notifications.data).toStrictEqual(data);
 	});
 
-	test('should check mutateOnNotificationClear', () => {
+	test('should check mutateOnNotificationClearById', () => {
 		class Notifications {
 			remove(notificationId){
 				this.notificationId = notificationId;
@@ -36,8 +40,21 @@ describe('notification-mutations.js', () => {
 			notifications: new Notifications()
 		};
 
-		mutateOnNotificationClear(state, expectedId);
+		mutateOnNotificationClearById(state, expectedId);
 
 		expect(state.notifications.notificationId).toBe(expectedId);
+	});
+
+	test('should check mutateOnNotificationClearAll', () => {
+		class Notifications {
+			clear() {
+				this.called = true;
+			}
+		};
+
+		let state = {notifications: new Notifications()};
+		mutateOnNotificationClearAll(state);
+
+		expect(state.notifications.called).toBe(true);
 	});
 });

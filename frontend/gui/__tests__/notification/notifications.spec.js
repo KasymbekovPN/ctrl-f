@@ -144,4 +144,19 @@ describe('notifications.js', () => {
 			expect(notifications._timerIds.size).toBe(0);
 		}, 100);
 	});
+
+	test('should check clear-method', () => {
+		const firstNotificationId = 0;
+		const firstNotification = { arg: 'first' };
+		const secondNotificationId = 1;
+		const secondNotification = { arg: 'second' };
+
+		const notifications = new Notifications(delay, size);
+		notifications.put(firstNotificationId, firstNotification);
+		notifications.put(secondNotificationId, secondNotification);
+		notifications.clear();
+
+		expect(notifications._data.size).toBe(0);
+		expect(notifications._timerIds.size).toBe(0);
+	});
 });

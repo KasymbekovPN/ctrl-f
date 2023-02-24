@@ -3,11 +3,16 @@ const mutateOnNotificationNotify = (state, data) => {
 	state.notifications.put(state.nextId++, data);
 };
 
-const mutateOnNotificationClear = (state, notificationId)  => {
+const mutateOnNotificationClearById = (state, notificationId)  => {
 	state.notifications.remove(notificationId);
+};
+
+const mutateOnNotificationClearAll = state => {
+	state.notifications.clear();
 };
 
 export {
 	mutateOnNotificationNotify,
-	mutateOnNotificationClear
+	mutateOnNotificationClearById,
+	mutateOnNotificationClearAll
 };

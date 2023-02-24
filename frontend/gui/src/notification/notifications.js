@@ -39,6 +39,12 @@ export default class Notifications {
 		this._timerIds.delete(notificationId);
 	}
 
+	clear(){
+		for (const id of this._data.keys()){
+			this.remove(id);
+		}
+	}
+
 	isEmpty() {
 		return this._data.size === 0;
 	}

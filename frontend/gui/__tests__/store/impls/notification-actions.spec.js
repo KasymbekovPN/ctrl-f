@@ -1,6 +1,7 @@
 import { NOTIFICATION } from "../../../src/sconst/notification";
 import {
-	actOnNotificationClear,
+	actOnNotificationClearAll,
+	actOnNotificationClearById,
 	actOnNotificationError,
 	actOnNotificationInfo,
 	actOnNotificationSuccess,
@@ -26,7 +27,7 @@ describe('notification-actions.js', () => {
 
 		const expected = {
 			command: NOTIFICATION.NOTIFY,
-			data: { level: NOTIFICATION.SUCCESS, code, args }
+			data: { level: NOTIFICATION.LEVEL.SUCCESS, code, args }
 		};
 		expect(commitResult).toStrictEqual(expected);
 		reset();
@@ -37,7 +38,7 @@ describe('notification-actions.js', () => {
 
 		const expected = {
 			command: NOTIFICATION.NOTIFY,
-			data: { level: NOTIFICATION.ERROR, code, args }
+			data: { level: NOTIFICATION.LEVEL.ERROR, code, args }
 		};
 		expect(commitResult).toStrictEqual(expected);
 		reset();
@@ -48,7 +49,7 @@ describe('notification-actions.js', () => {
 
 		const expected = {
 			command: NOTIFICATION.NOTIFY,
-			data: { level: NOTIFICATION.INFO, code, args }
+			data: { level: NOTIFICATION.LEVEL.INFO, code, args }
 		};
 		expect(commitResult).toStrictEqual(expected);
 		reset();
@@ -59,20 +60,28 @@ describe('notification-actions.js', () => {
 
 		const expected = {
 			command: NOTIFICATION.NOTIFY,
-			data: { level: NOTIFICATION.WARNING, code, args }
+			data: { level: NOTIFICATION.LEVEL.WARNING, code, args }
 		};
 		expect(commitResult).toStrictEqual(expected);
 		reset();
 	});
 
-	test('should check actOnNotificationClear', () => {
+	test('should check actOnNotificationClearById', () => {
 		const notificationId = 12345;
-		actOnNotificationClear({commit}, notificationId);
+		actOnNotificationClearById({commit}, notificationId);
 
 		const expected = {
-			command: NOTIFICATION.CLEAR,
+			command: NOTIFICATION.CLEAR.ID,
 			data: notificationId
 		};
+		expect(commitResult).toStrictEqual(expected);
+		reset();
+	});
+
+	test('should check actOnNotificationClearAll', () => {
+		actOnNotificationClearAll({commit});
+
+		const expected = { command: NOTIFICATION.CLEAR.ALL };
 		expect(commitResult).toStrictEqual(expected);
 		reset();
 	});

@@ -98,7 +98,7 @@ describe('subscription-actions.js', () => {
 		const code = 'some.code';
 		const args = {arg0: 'value0'};
 		const expectedDispatchResult = {
-			[NOTIFICATION.ERROR]: {code, args}
+			[NOTIFICATION.LEVEL.ERROR]: {code, args}
 		};
 		const body = {
 			success: false,
