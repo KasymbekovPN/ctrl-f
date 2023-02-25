@@ -8,7 +8,7 @@
 		<p>{{ odd }}</p>
 		<p>{{ type }}</p> -->
 
-		<p>{{ textContext }}</p>
+		<p>{{ asText }}</p>
 	</div>
 </template>
 
@@ -51,18 +51,7 @@
 			return {}
 		},
 		computed: {
-			textContext: function() {
-				//<
-				// console.log('11111111111111111')
-				// console.log(this.datasource);
-
-				// console.log(this.ds);
-				// console.log(this.ds(this.id, this.attribute));
-
-				// console.log(this.$store);
-				// console.log(this.$store.getters[this.datasource](this.id, this.attribute));
-
-				//<
+			asText: function() {
 				return this.$store.getters[this.datasource](this.id, this.attribute);
 			}
 		},
