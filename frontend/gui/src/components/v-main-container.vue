@@ -1,5 +1,17 @@
 <template>
 	<div class="v-main-container">
+		<!-- //< del region begin -->
+		<button @click="testOnClick">click me</button>
+		<v-table-cell
+			:datasource="datasource"
+			:id="id"
+			:attribute="attribute"
+			:heigth="heigth"
+			:width="width"
+			:odd="odd"
+		/>
+		<!-- //< del region end -->
+
 		<v-notification
 			:messages="getNotifications"
 		/>
@@ -30,18 +42,31 @@
 	import { ROUTE } from '../sconst/route';
 	import vNotification from './notification/v-notification';
 
+	//<
+	import vTableCell from './table/v-table-cell';
+
 	export default {
 		name: 'v-main-container',
 		components: {
 			vDisconnectionPage,
 			vHeader,
 			vMenu,
-			vNotification
+			vNotification,
+			//<
+			vTableCell
 		},
 		props: {},
 		data() {
 			return {
-				items: config.menu.items
+				items: config.menu.items,
+				//< temp
+				datasource: "getDomainAttribute",
+				id: 0,
+				attribute: "name",
+				heigth: "100px",
+				width: "100px",
+				odd: false
+
 			}
 		},
 		computed: {
@@ -51,7 +76,12 @@
 				'getNotifications'
 			])
 		},
-		methods: {},
+		methods: {
+			//< temp
+			testOnClick: function(){
+				this.$store.dispatch('testCellChange');
+			}
+		},
 		watch: {
 			$route: function(to, /*from*/){
 				this.$store.dispatch(ROUTE.ON.CHANGING, to.path);
