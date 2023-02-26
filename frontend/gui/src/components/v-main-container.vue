@@ -2,6 +2,11 @@
 	<div class="v-main-container">
 		<!-- //< del region begin -->
 		<button @click="testOnClick">click me</button>
+
+		<v-table-header-cell
+			:code="code"
+		/>
+
 		<v-table-cell
 			:datasource="datasource"
 			:id="id"
@@ -44,6 +49,7 @@
 
 	//<
 	import vTableCell from './table/v-table-cell';
+	import vTableHeaderCell from './table/v-table-header-cell';
 	import { CELL } from '../sconst/cell';
 	//<
 
@@ -55,7 +61,9 @@
 			vMenu,
 			vNotification,
 			//<
-			vTableCell
+			vTableCell,
+			vTableHeaderCell
+			//<
 		},
 		props: {},
 		data() {
@@ -68,7 +76,9 @@
 				width: "1000px",
 				even: true,
 				type: CELL.TYPE.TEXT,
-				decimalPlaces: 2
+				decimalPlaces: 2,
+				code: 'table.header.tag.id'
+				// code: 'table.header.tag.name'
 			}
 		},
 		computed: {

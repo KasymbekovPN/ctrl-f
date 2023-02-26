@@ -38,7 +38,7 @@
 			},
 			even: {
 				type: Boolean,
-				required: false
+				default: false
 			},
 			decimalPlaces: {
 				type: Number,
