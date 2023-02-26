@@ -6,7 +6,6 @@
 			:datasource="datasource"
 			:id="id"
 			:attribute="attribute"
-			:width="width"
 			:even="even"
 			:type="type"
 			:decimalPlaces="decimalPlaces"
@@ -67,7 +66,7 @@
 				id: 0,
 				attribute: "name",
 				width: "1000px",
-				even: false,
+				even: true,
 				type: CELL.TYPE.TEXT,
 				decimalPlaces: 2
 			}

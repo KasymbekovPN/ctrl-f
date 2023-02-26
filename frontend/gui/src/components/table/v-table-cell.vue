@@ -2,11 +2,9 @@
 	<div
 		class="v-table-cell"
 		:class="{ even: even }"
-		:style="{ width: width }"
 	>
-		<p class="v-table-cell-text-h" v-if="isHeader">{{ asText }}</p>
-		<p class="v-table-cell-text-p" v-if="isText">{{ asText }}</p>
-		<p class="v-table-cell-text-n" v-if="isNumber">{{ asNumber }}</p>
+		<p class="v-table-cell-text" v-if="isText">{{ asText }}</p>
+		<p class="v-table-cell-text" v-if="isNumber">{{ asNumber }}</p>
 		<img
 			class="v-table-cell-lamp"
 			v-if="isLamp"
@@ -38,24 +36,19 @@
 				type: String,
 				default: CELL.TYPE.TEXT
 			},
-			width: {
-				type: String,
-				required: true
-			},
 			even: {
 				type: Boolean,
-				required: true
+				required: false
 			},
 			decimalPlaces: {
 				type: Number,
-				default: 0
+				default: 2
 			}
 		},
 		data() {
 			return {}
 		},
 		computed: {
-			isHeader() { return this.type === CELL.TYPE.HEADER; },
 			isText() { return this.type === CELL.TYPE.TEXT; },
 			isNumber() { return this.type === CELL.TYPE.NUMBER; },
 			isLamp() { return this.type === CELL.TYPE.LAMP; },
@@ -83,22 +76,7 @@
 		background: #bebed84f;
 	}
 
-	.v-table-cell-text-h {
-		margin: 0 auto;
-		font-size: 20px;
-		margin-top: 3px;
-		font-family: $commonFontFamily;
-		font-weight: bold;
-	}
-
-	.v-table-cell-text-p {
-		margin: 0 auto;
-		font-size: 20px;
-		margin-top: 3px;
-		font-family: $commonFontFamily;
-	}
-
-	.v-table-cell-text-n {
+	.v-table-cell-text {
 		margin: 0 auto;
 		font-size: 20px;
 		margin-top: 3px;
