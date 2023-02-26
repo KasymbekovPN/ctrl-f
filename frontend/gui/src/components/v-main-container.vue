@@ -6,9 +6,10 @@
 			:datasource="datasource"
 			:id="id"
 			:attribute="attribute"
-			:heigth="heigth"
 			:width="width"
-			:odd="odd"
+			:even="even"
+			:type="type"
+			:decimalPlaces="decimalPlaces"
 		/>
 		<!-- //< del region end -->
 
@@ -44,6 +45,8 @@
 
 	//<
 	import vTableCell from './table/v-table-cell';
+	import { CELL } from '../sconst/cell';
+	//<
 
 	export default {
 		name: 'v-main-container',
@@ -62,11 +65,11 @@
 				//< temp
 				datasource: "getDomainAttribute",
 				id: 0,
-				attribute: "name",
-				heigth: "100px",
+				attribute: "bbb",
 				width: "100px",
-				odd: false
-
+				even: true,
+				type: CELL.TYPE.LAMP,
+				decimalPlaces: 2
 			}
 		},
 		computed: {

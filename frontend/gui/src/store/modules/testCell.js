@@ -11,7 +11,9 @@ const getters = {
 			for (let i = 0; i < 10; i++){
 				state.data.set(i, {
 					id: i,
-					name: `name ${i}`
+					name: `name ${i}`,
+					n: 123.4567,
+					bbb: 12
 				});
 			}
 		}
