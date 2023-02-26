@@ -3,7 +3,11 @@
 		<!-- //< del region begin -->
 		<button @click="testOnClick">click me</button>
 
-		<v-table-header-cell
+		<v-table-header
+			:data="headerData"
+		/>
+
+		<!-- <v-table-header-cell
 			:code="code"
 		/>
 
@@ -14,7 +18,7 @@
 			:even="even"
 			:type="type"
 			:decimalPlaces="decimalPlaces"
-		/>
+		/> -->
 		<!-- //< del region end -->
 
 		<v-notification
@@ -48,8 +52,9 @@
 	import vNotification from './notification/v-notification';
 
 	//<
-	import vTableCell from './table/v-table-cell';
-	import vTableHeaderCell from './table/v-table-header-cell';
+	// import vTableCell from './table/v-table-cell';
+	// import vTableHeaderCell from './table/v-table-header-cell';
+	import vTableHeader from './table/v-table-header';
 	import { CELL } from '../sconst/cell';
 	//<
 
@@ -61,8 +66,9 @@
 			vMenu,
 			vNotification,
 			//<
-			vTableCell,
-			vTableHeaderCell
+			// vTableCell,
+			// vTableHeaderCell,
+			vTableHeader
 			//<
 		},
 		props: {},
@@ -77,8 +83,17 @@
 				even: true,
 				type: CELL.TYPE.TEXT,
 				decimalPlaces: 2,
-				code: 'table.header.tag.id'
-				// code: 'table.header.tag.name'
+				code: 'table.header.tag.id',
+				// code: 'table.header.tag.name',
+				headerData: [
+					{
+						code: 'table.header.tag.id',
+						width: '100px'
+					},
+					{
+						code: 'table.header.tag.name'
+					}
+				]
 			}
 		},
 		computed: {
