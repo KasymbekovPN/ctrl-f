@@ -65,10 +65,10 @@
 				//< temp
 				datasource: "getDomainAttribute",
 				id: 0,
-				attribute: "bbb",
-				width: "100px",
-				even: true,
-				type: CELL.TYPE.LAMP,
+				attribute: "name",
+				width: "1000px",
+				even: false,
+				type: CELL.TYPE.TEXT,
 				decimalPlaces: 2
 			}
 		},
