@@ -3,9 +3,9 @@
 		<!-- //< del region begin -->
 		<button @click="testOnClick">click me</button>
 
-		<v-table-header
+		<!-- <v-table-header
 			:data="headerData"
-		/>
+		/> -->
 
 		<!-- <v-table-header-cell
 			:code="code"
@@ -55,7 +55,7 @@
 	//<
 	// import vTableCell from './table/v-table-cell';
 	// import vTableHeaderCell from './table/v-table-header-cell';
-	import vTableHeader from './table/v-table-header';
+	// import vTableHeader from './table/v-table-header';
 	import { CELL } from '../sconst/cell';
 	//<
 
@@ -69,7 +69,7 @@
 			//<
 			// vTableCell,
 			// vTableHeaderCell,
-			vTableHeader
+			// vTableHeader
 			//<
 		},
 		props: {},

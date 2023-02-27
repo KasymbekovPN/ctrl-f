@@ -29,38 +29,54 @@
 				required: true
 			},
 			attribute: {
-				type: String,
+				type: Object,
 				required: true
-			},
-			type: {
-				type: String,
-				default: CELL.TYPE.TEXT
-			},
-			even: {
-				type: Boolean,
-				default: false
-			},
-			decimalPlaces: {
-				type: Number,
-				default: 2
 			}
+			//<
+			// attribute: {
+			// 	type: String,
+			// 	required: true
+			// },
+			// type: {
+			// 	type: String,
+			// 	default: CELL.TYPE.TEXT
+			// },
+			// even: {
+			// 	type: Boolean,
+			// 	default: false
+			// },
+			// decimalPlaces: {
+			// 	type: Number,
+			// 	default: 2
+			// }
 		},
 		data() {
 			return {}
 		},
 		computed: {
-			isText() { return this.type === CELL.TYPE.TEXT; },
-			isNumber() { return this.type === CELL.TYPE.NUMBER; },
-			isLamp() { return this.type === CELL.TYPE.LAMP; },
+			// isText() { return this.type === CELL.TYPE.TEXT; },
+			// isNumber() { return this.type === CELL.TYPE.NUMBER; },
+			// isLamp() { return this.type === CELL.TYPE.LAMP; },
+			//<
+			isText() { return this.attribute.type === CELL.TYPE.TEXT; },
+			isNumber() { return this.attribute.type === CELL.TYPE.NUMBER; },
+			isLamp() { return this.attribute.type === CELL.TYPE.LAMP; },
 			asText() {
-				return toText(this.$store.getters[this.datasource](this.id, this.attribute));
+				// return toText(this.$store.getters[this.datasource](this.id, this.attribute));
+				//<
+				return toText(this.$store.getters[this.datasource](this.id, this.attribute.name));
 			},
 			asNumber() {
-				return toNumber(this.$store.getters[this.datasource](this.id, this.attribute), this.decimalPlaces);
+				// return toNumber(this.$store.getters[this.datasource](this.id, this.attribute), this.decimalPlaces);
+				//<
+				return toNumber(this.$store.getters[this.datasource](this.id, this.attribute.name), this.attribute.decimalPlaces);
 			},
 			asLamp() {
-				return toLamp(this.$store.getters[this.datasource](this.id, this.attribute));
-			}
+				// return toLamp(this.$store.getters[this.datasource](this.id, this.attribute));
+				//<
+				return toLamp(this.$store.getters[this.datasource](this.id, this.attribute.name));
+			},
+			event() { return this.attribute.even; }
 		},
 		methods: {}
 	}
