@@ -22,6 +22,7 @@
 		<!-- //< del region end -->
 
 		<v-notification
+			v-if="isNotificationVisible"
 			:messages="getNotifications"
 		/>
 		<div v-if="isConnected" class="v-main-container__connected">
@@ -100,7 +101,8 @@
 			...mapGetters([
 				'isConnected',
 				'isAuthenticated',
-				'getNotifications'
+				'getNotifications',
+				'isNotificationVisible'
 			])
 		},
 		methods: {

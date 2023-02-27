@@ -10,7 +10,8 @@ import {
 	actOnNotificationWarning
 } from "../imps/notification-actions";
 import {
-	getNotifications
+	getNotifications,
+	isNotificationVisible
 } from "../imps/notification-getters";
 import {
 	mutateOnNotificationClearAll,
@@ -24,7 +25,8 @@ const state = {
 };
 
 const getters = {
-	getNotifications: getNotifications
+	getNotifications: getNotifications,
+	isNotificationVisible: isNotificationVisible
 };
 
 const actions = {
