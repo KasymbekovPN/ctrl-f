@@ -81,20 +81,10 @@
 		font-size: 20px;
 		margin-top: 3px;
 		font-family: $commonFontFamily;
-
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-khtml-user-select: none;
-		-ms-user-select: none;
 	}
 
 	.v-table-cell-lamp {
 		width: 26px;
 		margin-top: 2px;
-
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-khtml-user-select: none;
-		-ms-user-select: none;
 	}
 </style>

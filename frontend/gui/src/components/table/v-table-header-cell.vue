@@ -42,10 +42,5 @@
 		font-weight: 700;
 		margin-top: 3px;
 		font-family: $commonFontFamily;
-
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-khtml-user-select: none;
-		-ms-user-select: none;
 	}
 </style>
