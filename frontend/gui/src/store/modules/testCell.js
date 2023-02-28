@@ -12,8 +12,8 @@ const getters = {
 				state.data.set(i, {
 					id: i,
 					name: `name ${i}`,
-					n: 123.4567,
-					bbb: 12
+					price: 123.457,
+					status: false
 				});
 			}
 		}
@@ -32,9 +32,13 @@ const mutations = {
 	testCellChange: state => {
 		for (const [key, value] of state.data){
 			const id = value.id + 1;
+			const price = value.price + 1.012;
+			const status = value.status;
 			state.data.set(key, {
 				id: id,
-				name: `name ${id}`
+				name: `name ${id}`,
+				price: price,
+				status: !status
 			});
 		}
 	}

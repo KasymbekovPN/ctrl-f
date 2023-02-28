@@ -3,6 +3,13 @@
 		<!-- //< del region begin -->
 		<button @click="testOnClick">click me</button>
 
+		<!-- <v-table-row
+			:datasource="datasource"
+			:id="id"
+			:attributes="attributes"
+			:even="even"
+		/> -->
+
 		<!-- <v-table-header
 			:data="headerData"
 		/> -->
@@ -56,6 +63,7 @@
 	// import vTableCell from './table/v-table-cell';
 	// import vTableHeaderCell from './table/v-table-header-cell';
 	// import vTableHeader from './table/v-table-header';
+	// import vTableRow from './table/v-table-row';
 	import { CELL } from '../sconst/cell';
 	//<
 
@@ -70,6 +78,7 @@
 			// vTableCell,
 			// vTableHeaderCell,
 			// vTableHeader
+			// vTableRow
 			//<
 		},
 		props: {},
@@ -79,9 +88,33 @@
 				//< temp
 				datasource: "getDomainAttribute",
 				id: 0,
+
+				attributes: [
+					{
+						name: 'id',
+						type: CELL.TYPE.TEXT,
+						width: '100px'
+					},
+					{
+						name: 'name',
+						type: CELL.TYPE.TEXT,
+						width: '100px'
+					},
+					{
+						name: 'price',
+						type: CELL.TYPE.NUMBER,
+						decimalPlaces: 2,
+						width: '100px'
+					},
+					{
+						name: 'status',
+						type: CELL.TYPE.LAMP
+					}
+				],
+
 				attribute: "name",
 				width: "1000px",
-				even: true,
+				even: false,
 				type: CELL.TYPE.TEXT,
 				decimalPlaces: 2,
 				code: 'table.header.tag.id',

@@ -1,13 +1,15 @@
 <template>
-	<!-- //<  -->
-	<!-- :style="{'grid-template-columns': gridTemplateColumns}" -->
-	<div class="v-table-row">
+	<div
+		class="v-table-row"
+		:style="{'grid-template-columns': gridTemplateColumns}"
+	>
 		<v-table-cell
 			v-for="(attribute, index) in attributes"
 			:key="index"
 			:datasource="datasource"
-			:id="id",
+			:id="id"
 			:attribute="attribute"
+			:even="even"
 		/>
 	</div>
 </template>
@@ -36,23 +38,22 @@
 			even: {
 				type: Boolean,
 				default: false
-			},
+			}
 		},
 		data() {
 			return {}
 		},
 		computed: {
-			//<
-			// gridTemplateColumns() {
-			// 	let delimiter = '';
-			// 	let result = '';
-			// 	for(const datum of this.data){
-			// 		result += delimiter + (datum.width !== undefined ? datum.width : '1fr');
-			// 		delimiter = ' ';
-			// 	}
+			gridTemplateColumns() {
+				let delimiter = '';
+				let result = '';
+				for (const attribute of this.attributes){
+					result += delimiter + (attribute.width !== undefined ? attribute.width : '1fr');
+					delimiter = ' ';
+				}
 
-			// 	return result;
-			// }
+				return result;
+			}
 		},
 		methods: {}
 	}
@@ -60,7 +61,7 @@
 
 <style>
 	.v-table-row {
-		border: solid black 1px;
+		border: solid black 0px;
 		height: 30px;
 		display: grid;
 	}
