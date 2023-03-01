@@ -9,8 +9,6 @@ import signal from './modules/signal';
 import domain from './modules/domain';
 import notification from './modules/notification';
 import tag from './modules/tag';
-//< temp
-import testCell from './modules/testCell';
 
 export default new Vuex.Store({
 	modules: {
@@ -23,8 +21,6 @@ export default new Vuex.Store({
 		signal,
 		domain,
 		notification,
-		tag,
-		//<
-		testCell
+		tag
 	}
 });
