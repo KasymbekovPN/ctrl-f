@@ -1,8 +1,13 @@
 import { TAG } from "../../sconst/tag";
 
-const state = {};
+const state = {
+	tags: new Map()
+};
 
-const getters = {};
+const getters = {
+	// tagAttributeDatasource
+	// tagIndexes
+};
 
 const actions = {
 	[TAG.CREATED]: ({commit}, tag) => {
