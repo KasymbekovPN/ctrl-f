@@ -17,6 +17,7 @@ const responseLogin = ({commit, dispatch, router}, response) => {
 	if (response.success){
 		commit(AUTH.LOGIN.SUCCESS, response.value);
 		dispatch(USER.PROFILE.SET, response.value);
+		//< call domain loading
 	} else {
 		dispatch(NOTIFICATION.LEVEL.ERROR, {code: 'login-page.state.error'});
 		commit(AUTH.LOGIN.ERROR);

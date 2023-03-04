@@ -1,9 +1,12 @@
+import config from "../../../config";
+import { CONNECTION } from "../../../src/sconst/connection";
 import { TAG } from "../../../src/sconst/tag";
 import {
-	actOnTagCreated,
-	actOnTagLoaded,
-	actOnTagRemoved,
-	actOnTagUpdated
+	actOnTagLoadingRequest,
+	actOnTagCreationRequest,
+	actOnTagLoadingResponse,
+	actOnTagCreationResponse,
+	actOnTagCleaning
 } from "../../../src/store/imps/tag-actions";
 
 describe('tag-actions.js', () => {
@@ -12,54 +15,71 @@ describe('tag-actions.js', () => {
 	const name = 'some.name';
 
 	let commitResult;
-	const commit = (command, data) => {
-		commitResult = data !== undefined ? { command, data } : { command };
-	};
+	const commit = (command, data) => { commitResult = data !== undefined ? { command, data } : { command }; };
+
+	let dispatchResult;
+	const dispatch = (command, data) => { dispatchResult = data !== undefined ? { command, data } : { command }; };
 
 	afterEach(() => {
-		commitResult = undefined;
+		commitResult = dispatchResult = undefined;
 	});
 
-	test('should check actOnTagLoaded', () => {
+	test('should check actOnTagLoadingRequest', () => {
+		const expectedDispatchResult = {
+			command: CONNECTION.SEND,
+			data: {
+				destination: config.requests.tag.load,
+				headers: {},
+				body: {}
+			}
+		};
+
+		actOnTagLoadingRequest({dispatch});
+		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
+	});
+
+	test('should check actOnTagCreationRequest', () => {
+		const expectedDispatchResult = {
+			command: CONNECTION.SEND,
+			data: {
+				destination: config.requests.tag.create,
+				headers: {},
+				body: {name}
+			}
+		};
+
+		actOnTagCreationRequest({dispatch}, name);
+		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
+	});
+
+	test('should check actOnTagLoadingResponse', () => {
 		const tags = [{ id, name }];
 		const expected = {
-			command: TAG.LOADED,
+			command: TAG.RESPONSE.LOAD,
 			data: tags
 		};
 
-		actOnTagLoaded({commit}, tags);
+		actOnTagLoadingResponse({commit}, tags);
 		expect(commitResult).toStrictEqual(expected);
 	});
 
-	test('should check actOnTagCreated', () => {
+	test('should check actOnTagCreationResponse', () => {
 		const tag = { id, name };
 		const expected = {
-			command: TAG.CREATED,
+			command: TAG.RESPONSE.CREATE,
 			data: tag
 		};
 
-		actOnTagCreated({commit}, tag);
+		actOnTagCreationResponse({commit}, tag);
 		expect(commitResult).toStrictEqual(expected);
 	});
 
-	test('should check actOnTagUpdated', () => {
-		const tag = { id, name };
+	test('should check actOnTagCleaning', () => {
 		const expected = {
-			command: TAG.UPDATED,
-			data: tag
+			command: TAG.STORAGE.CLEAR,
 		};
 
-		actOnTagUpdated({commit}, tag);
-		expect(commitResult).toStrictEqual(expected);
-	});
-
-	test('should check actOnTagRemoved', () => {
-		const expected = {
-			command: TAG.REMOVED,
-			data: id
-		};
-
-		actOnTagRemoved({commit}, id);
+		actOnTagCleaning({commit});
 		expect(commitResult).toStrictEqual(expected);
 	});
 });

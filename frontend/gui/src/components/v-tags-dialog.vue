@@ -41,7 +41,7 @@
 
 <script>
 	import { mapGetters, mapActions } from 'vuex';
-	import { DOMAIN } from '../sconst/domain';
+	import { TAG } from '../sconst/tag';
 
 	export default {
 		name: 'v-header',
@@ -59,7 +59,7 @@
 		},
 		methods: {
 			...mapActions({
-				sendNewTag: DOMAIN.TAG.REQUEST.CREATE
+				sendNewTag: TAG.REQUEST.CREATE
 			}),
 			onSaveButtonClick: function() {
 				this.sendNewTag({name: this.name});

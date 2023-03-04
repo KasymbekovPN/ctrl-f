@@ -1,40 +1,57 @@
+import config from "../../../config";
+import { CONNECTION } from "../../sconst/connection";
 import { TAG } from "../../sconst/tag";
 
-const actOnTagLoaded = ({commit}, tags) => {
-	//<
-	console.log(`act: ${TAG.LOADED}`);
-	console.log(tags);
-	//<
-	commit(TAG.LOADED, tags);
+const actOnTagLoadingRequest = ({dispatch}) => {
+	dispatch(CONNECTION.SEND, {
+		destination: config.requests.tag.load,
+		headers: {},
+		body: {}
+	});
 };
 
-const actOnTagCreated = ({commit}, tag) => {
-	//<
-	console.log(`act: ${TAG.CREATED}`);
-	console.log(tag);
-	//<
-	commit(TAG.CREATED, tag);
+const actOnTagCreationRequest = ({dispatch}, name) => {
+	dispatch(CONNECTION.SEND, {
+		destination: config.requests.tag.create,
+		headers: {},
+		body: {name}
+	});
 };
 
-const actOnTagUpdated = ({commit}, tag) => {
-	//<
-	console.log(`act: ${TAG.UPDATED}`);
-	console.log(tag);
-	//<
-	commit(TAG.UPDATED, tag);
+//<
+// const actOnTagUpdatingRequest = ({dispatch}, {id, name}) => {};
+
+//<
+// const actOnTagRemovingRequest = ({dispatch}, id) => {};
+
+const actOnTagLoadingResponse = ({commit}, tags) => {
+	commit(TAG.RESPONSE.LOAD, tags);
 };
 
-const actOnTagRemoved = ({commit}, id) => {
-	//<
-	console.log(`act: ${TAG.REMOVED}`);
-	console.log(id);
-	//<
-	commit(TAG.REMOVED, id);
+const actOnTagCreationResponse = ({commit}, tag) => {
+	commit(TAG.RESPONSE.CREATE, tag);
+};
+
+//<
+// const actOnTagUpdatingResponse = ({commit}, tag) => {};
+
+//<
+// const actOnTagRemovingResponse = ({commit}, id) => {};
+
+const actOnTagCleaning = ({commit}) => {
+	commit(TAG.STORAGE.CLEAR);
 };
 
 export {
-	actOnTagLoaded,
-	actOnTagCreated,
-	actOnTagUpdated,
-	actOnTagRemoved
+	actOnTagLoadingRequest,
+	actOnTagCreationRequest,
+	//<
+	// actOnTagUpdatingRequest,
+	// actOnTagRemovingRequest,
+	actOnTagLoadingResponse,
+	actOnTagCreationResponse,
+	//<
+	// actOnTagUpdatingResponse,
+	// actOnTagRemovingResponse,
+	actOnTagCleaning
 };

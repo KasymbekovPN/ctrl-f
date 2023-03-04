@@ -1,4 +1,3 @@
-import config from "../../config";
 import { TAG } from "./tag";
 
 export const DOMAIN_MANAGER = {
@@ -7,9 +6,9 @@ export const DOMAIN_MANAGER = {
 		LOGOUT: 'DOMAIN_MANAGER_AFTER_LOGOUT'
 	},
 	LOAD_REQUESTS: [
-		config.requests.tag.load
+		TAG.REQUEST.LOAD
 	],
 	REMOVE_REQUESTS: [
-		TAG.REMOVED_ALL
+		TAG.STORAGE.CLEAR
 	]
 };
