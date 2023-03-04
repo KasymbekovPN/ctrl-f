@@ -1,5 +1,14 @@
+//< del
 import config from "../../../config";
 import { CONNECTION } from "../../sconst/connection";
+
+const actOnTagLoadingRequest = ({dispatch}) => {
+	dispatch(CONNECTION.SEND, {
+		destination: config.requests.tag.load,
+		headers: {},
+		body: {}
+	});
+};
 
 const processTagCreationRequest = ({dispatch}, {name}) => {
 	dispatch(CONNECTION.SEND, {
@@ -26,6 +35,7 @@ const processTagDeletingRequest = ({dispatch}, {id})  => {
 };
 
 export {
+	actOnTagLoadingRequest,
 	processTagCreationRequest,
 	processTagUpdatingRequest,
 	processTagDeletingRequest

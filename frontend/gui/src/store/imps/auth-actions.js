@@ -40,6 +40,7 @@ const responseLogout = ({commit, dispatch, router}, response) => {
 		commit(AUTH.LOGOUT.ERROR);
 	}
 	dispatch(USER.PROFILE.RESET, response);
+	//< call domain clearing
 	router.push(config.paths.login);
 };
 

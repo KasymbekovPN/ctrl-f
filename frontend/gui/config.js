@@ -26,6 +26,7 @@ export default {
 		clientParams: '/clientParamsRequest',
 		logout: '/logoutRequest',
 		tag: {
+			load: '/tagLoadingRequest',
 			create: '/tagCreationRequest',
 			update: '/tagUpdatingRequest',
 			delete: '/tagDeletingRequest'

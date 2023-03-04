@@ -1,10 +1,11 @@
 import config from "../../../config";
 import { CONNECTION } from "../../../src/sconst/connection";
 import {
+	actOnTagLoadingRequest,
 	processTagCreationRequest,
 	processTagDeletingRequest,
 	processTagUpdatingRequest
- } from "../../../src/store/imps/domain-actions";
+ } from "../../../src/store/imps/domain-tag-actions";
 
 describe('domain-actions.js', () => {
 
@@ -19,6 +20,21 @@ describe('domain-actions.js', () => {
 	const reset = () => {
 		dispatchResult = undefined;
 	};
+
+	test('should check action on tag loading', () => {
+		const expectedDispatchResult = {
+			command: CONNECTION.SEND,
+			data: {
+				destination: config.requests.tag.load,
+				headers: {},
+				body: {}
+			}
+		};
+
+		actOnTagLoadingRequest({dispatch});
+		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
+		reset();
+	});
 
 	test('should check action on tag creation', () => {
 		const expectedDispatchResult = {
