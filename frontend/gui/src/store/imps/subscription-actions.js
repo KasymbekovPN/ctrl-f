@@ -30,10 +30,15 @@ const processLogoutRequestSubscription = ({dispatch}, response) => {
 	dispatch(AUTH.LOGOUT.RESPONSE, data);
 };
 
+const processTagLoadingSubscription = ({dispatch}, response) => {
+	const data = JSON.parse(response.body);
+	dispatch(TAG.RESPONSE.LOAD, data.value);
+};
+
 const processTagCreationSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
 	if (data.success){
-		dispatch(TAG.CREATED, data.value);
+		dispatch(TAG.RESPONSE.CREATE, data.value);
 	} else {
 		const {code, args} = data;
 		dispatch(NOTIFICATION.LEVEL.ERROR, {code, args});
@@ -45,5 +50,6 @@ export {
 	processI18nSubscription,
 	processAuthRequestSubscription,
 	processLogoutRequestSubscription,
+	processTagLoadingSubscription,
 	processTagCreationSubscription
 };

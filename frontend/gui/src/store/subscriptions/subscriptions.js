@@ -5,5 +5,6 @@ export const SUBSCRIPTIONS = {
 	[SUBSCRIPTION.I18N]: '/topic/i18nResponse/',
 	[SUBSCRIPTION.AUTH_REQUEST]: '/topic/authResponse/',
 	[SUBSCRIPTION.LOGOUT_REQUEST]: '/topic/logoutResponse/',
-	[SUBSCRIPTION.TAG_CREATION]: '/topic/tagCreationResponse/'
+	[SUBSCRIPTION.TAG.LOADINTG]: '/topic/tagLoadingResponse/',
+	[SUBSCRIPTION.TAG.CREATION]: '/topic/tagCreationResponse/'
 };

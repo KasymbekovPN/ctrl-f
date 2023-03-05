@@ -4,7 +4,8 @@ import {
 	processClientParamsSubscription,
 	processI18nSubscription,
 	processLogoutRequestSubscription,
-	processTagCreationSubscription
+	processTagCreationSubscription,
+	processTagLoadingSubscription
 } from "../../../src/store/imps/subscription-actions";
 import { CONNECTION } from "../../../src/sconst/connection";
 import { I18N } from "../../../src/sconst/i18n";
@@ -76,10 +77,22 @@ describe('subscription-actions.js', () => {
 		reset();
 	});
 
+	test('should check tag loalding', () => {
+		const tag = {id: 1, name: 'some.name'};
+		const tags = [tag];
+		const expectedDispatchResult = { [TAG.RESPONSE.LOAD]: tags };
+		const body = { value: tags };
+
+		const response = {body: JSON.stringify(body)};
+		processTagLoadingSubscription({dispatch}, response);
+		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
+		reset();
+	});
+
 	test('should check tag creation subscription action if success', () => {
 		const value = {id: 1, name: "name"};
 		const expectedDispatchResult = {
-			[TAG.CREATED]: value
+			[TAG.RESPONSE.CREATE]: value
 		};
 		const body = {
 			success: true,
