@@ -44,7 +44,7 @@ describe('tag-actions.js', () => {
 			data: {
 				destination: config.requests.tag.create,
 				headers: {},
-				body: {name}
+				body: name
 			}
 		};
 

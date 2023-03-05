@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public final class TagCreationControllerErrorArgs implements ErrorArgs {
-	private final String name;
+public final class TagLoadingControllerErrorArgs implements ErrorArgs{
+	private final String cause;
 }

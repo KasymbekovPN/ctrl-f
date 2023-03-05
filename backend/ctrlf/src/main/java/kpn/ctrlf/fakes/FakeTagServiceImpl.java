@@ -5,19 +5,23 @@ import kpn.lib.result.ImmutableResult;
 import kpn.lib.result.Result;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 // TODO: 05.02.2023 it is temporary variant
 @Component
 public final class FakeTagServiceImpl implements FakeTagService {
+	private static final Map<Long, Tag> INIT_MAP = new HashMap<>();
+	static {
+		for (long i = 0; i < 10; i++) {
+			INIT_MAP.put(i, new Tag(i, "name " + String.valueOf(i)));
+		}
+	}
+
 	private final Map<Long, Tag> storage;
 	private final Set<String> names = new HashSet<>();
 
 	public FakeTagServiceImpl() {
-		storage = new HashMap<>();
+		storage = INIT_MAP;
 	}
 
 	public FakeTagServiceImpl(Map<Long, Tag> storage) {
@@ -37,5 +41,14 @@ public final class FakeTagServiceImpl implements FakeTagService {
 		storage.put(id, newTag);
 
 		return ImmutableResult.<Tag>ok(newTag);
+	}
+
+	@Override
+	public Result<List<Tag>> findAll() {
+		return ImmutableResult.<List<Tag>>ok(new ArrayList<>(storage.values()));
+		//<
+//		return ImmutableResult.<List<Tag>>bFail("domain.tag.loading.fail")
+//			.arg("some went wrong")
+//			.build();
 	}
 }

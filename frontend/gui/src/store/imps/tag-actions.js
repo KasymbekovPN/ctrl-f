@@ -14,7 +14,7 @@ const actOnTagCreationRequest = ({dispatch}, name) => {
 	dispatch(CONNECTION.SEND, {
 		destination: config.requests.tag.create,
 		headers: {},
-		body: {name}
+		body: name
 	});
 };
 

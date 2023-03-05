@@ -77,11 +77,26 @@ describe('subscription-actions.js', () => {
 		reset();
 	});
 
-	test('should check tag loalding', () => {
+	test('should check tag loalding if success', () => {
 		const tag = {id: 1, name: 'some.name'};
 		const tags = [tag];
 		const expectedDispatchResult = { [TAG.RESPONSE.LOAD]: tags };
-		const body = { value: tags };
+		const body = {
+			success: true,
+			value: {tags}
+		};
+
+		const response = {body: JSON.stringify(body)};
+		processTagLoadingSubscription({dispatch}, response);
+		expect(dispatchResult).toStrictEqual(expectedDispatchResult);
+		reset();
+	});
+
+	test('should check tag loalding if fail', () => {
+		const code = 'some.code';
+		const args = {arg: 'some,.arg'}
+		const expectedDispatchResult = { [NOTIFICATION.LEVEL.ERROR]: {code, args}};
+		const body = { success: false, code, args };
 
 		const response = {body: JSON.stringify(body)};
 		processTagLoadingSubscription({dispatch}, response);

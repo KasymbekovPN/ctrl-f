@@ -32,7 +32,12 @@ const processLogoutRequestSubscription = ({dispatch}, response) => {
 
 const processTagLoadingSubscription = ({dispatch}, response) => {
 	const data = JSON.parse(response.body);
-	dispatch(TAG.RESPONSE.LOAD, data.value);
+	if (data.success){
+		dispatch(TAG.RESPONSE.LOAD, data.value.tags);
+	} else {
+		const {code, args} = data;
+		dispatch(NOTIFICATION.LEVEL.ERROR, {code, args});
+	}
 };
 
 const processTagCreationSubscription = ({dispatch}, response) => {
