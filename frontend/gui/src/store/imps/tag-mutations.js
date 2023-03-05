@@ -1,4 +1,3 @@
-
 const mutateOnTagLoaded = (state, tags) => {
 	state.tags.clear();
 	for (const tag of tags){
@@ -38,9 +37,17 @@ const mutateOnTagRemoved = (state, id) => {
 	//<
 };
 
+const mutateOnTagClearing = state => {
+	state.tags.clear();
+	//<
+	console.log('mutateOnTagClearing');
+	//<
+};
+
 export {
 	mutateOnTagLoaded,
 	mutateOnTagCreated,
 	mutateOnTagUpdated,
-	mutateOnTagRemoved
+	mutateOnTagRemoved,
+	mutateOnTagClearing
 };

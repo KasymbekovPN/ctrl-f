@@ -1,4 +1,5 @@
 import {
+	mutateOnTagClearing,
 	mutateOnTagCreated,
 	mutateOnTagLoaded,
 	mutateOnTagRemoved,
@@ -73,5 +74,13 @@ describe('tag-mutations.js', () => {
 		let state = { tags: new Map().set(id, tag) };
 		mutateOnTagRemoved(state, id);
 		expect(state).toStrictEqual(expectedState);
+	});
+
+	test('should check mutateOnTagClearing', () => {
+		const tag = {id, name};
+
+		let state = { tags: new Map().set(id, tag) };
+		mutateOnTagClearing(state);
+		expect(state.tags.size).toBe(0);
 	});
 });
