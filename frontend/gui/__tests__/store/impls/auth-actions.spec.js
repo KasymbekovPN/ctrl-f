@@ -10,6 +10,7 @@ import { AUTH } from "../../../src/sconst/auth";
 import { CONNECTION } from "../../../src/sconst/connection";
 import { USER } from "../../../src/sconst/userProfile";
 import { NOTIFICATION } from "../../../src/sconst/notification";
+import { DOMAIN_MANAGER } from "../../../src/sconst/domainManager";
 
 describe('auth-actions.js', () => {
 
@@ -17,9 +18,9 @@ describe('auth-actions.js', () => {
 	const commit = (command, data) => {
 		commitResult = data !== undefined ? { command, data } : { command };
 	};
-	let dispatchResult;
+	let dispatchResult = [];
 	const dispatch = (command, data) => {
-		dispatchResult = data !== undefined ? { command, data } : { command };
+		dispatchResult.push(data !== undefined ? { command, data } : { command });
 	};
 
 	class Router {
@@ -29,20 +30,21 @@ describe('auth-actions.js', () => {
 	}
 
 	const reset = () => {
-		dispatchResult = commitResult = undefined;
+		dispatchResult = [];
+		commitResult = undefined;
 	};
 
 	test('should check requestLogin-actions', () => {
 		const user = {data: 'user'};
 		const expectedCommitResult = {command: AUTH.LOGIN.REQUEST};
-		const expectedDispatchResult = {
+		const expectedDispatchResult = [{
 			command: CONNECTION.SEND,
 			data: {
 				destination: config.requests.auth,
 				headers: {},
 				body: user
 			}
-		};
+		}];
 
 		requestLogin({commit, dispatch}, user);
 		expect(commitResult).toStrictEqual(expectedCommitResult);
@@ -53,12 +55,12 @@ describe('auth-actions.js', () => {
 	test('should check responseLogin-actions if response is fail', () => {
 		const response = {success: false};
 		const expectedCommitResult = {command: AUTH.LOGIN.ERROR};
-		const expectedDispatchResult = {
+		const expectedDispatchResult = [{
 			command: NOTIFICATION.LEVEL.ERROR,
 			data: {
 				code: 'login-page.state.error'
 			}
-		};
+		}];
 		const router = new Router();
 
 		responseLogin({commit, dispatch, router}, response);
@@ -71,16 +73,18 @@ describe('auth-actions.js', () => {
 	test('should check responseLogin-actions', () => {
 		const response = {
 			success: true,
-			value: {
-				token: 'some token',
-				username: 'some username'
-			}
+			value: { token: 'some token', username: 'some username' }
 		};
 		const expectedCommitResult = {command: AUTH.LOGIN.SUCCESS, data: response.value};
-		const expectedDispatchResult = {
-			command: USER.PROFILE.SET,
-			data: response.value
-		};
+		const expectedDispatchResult = [
+			{
+				command: USER.PROFILE.SET,
+				data: response.value
+			},
+			{
+				command: DOMAIN_MANAGER.AFTER.LOGIN
+			}
+		];
 		const router = new Router();
 
 		responseLogin({commit, dispatch, router}, response);
@@ -93,14 +97,14 @@ describe('auth-actions.js', () => {
 
 	test('should check requestLogout-actions', () => {
 		const expectedCommitResult = {command: AUTH.LOGOUT.REQUEST};
-		const expectedDispatchResult = {
+		const expectedDispatchResult = [{
 			command: CONNECTION.SEND,
 			data: {
 				destination: config.requests.logout,
 				headers: {},
 				body: {}
 			}
-		};
+		}];
 
 		requestLogout({commit, dispatch});
 		expect(commitResult).toStrictEqual(expectedCommitResult);
@@ -111,10 +115,15 @@ describe('auth-actions.js', () => {
 	test('should check responseLogout-actions if response is fail', () => {
 		const response = {success: false};
 		const expectedCommitResult = {command: AUTH.LOGOUT.ERROR};
-		const expectedDispatchResult = {
-			command: USER.PROFILE.RESET,
-			data: response
-		};
+		const expectedDispatchResult = [
+			{
+				command: USER.PROFILE.RESET,
+				data: response
+			},
+			{
+				command: DOMAIN_MANAGER.AFTER.LOGOUT
+			}
+		];
 		const router = new Router();
 
 		responseLogout({commit, dispatch, router}, response);
@@ -127,10 +136,15 @@ describe('auth-actions.js', () => {
 	test('should check responseLogout-actions', () => {
 		const response = {success: true};
 		const expectedCommitResult = {command: AUTH.LOGOUT.SUCCESS, data: response};
-		const expectedDispatchResult = {
-			command: USER.PROFILE.RESET,
-			data: response
-		};
+		const expectedDispatchResult = [
+			{
+				command: USER.PROFILE.RESET,
+				data: response
+			},
+			{
+				command: DOMAIN_MANAGER.AFTER.LOGOUT
+			}
+		];
 		const router = new Router();
 
 		responseLogout({commit, dispatch, router}, response);

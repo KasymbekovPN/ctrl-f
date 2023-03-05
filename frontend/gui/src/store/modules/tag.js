@@ -1,20 +1,22 @@
 import { TAG } from "../../sconst/tag";
 import {
-// 	actOnTagCreated,
-// 	actOnTagLoaded,
-// 	actOnTagRemoved,
-// 	actOnTagUpdated
+	actOnTagCleaning,
+	actOnTagCreationRequest,
+	actOnTagCreationResponse,
+	actOnTagLoadingRequest,
+	actOnTagLoadingResponse
 } from "../imps/tag-actions";
 import {
 	tagAttributeDatasource,
 	tagIndexes
 } from "../imps/tag-getters";
-// import {
-// 	mutateOnTagCreated,
-// 	mutateOnTagLoaded,
-// 	mutateOnTagRemoved,
-// 	mutateOnTagUpdated
-// } from "../imps/tag-mutations";
+import {
+	mutateOnTagClearing,
+	mutateOnTagCreated,
+	mutateOnTagLoaded,
+	mutateOnTagRemoved,
+	mutateOnTagUpdated
+} from "../imps/tag-mutations";
 
 const state = {
 	tags: new Map()
@@ -26,17 +28,19 @@ const getters = {
 };
 
 const actions = {
-	// [TAG.LOADED]: actOnTagLoaded,
-	// [TAG.CREATED]: actOnTagCreated,
-	// [TAG.UPDATED]: actOnTagUpdated,
-	// [TAG.REMOVED]: actOnTagRemoved
+	[TAG.REQUEST.LOAD]: actOnTagLoadingRequest,
+	[TAG.REQUEST.CREATE]: actOnTagCreationRequest,
+	[TAG.RESPONSE.LOAD]: actOnTagLoadingResponse,
+	[TAG.RESPONSE.CREATE]: actOnTagCreationResponse,
+	[TAG.STORAGE.CLEAR]: actOnTagCleaning
 };
 
 const mutations = {
-	// [TAG.LOADED]: mutateOnTagLoaded,
-	// [TAG.CREATED]: mutateOnTagCreated,
-	// [TAG.UPDATED]: mutateOnTagUpdated,
-	// [TAG.REMOVED]: mutateOnTagRemoved
+	[TAG.RESPONSE.LOAD]: mutateOnTagLoaded,
+	[TAG.RESPONSE.CREATE]: mutateOnTagCreated,
+	[TAG.RESPONSE.UPDATE]: mutateOnTagUpdated,
+	[TAG.RESPONSE.REMOVE]: mutateOnTagRemoved,
+	[TAG.STORAGE.CLEAR]: mutateOnTagClearing
 };
 
 export default {

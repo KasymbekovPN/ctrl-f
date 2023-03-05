@@ -3,6 +3,7 @@ import config from "../../../config";
 import { AUTH } from "../../sconst/auth";
 import { CONNECTION } from "../../sconst/connection";
 import { USER } from "../../sconst/userProfile";
+import { DOMAIN_MANAGER } from "../../sconst/domainManager";
 
 const requestLogin = ({commit, dispatch}, user) => {
 	commit(AUTH.LOGIN.REQUEST);
@@ -17,7 +18,7 @@ const responseLogin = ({commit, dispatch, router}, response) => {
 	if (response.success){
 		commit(AUTH.LOGIN.SUCCESS, response.value);
 		dispatch(USER.PROFILE.SET, response.value);
-		//< call domain loading
+		dispatch(DOMAIN_MANAGER.AFTER.LOGIN);
 	} else {
 		dispatch(NOTIFICATION.LEVEL.ERROR, {code: 'login-page.state.error'});
 		commit(AUTH.LOGIN.ERROR);
@@ -41,7 +42,7 @@ const responseLogout = ({commit, dispatch, router}, response) => {
 		commit(AUTH.LOGOUT.ERROR);
 	}
 	dispatch(USER.PROFILE.RESET, response);
-	//< call domain clearing
+	dispatch(DOMAIN_MANAGER.AFTER.LOGOUT);
 	router.push(config.paths.login);
 };
 
