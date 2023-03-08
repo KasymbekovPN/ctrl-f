@@ -1,6 +1,10 @@
 <template>
 	<div class="v-tags">
-		<p>TAGS</p>
+		<v-table
+			indexesDatasource="tagIndexes"
+			attributeDatasource="tagAttributeDatasource"
+			:attributes="attributes"
+		/>
 		<v-tags-dialog v-show="isTagModalVisible" @close-modal="closeModal" />
 	</div>
 </template>
@@ -10,15 +14,32 @@
 	import { mapGetters } from 'vuex';
 	import { SIGNAL } from '../sconst/signal';
 	import vTagsDialog from './v-tags-dialog';
+	import vTable from './table/v-table';
+	import { CELL } from '../sconst/cell';
 
 	export default {
 		name: 'v-tags',
 		components: {
-			vTagsDialog
+			vTagsDialog,
+			vTable
 		},
 		props: {},
 		data() {
-			return {}
+			return {
+				attributes: [
+					{
+						name: 'id',
+						type: CELL.TYPE.TEXT,
+						code: 'table.header.tag.id',
+						width: '100px'
+					},
+					{
+						name: 'name',
+						type: CELL.TYPE.TEXT,
+						code: 'table.header.tag.name'
+					}
+				]
+			}
 		},
 		computed: {
 			...mapGetters([
@@ -32,8 +53,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	.v-tags {
-	}
-</style>

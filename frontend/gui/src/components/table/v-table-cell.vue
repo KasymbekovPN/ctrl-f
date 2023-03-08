@@ -60,7 +60,7 @@
 
 <style lang="scss">
 	.v-table-cell {
-		border: solid black 1px;
+		border: solid black 0px;
 		height: 30px;
 	}
 

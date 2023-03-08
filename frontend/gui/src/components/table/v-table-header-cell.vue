@@ -31,7 +31,7 @@
 
 <style lang="scss">
 	.v-table-header-cell {
-		border: solid black 1px;
+		border: solid black 0px;
 		height: 36px;
 		background: #4f688c4f;
 	}
