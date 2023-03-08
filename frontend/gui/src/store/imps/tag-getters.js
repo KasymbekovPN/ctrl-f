@@ -11,7 +11,15 @@ const tagIndexes = state => {
 		: new Map().keys();
 };
 
+const tagSelectedId = state => () => {
+	const r = state.selectedId;
+	state.selectedId = undefined;
+
+	return r;
+};
+
 export {
 	tagAttributeDatasource,
-	tagIndexes
+	tagIndexes,
+	tagSelectedId
 };

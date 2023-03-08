@@ -1,6 +1,7 @@
 import {
 	mutateOnTagClearing,
 	mutateOnTagCreated,
+	mutateOnTagItemSelect,
 	mutateOnTagLoaded,
 	mutateOnTagRemoved,
 	mutateOnTagUpdated
@@ -83,4 +84,12 @@ describe('tag-mutations.js', () => {
 		mutateOnTagClearing(state);
 		expect(state.tags.size).toBe(0);
 	});
+
+	test('should check mutateOnTagItemSelect', () => {
+		const expected = 123;
+
+		let state = {selectedId: undefined};
+		mutateOnTagItemSelect(state, expected);
+		expect(state.selectedId).toBe(expected);
+	})
 });

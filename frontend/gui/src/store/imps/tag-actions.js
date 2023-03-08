@@ -1,4 +1,5 @@
 import config from "../../../config";
+import { SIGNAL } from "../../sconst/signal";
 import { CONNECTION } from "../../sconst/connection";
 import { TAG } from "../../sconst/tag";
 
@@ -18,8 +19,13 @@ const actOnTagCreationRequest = ({dispatch}, name) => {
 	});
 };
 
-//<
-// const actOnTagUpdatingRequest = ({dispatch}, {id, name}) => {};
+const actOnTagUpdatingRequest = ({dispatch}, {id, name}) => {
+	dispatch(CONNECTION.SEND, {
+		destination: config.requests.tag.update,
+		headers: {},
+		body: {id, name}
+	});
+};
 
 //<
 // const actOnTagRemovingRequest = ({dispatch}, id) => {};
@@ -32,8 +38,9 @@ const actOnTagCreationResponse = ({commit}, tag) => {
 	commit(TAG.RESPONSE.CREATE, tag);
 };
 
-//<
-// const actOnTagUpdatingResponse = ({commit}, tag) => {};
+const actOnTagUpdatingResponse = ({commit}, tag) => {
+	commit(TAG.RESPONSE.UPDATE, tag);
+};
 
 //<
 // const actOnTagRemovingResponse = ({commit}, id) => {};
@@ -42,16 +49,22 @@ const actOnTagCleaning = ({commit}) => {
 	commit(TAG.STORAGE.CLEAR);
 };
 
+const actOnTagSelectItem = ({commit, dispatch}, id) => {
+	commit(TAG.SELECT.ITEM, id);
+	dispatch(SIGNAL.MODAL.TAG.ADD.SHOW);
+};
+
 export {
 	actOnTagLoadingRequest,
 	actOnTagCreationRequest,
+	actOnTagUpdatingRequest,
 	//<
-	// actOnTagUpdatingRequest,
 	// actOnTagRemovingRequest,
 	actOnTagLoadingResponse,
 	actOnTagCreationResponse,
+	actOnTagUpdatingResponse,
 	//<
-	// actOnTagUpdatingResponse,
 	// actOnTagRemovingResponse,
-	actOnTagCleaning
+	actOnTagCleaning,
+	actOnTagSelectItem
 };

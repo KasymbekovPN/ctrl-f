@@ -1,3 +1,4 @@
+//< del
 export const SIGNAL = {
 	MODAL: {
 		SOME: {

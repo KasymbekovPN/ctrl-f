@@ -51,4 +51,24 @@ public final class FakeTagServiceImpl implements FakeTagService {
 //			.arg("some went wrong")
 //			.build();
 	}
+
+	@Override
+	public Result<Tag> update(Tag tag) {
+//		return ImmutableResult.<Tag>bFail("domain.updating.tag.error.already-exist")
+//			.arg(tag.getId())
+//			.arg(tag.getName())
+//			.build();
+		// TODO: 08.03.2023 !!!
+		Long id = tag.getId();
+		String name = tag.getName();
+		if (names.contains(name)){
+			return ImmutableResult.<Tag>bFail("domain.tag.updating.fail")
+				.arg(id)
+				.arg(name)
+				.build();
+		}
+
+		storage.put(id, tag);
+		return ImmutableResult.<Tag>ok(tag);
+	}
 }

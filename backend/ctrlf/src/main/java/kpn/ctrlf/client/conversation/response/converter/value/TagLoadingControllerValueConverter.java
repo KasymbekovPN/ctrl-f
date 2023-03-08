@@ -11,7 +11,7 @@ import java.util.List;
 
 @ControllerConverter(Controllers.TAG_LOADING)
 @Component
-public final class TagLoadingControllerConverter implements ValueConverter{
+public final class TagLoadingControllerValueConverter implements ValueConverter{
 	@Override
 	public Value convert(Object input) {
 		if (!(input instanceof List<?>)){

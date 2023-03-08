@@ -2,6 +2,7 @@
 	<div
 		class="v-table-cell"
 		:class="{ even: even }"
+		v-on:dblclick="onClick"
 	>
 		<p class="v-table-cell-text" v-if="isText">{{ asText }}</p>
 		<p class="v-table-cell-text" v-if="isNumber">{{ asNumber }}</p>
@@ -35,6 +36,10 @@
 			even: {
 				type: Boolean,
 				default: false
+			},
+			selectItemAction: {
+				type: String,
+				required: true
 			}
 		},
 		data() {
@@ -54,7 +59,11 @@
 				return toLamp(this.$store.getters[this.datasource](this.id, this.attribute.name));
 			}
 		},
-		methods: {}
+		methods: {
+			onClick: function() {
+				this.$store.dispatch(this.selectItemAction, this.id);
+			}
+		}
 	}
 </script>
 

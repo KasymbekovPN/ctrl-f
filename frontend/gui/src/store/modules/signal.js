@@ -13,7 +13,9 @@ import {
 } from "../imps/signal-getters";
 import {
 	actOnSomeModalHide,
-	actOnSomeModalShow
+	actOnSomeModalShow,
+	actOnTagModalHide,
+	actOnTagModalShow
 } from "../imps/signal-actions";
 import {
 	mutateOnSomeModalHide,
@@ -48,7 +50,9 @@ const getters = {
 
 const actions = {
 	[SIGNAL.MODAL.SOME.ADD.SHOW]: actOnSomeModalShow,
-	[SIGNAL.MODAL.SOME.ADD.HIDE]: actOnSomeModalHide
+	[SIGNAL.MODAL.SOME.ADD.HIDE]: actOnSomeModalHide,
+	[SIGNAL.MODAL.TAG.ADD.SHOW]: actOnTagModalShow,
+	[SIGNAL.MODAL.TAG.ADD.HIDE]: actOnTagModalHide
 };
 
 const mutations = {

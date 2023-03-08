@@ -5,7 +5,8 @@ import {
 	processI18nSubscription,
 	processLogoutRequestSubscription,
 	processTagCreationSubscription,
-	processTagLoadingSubscription
+	processTagLoadingSubscription,
+	processTagUpdatingSubscription
 } from "../../../src/store/imps/subscription-actions";
 import { CONNECTION } from "../../../src/sconst/connection";
 import { I18N } from "../../../src/sconst/i18n";
@@ -137,6 +138,44 @@ describe('subscription-actions.js', () => {
 		};
 
 		processTagCreationSubscription({dispatch: testDispatch.dispatch}, response);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
+	})
+
+	test('should check tag updating subscription action if success', () => {
+		const value = {id: 1, name: "name"};
+		const expectedDispatchResult = [{
+			command: TAG.RESPONSE.UPDATE,
+			data: value
+		}];
+		const body = {
+			success: true,
+			value
+		};
+		const response = {
+			body: JSON.stringify(body)
+		};
+
+		processTagUpdatingSubscription({dispatch: testDispatch.dispatch}, response);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
+	})
+
+	test('should check tag updating subscription action if fail', () => {
+		const code = 'some.code';
+		const args = {arg0: 'value0'};
+		const expectedDispatchResult = [{
+			command: NOTIFICATION.LEVEL.ERROR,
+			data: {code, args}
+		}];
+		const body = {
+			success: false,
+			code,
+			args
+		};
+		const response = {
+			body: JSON.stringify(body)
+		};
+
+		processTagUpdatingSubscription({dispatch: testDispatch.dispatch}, response);
 		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
 	})
 });

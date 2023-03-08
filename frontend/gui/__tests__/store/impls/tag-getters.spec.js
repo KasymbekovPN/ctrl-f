@@ -1,6 +1,7 @@
 import {
 	tagAttributeDatasource,
-	tagIndexes
+	tagIndexes,
+	tagSelectedId
 } from "../../../src/store/imps/tag-getters";
 import each from "jest-each";
 
@@ -46,5 +47,16 @@ describe('tag-getters.js', () => {
 
 		const it = tagIndexes(state);
 		expect(it).toStrictEqual(tags.keys());
+	});
+
+	test('should check tagSelectedId-getter', () => {
+		const expectedSelectedId = 123;
+		const state = {selectedId: expectedSelectedId};
+
+		const firstTakenResult = tagSelectedId(state)();
+		const secondTakenResult = tagSelectedId(state)();
+
+		expect(firstTakenResult).toBe(expectedSelectedId);
+		expect(secondTakenResult).toBeUndefined();
 	});
 });

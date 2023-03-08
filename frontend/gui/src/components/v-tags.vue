@@ -4,8 +4,12 @@
 			indexesDatasource="tagIndexes"
 			attributeDatasource="tagAttributeDatasource"
 			:attributes="attributes"
+			:selectItemAction="selectItemAction"
 		/>
-		<v-tags-dialog v-show="isTagModalVisible" @close-modal="closeModal" />
+		<v-tags-dialog
+			v-show="isTagModalVisible"
+			@close-modal="closeModal"
+		/>
 	</div>
 </template>
 
@@ -16,6 +20,7 @@
 	import vTagsDialog from './v-tags-dialog';
 	import vTable from './table/v-table';
 	import { CELL } from '../sconst/cell';
+	import { TAG } from '../sconst/tag';
 
 	export default {
 		name: 'v-tags',
@@ -38,7 +43,8 @@
 						type: CELL.TYPE.TEXT,
 						code: 'table.header.tag.name'
 					}
-				]
+				],
+				selectItemAction: TAG.SELECT.ITEM
 			}
 		},
 		computed: {

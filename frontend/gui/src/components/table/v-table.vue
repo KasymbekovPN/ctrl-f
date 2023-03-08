@@ -10,6 +10,7 @@
 			:id="index"
 			:attributes="tableAttributes"
 			:even="index % 2 != 0"
+			:selectItemAction="selectItemAction"
 		/>
 	</div>
 </template>
@@ -36,6 +37,10 @@
 			attributes:{
 				type: Array,
 				required: true
+			},
+			selectItemAction: {
+				type: String,
+				required:  true
 			}
 		},
 		data() {

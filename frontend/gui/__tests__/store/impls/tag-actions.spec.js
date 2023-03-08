@@ -1,4 +1,5 @@
 import config from "../../../config";
+import { SIGNAL } from "../../../src/sconst/signal";
 import { CONNECTION } from "../../../src/sconst/connection";
 import { TAG } from "../../../src/sconst/tag";
 import {
@@ -6,7 +7,10 @@ import {
 	actOnTagCreationRequest,
 	actOnTagLoadingResponse,
 	actOnTagCreationResponse,
-	actOnTagCleaning
+	actOnTagCleaning,
+	actOnTagSelectItem,
+	actOnTagUpdatingRequest,
+	actOnTagUpdatingResponse
 } from "../../../src/store/imps/tag-actions";
 import testCommit from "../../../__utils/test-commit";
 import testDispatch from "../../../__utils/test-dispatch";
@@ -44,6 +48,21 @@ describe('tag-actions.js', () => {
 		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
 	});
 
+	test('should check ', () => {
+		const body = {id: 123, name: 'some.name'};
+		const expectedDispatchResult = [{
+			command: CONNECTION.SEND,
+			data: {
+				destination: config.requests.tag.update,
+				headers: {},
+				body: body
+			}
+		}];
+
+		actOnTagUpdatingRequest({dispatch: testDispatch.dispatch}, body);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
+	});
+
 	test('should check actOnTagLoadingResponse', () => {
 		const tags = [{ id, name }];
 		const expected = [{
@@ -66,6 +85,17 @@ describe('tag-actions.js', () => {
 		expect(testCommit.getResult()).toStrictEqual(expected);
 	});
 
+	test('should check actOnTagUpdatingResponse', () => {
+		const tag = { id, name };
+		const expected = [{
+			command: TAG.RESPONSE.UPDATE,
+			data: tag
+		}];
+
+		actOnTagUpdatingResponse({commit: testCommit.commit}, tag);
+		expect(testCommit.getResult()).toStrictEqual(expected);
+	});
+
 	test('should check actOnTagCleaning', () => {
 		const expected = [{
 			command: TAG.STORAGE.CLEAR,
@@ -73,5 +103,17 @@ describe('tag-actions.js', () => {
 
 		actOnTagCleaning({commit: testCommit.commit});
 		expect(testCommit.getResult()).toStrictEqual(expected);
+	});
+
+	test('should check actOnTagSelectItem', () => {
+		const expectedDispatchResult = [{command: SIGNAL.MODAL.TAG.ADD.SHOW}];
+		const expectedCommitResult = [{
+			command: TAG.SELECT.ITEM,
+			data: id
+		}];
+
+		actOnTagSelectItem({commit: testCommit.commit, dispatch: testDispatch.dispatch}, id);
+		expect(testCommit.getResult()).toStrictEqual(expectedCommitResult);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
 	});
 });

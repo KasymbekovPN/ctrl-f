@@ -28,8 +28,8 @@
 					>
 						{{ translate('dialog.btn.close.name') }}
 					</button>
-					<!-- //< v-if!!! -->
 					<button
+						v-if="deleteButtonVisible"
 						class="modal-btn-delete"
 						@click="onDeleteButtonClick"
 					>{{ translate('dialog.btn.delete.name') }}</button>
@@ -49,28 +49,48 @@
 		data() {
 			return {
 				id : undefined,
-				name: ''
+				name: '',
+				deleteButtonVisible: false
 			}
 		},
 		computed: {
 			...mapGetters([
-				'translate'
+				'translate',
+				'tagAttributeDatasource',
+				'isTagModalVisible',
+				'tagSelectedId'
 			])
 		},
 		methods: {
 			...mapActions({
-				sendNewTag: TAG.REQUEST.CREATE
+				sendNewTag: TAG.REQUEST.CREATE,
+				sendUpdatedTag: TAG.REQUEST.UPDATE
 			}),
 			onSaveButtonClick: function() {
-				this.sendNewTag({name: this.name});
+				if (this.id !== undefined){
+					this.sendUpdatedTag({id: this.id, name: this.name});
+				} else {
+					this.sendNewTag({name: this.name});
+				}
 				this.onClose();
 			},
 			onClose: function(){
 				this.$emit('close-modal');
-				this.name = '';
-				this.id = undefined;
 			},
 			onDeleteButtonClick: function() {}
+		},
+		watch: {
+			isTagModalVisible(newValue) {
+				if (newValue){
+					this.id = this.tagSelectedId();
+					this.name = this.id !== undefined ? this.tagAttributeDatasource(this.id, 'name') : '';
+					this.deleteButtonVisible = this.id !== undefined;
+				} else {
+					this.id = undefined;
+					this.name = '';
+					this.deleteButtonVisible = false;
+				}
+			}
 		}
 	}
 </script>

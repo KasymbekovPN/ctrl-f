@@ -13,5 +13,8 @@ export const TAG = {
 	},
 	STORAGE: {
 		CLEAR: 'TAG_STORAGE_CLEAR'
-	}
+	},
+	SELECT: {
+		ITEM: 'TAG_SELECT_ITEM'
+	},
 };

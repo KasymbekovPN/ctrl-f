@@ -9,4 +9,5 @@ import java.util.List;
 public interface FakeTagService {
 	default Result<Tag> save(Tag tag) { return null; }
 	default Result<List<Tag>> findAll() { return null; }
+	default Result<Tag> update(Tag tag) { return null; };
 }

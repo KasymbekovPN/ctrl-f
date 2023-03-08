@@ -25,10 +25,15 @@ const mutateOnTagClearing = state => {
 	state.tags.clear();
 };
 
+const mutateOnTagItemSelect = (state, id) => {
+	state.selectedId = id;
+};
+
 export {
 	mutateOnTagLoaded,
 	mutateOnTagCreated,
 	mutateOnTagUpdated,
 	mutateOnTagRemoved,
-	mutateOnTagClearing
+	mutateOnTagClearing,
+	mutateOnTagItemSelect
 };

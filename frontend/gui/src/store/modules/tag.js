@@ -4,15 +4,20 @@ import {
 	actOnTagCreationRequest,
 	actOnTagCreationResponse,
 	actOnTagLoadingRequest,
-	actOnTagLoadingResponse
+	actOnTagLoadingResponse,
+	actOnTagSelectItem,
+	actOnTagUpdatingRequest,
+	actOnTagUpdatingResponse
 } from "../imps/tag-actions";
 import {
 	tagAttributeDatasource,
-	tagIndexes
+	tagIndexes,
+	tagSelectedId
 } from "../imps/tag-getters";
 import {
 	mutateOnTagClearing,
 	mutateOnTagCreated,
+	mutateOnTagItemSelect,
 	mutateOnTagLoaded,
 	mutateOnTagRemoved,
 	mutateOnTagUpdated
@@ -24,15 +29,19 @@ const state = {
 
 const getters = {
 	tagAttributeDatasource: tagAttributeDatasource,
-	tagIndexes: tagIndexes
+	tagIndexes: tagIndexes,
+	tagSelectedId: tagSelectedId
 };
 
 const actions = {
 	[TAG.REQUEST.LOAD]: actOnTagLoadingRequest,
 	[TAG.REQUEST.CREATE]: actOnTagCreationRequest,
+	[TAG.REQUEST.UPDATE]: actOnTagUpdatingRequest,
 	[TAG.RESPONSE.LOAD]: actOnTagLoadingResponse,
 	[TAG.RESPONSE.CREATE]: actOnTagCreationResponse,
-	[TAG.STORAGE.CLEAR]: actOnTagCleaning
+	[TAG.RESPONSE.UPDATE]: actOnTagUpdatingResponse,
+	[TAG.STORAGE.CLEAR]: actOnTagCleaning,
+	[TAG.SELECT.ITEM]: actOnTagSelectItem
 };
 
 const mutations = {
@@ -40,7 +49,8 @@ const mutations = {
 	[TAG.RESPONSE.CREATE]: mutateOnTagCreated,
 	[TAG.RESPONSE.UPDATE]: mutateOnTagUpdated,
 	[TAG.RESPONSE.REMOVE]: mutateOnTagRemoved,
-	[TAG.STORAGE.CLEAR]: mutateOnTagClearing
+	[TAG.STORAGE.CLEAR]: mutateOnTagClearing,
+	[TAG.SELECT.ITEM]: mutateOnTagItemSelect
 };
 
 export default {

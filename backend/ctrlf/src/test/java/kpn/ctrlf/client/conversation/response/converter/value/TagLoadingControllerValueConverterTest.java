@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TagLoadingControllerConverterTest {
+class TagLoadingControllerValueConverterTest {
 
 	@Test
 	void shouldCheckConversion_ifInputNull() {
-		Value value = new TagLoadingControllerConverter().convert(null);
+		Value value = new TagLoadingControllerValueConverter().convert(null);
 		assertThat(value.getClass()).isEqualTo(TagLoadingControllerValue.class);
 		TagLoadingControllerValue castValue = (TagLoadingControllerValue) value;
 
@@ -25,7 +25,7 @@ class TagLoadingControllerConverterTest {
 	@Test
 	void shouldCheckConversion_ifInputHasWrongType() {
 		Object input = new Object();
-		Value value = new TagLoadingControllerConverter().convert(input);
+		Value value = new TagLoadingControllerValueConverter().convert(input);
 		assertThat(value.getClass()).isEqualTo(TagLoadingControllerValue.class);
 		TagLoadingControllerValue castValue = (TagLoadingControllerValue) value;
 
@@ -34,7 +34,7 @@ class TagLoadingControllerConverterTest {
 
 	@Test
 	void shouldCheckConversion_ifInputIsEmptyList() {
-		Value value = new TagLoadingControllerConverter().convert(List.of());
+		Value value = new TagLoadingControllerValueConverter().convert(List.of());
 		assertThat(value.getClass()).isEqualTo(TagLoadingControllerValue.class);
 		TagLoadingControllerValue castValue = (TagLoadingControllerValue) value;
 
@@ -43,7 +43,7 @@ class TagLoadingControllerConverterTest {
 
 	@Test
 	void shouldCheckConversion_ifInputIsListWithWrongType() {
-		Value value = new TagLoadingControllerConverter().convert(List.of(0));
+		Value value = new TagLoadingControllerValueConverter().convert(List.of(0));
 		assertThat(value.getClass()).isEqualTo(TagLoadingControllerValue.class);
 		TagLoadingControllerValue castValue = (TagLoadingControllerValue) value;
 
@@ -58,7 +58,7 @@ class TagLoadingControllerConverterTest {
 			tags[i] = new Tag((long)i, "name " + i);
 		}
 
-		Value value = new TagLoadingControllerConverter().convert(Arrays.stream(tags).collect(Collectors.toList()));
+		Value value = new TagLoadingControllerValueConverter().convert(Arrays.stream(tags).collect(Collectors.toList()));
 		assertThat(value.getClass()).isEqualTo(TagLoadingControllerValue.class);
 		TagLoadingControllerValue castValue = (TagLoadingControllerValue) value;
 

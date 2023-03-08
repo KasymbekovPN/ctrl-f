@@ -10,6 +10,7 @@
 			:id="id"
 			:attribute="attribute"
 			:even="even"
+			:selectItemAction="selectItemAction"
 		/>
 	</div>
 </template>
@@ -38,6 +39,10 @@
 			even: {
 				type: Boolean,
 				default: false
+			},
+			selectItemAction: {
+				type: String,
+				required: true
 			}
 		},
 		data() {

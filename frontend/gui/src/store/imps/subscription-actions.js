@@ -50,11 +50,22 @@ const processTagCreationSubscription = ({dispatch}, response) => {
 	}
 };
 
+const processTagUpdatingSubscription = ({dispatch}, response) => {
+	const data = JSON.parse(response.body);
+	if (data.success){
+		dispatch(TAG.RESPONSE.UPDATE, data.value);
+	} else {
+		const {code, args} = data;
+		dispatch(NOTIFICATION.LEVEL.ERROR, {code, args});
+	}
+};
+
 export {
 	processClientParamsSubscription,
 	processI18nSubscription,
 	processAuthRequestSubscription,
 	processLogoutRequestSubscription,
 	processTagLoadingSubscription,
-	processTagCreationSubscription
+	processTagCreationSubscription,
+	processTagUpdatingSubscription
 };

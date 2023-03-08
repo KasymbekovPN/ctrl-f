@@ -1,4 +1,3 @@
-
 const isActionModalVisible = state => {
 	return !!state.actionModalVisible;
 };

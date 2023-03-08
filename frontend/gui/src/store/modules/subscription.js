@@ -4,7 +4,8 @@ import {
 	processI18nSubscription,
 	processLogoutRequestSubscription,
 	processTagCreationSubscription,
-	processTagLoadingSubscription
+	processTagLoadingSubscription,
+	processTagUpdatingSubscription
 } from "../imps/subscription-actions";
 import { SUBSCRIPTION } from "../../sconst/subscription";
 
@@ -18,7 +19,8 @@ const actions = {
 	[SUBSCRIPTION.AUTH_REQUEST]: processAuthRequestSubscription,
 	[SUBSCRIPTION.LOGOUT_REQUEST]: processLogoutRequestSubscription,
 	[SUBSCRIPTION.TAG.LOADINTG]: processTagLoadingSubscription,
-	[SUBSCRIPTION.TAG.CREATION]: processTagCreationSubscription
+	[SUBSCRIPTION.TAG.CREATION]: processTagCreationSubscription,
+	[SUBSCRIPTION.TAG.UPDATING]: processTagUpdatingSubscription
 };
 
 const mutations = {};
