@@ -10,7 +10,9 @@ import {
 	actOnTagCleaning,
 	actOnTagSelectItem,
 	actOnTagUpdatingRequest,
-	actOnTagUpdatingResponse
+	actOnTagUpdatingResponse,
+	actOnTagRemovingRequest,
+	actOnTagRemovingResponse
 } from "../../../src/store/imps/tag-actions";
 import testCommit from "../../../__utils/test-commit";
 import testDispatch from "../../../__utils/test-dispatch";
@@ -48,7 +50,7 @@ describe('tag-actions.js', () => {
 		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
 	});
 
-	test('should check ', () => {
+	test('should check actOnTagUpdatingRequest', () => {
 		const body = {id: 123, name: 'some.name'};
 		const expectedDispatchResult = [{
 			command: CONNECTION.SEND,
@@ -60,6 +62,21 @@ describe('tag-actions.js', () => {
 		}];
 
 		actOnTagUpdatingRequest({dispatch: testDispatch.dispatch}, body);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
+	});
+
+	test('should check actOnTagRemovingRequest', () => {
+		const id = 123;
+		const expectedDispatchResult = [{
+			command: CONNECTION.SEND,
+			data: {
+				destination: config.requests.tag.delete,
+				headers: {},
+				body: {id}
+			}
+		}];
+
+		actOnTagRemovingRequest({dispatch: testDispatch.dispatch}, id);
 		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
 	});
 
@@ -93,6 +110,17 @@ describe('tag-actions.js', () => {
 		}];
 
 		actOnTagUpdatingResponse({commit: testCommit.commit}, tag);
+		expect(testCommit.getResult()).toStrictEqual(expected);
+	});
+
+	test('should check actOnTagRemovingResponse', () => {
+		const id = 123;
+		const expected = [{
+			command: TAG.RESPONSE.REMOVE,
+			data: id
+		}];
+
+		actOnTagRemovingResponse({commit: testCommit.commit}, id);
 		expect(testCommit.getResult()).toStrictEqual(expected);
 	});
 

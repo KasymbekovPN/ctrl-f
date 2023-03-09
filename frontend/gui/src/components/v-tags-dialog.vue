@@ -64,7 +64,8 @@
 		methods: {
 			...mapActions({
 				sendNewTag: TAG.REQUEST.CREATE,
-				sendUpdatedTag: TAG.REQUEST.UPDATE
+				sendUpdatedTag: TAG.REQUEST.UPDATE,
+				sendRemoveTag: TAG.REQUEST.REMOVE
 			}),
 			onSaveButtonClick: function() {
 				if (this.id !== undefined){
@@ -77,7 +78,15 @@
 			onClose: function(){
 				this.$emit('close-modal');
 			},
-			onDeleteButtonClick: function() {}
+			onDeleteButtonClick: function() {
+				//< del
+				console.log(`onDeleteButtonClick: ${this.id}`);
+				//<
+				if (this.id !== undefined){
+					this.sendRemoveTag(this.id);
+				}
+				this.close();
+			}
 		},
 		watch: {
 			isTagModalVisible(newValue) {

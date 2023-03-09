@@ -27,8 +27,13 @@ const actOnTagUpdatingRequest = ({dispatch}, {id, name}) => {
 	});
 };
 
-//<
-// const actOnTagRemovingRequest = ({dispatch}, id) => {};
+const actOnTagRemovingRequest = ({dispatch}, id) => {
+	dispatch(CONNECTION.SEND, {
+		destination: config.requests.tag.delete,
+		headers: {},
+		body: {id}
+	});
+};
 
 const actOnTagLoadingResponse = ({commit}, tags) => {
 	commit(TAG.RESPONSE.LOAD, tags);
@@ -42,8 +47,9 @@ const actOnTagUpdatingResponse = ({commit}, tag) => {
 	commit(TAG.RESPONSE.UPDATE, tag);
 };
 
-//<
-// const actOnTagRemovingResponse = ({commit}, id) => {};
+const actOnTagRemovingResponse = ({commit}, id) => {
+	commit(TAG.RESPONSE.REMOVE, id);
+};
 
 const actOnTagCleaning = ({commit}) => {
 	commit(TAG.STORAGE.CLEAR);
@@ -58,13 +64,11 @@ export {
 	actOnTagLoadingRequest,
 	actOnTagCreationRequest,
 	actOnTagUpdatingRequest,
-	//<
-	// actOnTagRemovingRequest,
+	actOnTagRemovingRequest,
 	actOnTagLoadingResponse,
 	actOnTagCreationResponse,
 	actOnTagUpdatingResponse,
-	//<
-	// actOnTagRemovingResponse,
+	actOnTagRemovingResponse,
 	actOnTagCleaning,
 	actOnTagSelectItem
 };

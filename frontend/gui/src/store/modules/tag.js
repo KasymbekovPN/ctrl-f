@@ -5,6 +5,8 @@ import {
 	actOnTagCreationResponse,
 	actOnTagLoadingRequest,
 	actOnTagLoadingResponse,
+	actOnTagRemovingRequest,
+	actOnTagRemovingResponse,
 	actOnTagSelectItem,
 	actOnTagUpdatingRequest,
 	actOnTagUpdatingResponse
@@ -37,9 +39,11 @@ const actions = {
 	[TAG.REQUEST.LOAD]: actOnTagLoadingRequest,
 	[TAG.REQUEST.CREATE]: actOnTagCreationRequest,
 	[TAG.REQUEST.UPDATE]: actOnTagUpdatingRequest,
+	[TAG.REQUEST.REMOVE]: actOnTagRemovingRequest,
 	[TAG.RESPONSE.LOAD]: actOnTagLoadingResponse,
 	[TAG.RESPONSE.CREATE]: actOnTagCreationResponse,
 	[TAG.RESPONSE.UPDATE]: actOnTagUpdatingResponse,
+	[TAG.RESPONSE.REMOVE]: actOnTagRemovingResponse,
 	[TAG.STORAGE.CLEAR]: actOnTagCleaning,
 	[TAG.SELECT.ITEM]: actOnTagSelectItem
 };

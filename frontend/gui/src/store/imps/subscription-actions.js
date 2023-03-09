@@ -60,6 +60,16 @@ const processTagUpdatingSubscription = ({dispatch}, response) => {
 	}
 };
 
+const processTagRemovingSubscription = ({dispatch}, response) => {
+	const data = JSON.parse(response.body);
+	if (data.success){
+		dispatch(TAG.RESPONSE.REMOVE, data.value.id);
+	} else {
+		const {code, args} = data;
+		dispatch(NOTIFICATION.LEVEL.ERROR, {code, args});
+	}
+};
+
 export {
 	processClientParamsSubscription,
 	processI18nSubscription,
@@ -67,5 +77,6 @@ export {
 	processLogoutRequestSubscription,
 	processTagLoadingSubscription,
 	processTagCreationSubscription,
-	processTagUpdatingSubscription
+	processTagUpdatingSubscription,
+	processTagRemovingSubscription
 };

@@ -6,6 +6,7 @@ import {
 	processLogoutRequestSubscription,
 	processTagCreationSubscription,
 	processTagLoadingSubscription,
+	processTagRemovingSubscription,
 	processTagUpdatingSubscription
 } from "../../../src/store/imps/subscription-actions";
 import { CONNECTION } from "../../../src/sconst/connection";
@@ -176,6 +177,33 @@ describe('subscription-actions.js', () => {
 		};
 
 		processTagUpdatingSubscription({dispatch: testDispatch.dispatch}, response);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
+	})
+
+	test('should check tag removing subscription action if success', () => {
+		const value = {id: 1};
+		const expectedDispatchResult = [{
+			command: TAG.RESPONSE.REMOVE,
+			data: value.id
+		}];
+		const body = { success: true, value };
+		const response = { body: JSON.stringify(body) };
+
+		processTagRemovingSubscription({dispatch: testDispatch.dispatch}, response);
+		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
+	})
+
+	test('should check tag removing subscription action if fail', () => {
+		const code = 'some.code';
+		const args = {arg0: 'value0'};
+		const expectedDispatchResult = [{
+			command: NOTIFICATION.LEVEL.ERROR,
+			data: {code, args}
+		}];
+		const body = { success: false, code, args };
+		const response = { body: JSON.stringify(body) };
+
+		processTagRemovingSubscription({dispatch: testDispatch.dispatch}, response);
 		expect(testDispatch.getResult()).toStrictEqual(expectedDispatchResult);
 	})
 });
