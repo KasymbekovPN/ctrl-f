@@ -15,9 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TagDeletingControllerTest {
 
+	private static final Long ID = 123L;
 	private static final String NAME = "some.name";
 
-	private static final Result<Void> RESULT = ImmutableResult.<Void>ok(null);
+	private static final Result<Long> RESULT = ImmutableResult.<Long>ok(ID);
 
 	@Test
 	void shouldCheckResponseMethod() {
