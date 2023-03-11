@@ -79,13 +79,10 @@
 				this.$emit('close-modal');
 			},
 			onDeleteButtonClick: function() {
-				//< del
-				console.log(`onDeleteButtonClick: ${this.id}`);
-				//<
 				if (this.id !== undefined){
 					this.sendRemoveTag(this.id);
 				}
-				this.close();
+				this.onClose();
 			}
 		},
 		watch: {

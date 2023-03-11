@@ -71,4 +71,14 @@ public final class FakeTagServiceImpl implements FakeTagService {
 		storage.put(id, tag);
 		return ImmutableResult.<Tag>ok(tag);
 	}
+
+	@Override
+	public Result<Long> delete(Long id) {
+//		return ImmutableResult.<Void>bFail("domain.deleting.tag.error.already-exist")
+//			.arg(id)
+//			.build();
+		// TODO: 11.03.2023 !!!
+		storage.remove(id);
+		return ImmutableResult.<Long>ok(id);
+	}
 }
