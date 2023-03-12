@@ -22,9 +22,6 @@ public final class SessionBridgeImpl implements SessionBridge {
 	public void setCorrespondence(String coreSession, String guiSession) {
 		writeLock.lock();
 			correspondence.put(coreSession, guiSession);
-			// TODO: 11.03.2023 del
-		System.out.println(correspondence);
-		// TODO: 11.03.2023 ---
 		writeLock.unlock();
 	}
 
@@ -63,5 +60,12 @@ public final class SessionBridgeImpl implements SessionBridge {
 			Map<String, String> map = Collections.unmodifiableMap(correspondence);
 		readLock.unlock();
 		return map;
+	}
+
+	@Override
+	public void eraseCorrespondence(String coreSession) {
+		writeLock.lock();
+			correspondence.remove(coreSession);
+		writeLock.unlock();
 	}
 }

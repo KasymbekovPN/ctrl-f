@@ -68,6 +68,17 @@ class SessionBridgeImplTest {
 		}
 	}
 
+	@Test
+	void shouldCheckErasing() {
+		SessionBridgeImpl bridge = createAndEnrichSessionBridge();
+		assertThat(bridge.getCorrespondence()).isEqualTo(SESSIONS);
+
+		for (Map.Entry<String, String> entry : SESSIONS.entrySet()) {
+			bridge.eraseCorrespondence(entry.getKey());
+		}
+		assertThat(bridge.getCorrespondence()).isEmpty();
+	}
+
 	private static SessionBridgeImpl createAndEnrichSessionBridge(){
 		SessionBridgeImpl bridge = new SessionBridgeImpl();
 		for (Map.Entry<String, String> entry : SESSIONS.entrySet()) {

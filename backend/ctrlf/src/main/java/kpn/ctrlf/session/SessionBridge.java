@@ -8,4 +8,5 @@ public interface SessionBridge {
 	Optional<String> getCoreSession(String guiSession);
 	Optional<String> getGuiSession(String coreSession);
 	Map<String, String> getCorrespondence();
+	void eraseCorrespondence(String coreSession);
 }
