@@ -10,9 +10,11 @@ import kpn.ctrlf.client.conversation.response.converter.args.ErrorArgsConverter;
 import kpn.ctrlf.client.conversation.response.converter.value.ValueConverter;
 import kpn.ctrlf.data.domain.Tag;
 import kpn.ctrlf.fakes.FakeTagService;
+import kpn.ctrlf.subscription.SubscriptionHolder;
 import kpn.lib.result.Result;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -26,6 +28,9 @@ import java.util.List;
 public final class TagLoadingController implements RequestController<EmptyRequest> {
 
 	@Autowired
+	@Qualifier("tagSubscriptionHolder")
+	private SubscriptionHolder<String> subscriptionHolder;
+	@Autowired
 	private FakeTagService tagService;
 	@Autowired
 	private ResponseConverter responseConverter;
@@ -38,6 +43,7 @@ public final class TagLoadingController implements RequestController<EmptyReques
 	@SendTo("/topic/tagLoadingResponse/{sessionId}")
 	public Response response(@DestinationVariable String sessionId, EmptyRequest request) {
 		Result<List<Tag>> result = tagService.findAll();
+		subscriptionHolder.subscribe(sessionId);
 		return responseConverter.convert(result, valueConverter, errorArgsConverter);
 	}
 }

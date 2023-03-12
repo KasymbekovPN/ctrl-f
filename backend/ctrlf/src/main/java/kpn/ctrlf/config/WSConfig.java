@@ -1,6 +1,7 @@
 package kpn.ctrlf.config;
 
 import kpn.ctrlf.session.SessionBridge;
+import kpn.ctrlf.subscription.SubscriptionHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 import org.springframework.web.socket.handler.WebSocketHandlerDecorator;
 import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -29,6 +31,8 @@ import java.util.function.Function;
 public class WSConfig implements WebSocketMessageBrokerConfigurer {
 	@Autowired
 	private SessionBridge sessionBridge;
+	@Autowired
+	private List<SubscriptionHolder<String>> subscriptionHolders;
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -63,7 +67,13 @@ public class WSConfig implements WebSocketMessageBrokerConfigurer {
 
 					@Override
 					public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-						sessionBridge.eraseCorrespondence(session.getId());
+						String coreSessionId = session.getId();
+						Optional<String> guiSession = sessionBridge.getGuiSession(coreSessionId);
+						guiSession.ifPresent(subscriber -> {
+							subscriptionHolders.forEach(s -> s.unsubscribe(subscriber));
+						});
+						sessionBridge.eraseCorrespondence(coreSessionId);
+
 						super.afterConnectionClosed(session, closeStatus);
 					}
 				};

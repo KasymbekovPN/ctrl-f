@@ -6,6 +6,7 @@ import kpn.ctrlf.client.conversation.response.converter.ResponseConverter;
 import kpn.ctrlf.client.conversation.response.value.Value;
 import kpn.ctrlf.data.domain.Tag;
 import kpn.ctrlf.fakes.FakeTagService;
+import kpn.ctrlf.subscription.SubscriptionHolderImpl;
 import kpn.lib.result.ImmutableResult;
 import kpn.lib.result.Result;
 import lombok.Getter;
@@ -16,8 +17,10 @@ import org.mockito.Mockito;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.linesOf;
 
 class TagLoadingControllerTest {
+	private static final String SESSION_ID = "some.session.id";
 	private static final String NAME = "some.name";
 	private static final Long ID = 123L;
 
@@ -25,14 +28,18 @@ class TagLoadingControllerTest {
 
 	@Test
 	void shouldCheckResponseMethod() {
+		SubscriptionHolderImpl<String> subscriptionHolder = new SubscriptionHolderImpl<>();
 		TagLoadingController controller = new TagLoadingController();
 		controller.setTagService(createTagService());
 		controller.setResponseConverter(createResponseConverter());
+		controller.setSubscriptionHolder(subscriptionHolder);
 
-		OkResponse response = (OkResponse) controller.response("", new EmptyRequest());
+		OkResponse response = (OkResponse) controller.response(SESSION_ID, new EmptyRequest());
 		assertThat(response.getClass()).isEqualTo(OkResponse.class);
 		TestValue castValue = (TestValue) response.getValue();
 		assertThat(castValue.getName()).isEqualTo(NAME);
+		assertThat(subscriptionHolder.getSubscribers().size()).isEqualTo(1);
+		assertThat(subscriptionHolder.getSubscribers().contains(SESSION_ID)).isTrue();
 	}
 
 	private FakeTagService createTagService(){
