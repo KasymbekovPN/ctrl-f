@@ -16,7 +16,7 @@ public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 	@Override
 	public void traceCreation(D domain) {
 		for (String subscriber : subscriptionHolder.getSubscribers()) {
-			notifier.sendNotification(
+			notifier.append(
 				onCreationConverter.convert(domain, subscriber)
 			);
 		}
@@ -25,7 +25,7 @@ public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 	@Override
 	public void traceUpdating(D domain) {
 		for (String subscriber : subscriptionHolder.getSubscribers()) {
-			notifier.sendNotification(
+			notifier.append(
 				onUpdateConverter.convert(domain, subscriber)
 			);
 		}
@@ -34,7 +34,7 @@ public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 	@Override
 	public void traceDeleting(D domain) {
 		for (String subscriber : subscriptionHolder.getSubscribers()) {
-			notifier.sendNotification(
+			notifier.append(
 				onDeletingConverter.convert(domain, subscriber)
 			);
 		}

@@ -88,9 +88,13 @@ class ChangeMonitoringImplTest {
 		private final List<DomainChangeNotificationTask> tasks = new ArrayList<>();
 
 		@Override
-		public void sendNotification(DomainChangeNotificationTask task) {
+		public boolean append(DomainChangeNotificationTask task) {
 			tasks.add(task);
+			return false;
 		}
+
+		@Override
+		public void dispose() throws InterruptedException {}
 	}
 
 	@RequiredArgsConstructor
