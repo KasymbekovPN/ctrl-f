@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class SubscriptionHolderConfig {
 
 	@Bean
-	@Qualifier("tagSubscriptionHolder")
+	@Qualifier("tagSubscriptionHolder")// TODO: 15.03.2023 move value to some enum
 	public SubscriptionHolder<String> tagSubscriptionHolder(){
 		return new SubscriptionHolderImpl<>();
 	}

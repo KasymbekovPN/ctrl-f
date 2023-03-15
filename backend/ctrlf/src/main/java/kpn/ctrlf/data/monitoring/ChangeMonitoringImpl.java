@@ -1,9 +1,13 @@
 package kpn.ctrlf.data.monitoring;
 
 import kpn.ctrlf.client.conversation.notifier.DomainChangeNotificationTask;
+import kpn.ctrlf.client.conversation.notifier.DomainChangeNotificationTaskImpl;
 import kpn.ctrlf.client.conversation.notifier.DomainChangeNotifier;
+import kpn.ctrlf.client.conversation.response.value.Value;
 import kpn.ctrlf.subscription.SubscriptionHolder;
 import lombok.RequiredArgsConstructor;
+
+import java.util.function.Function;
 
 @RequiredArgsConstructor
 public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
@@ -42,5 +46,19 @@ public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 
 	public interface Converter<D> {
 		DomainChangeNotificationTask convert(D domain, String subscriber);
+	}
+
+	@RequiredArgsConstructor
+	public static class BaseConverter<D> implements Converter<D> {
+		private final Function<D, Value> domainConverter;
+		private final String destinationPrefix;
+
+		@Override
+		public DomainChangeNotificationTask convert(D domain, String subscriber) {
+			return new DomainChangeNotificationTaskImpl(
+				destinationPrefix + subscriber,
+				domainConverter.apply(domain)
+			);
+		}
 	}
 }

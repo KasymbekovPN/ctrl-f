@@ -9,9 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -76,6 +78,23 @@ class ChangeMonitoringImplTest {
 		assertThat(notifier.getTasks()).isEqualTo(createExpectedTasks(prefix));
 	}
 
+	@Test
+	void shouldCheckBaseConverter() {
+		Function<Object, Value> domainConverter = (Object) -> {
+			return new TestValue();
+		};
+		String destinationPrefix = "some.destination.prefix.";
+		String subscriber = "subscriber";
+		String expectedDestination = destinationPrefix + subscriber;
+
+		ChangeMonitoringImpl.BaseConverter<Object> converter
+			= new ChangeMonitoringImpl.BaseConverter<>(domainConverter, destinationPrefix);
+		DomainChangeNotificationTask task = converter.convert(new Object(), subscriber);
+
+		assertThat(task.getDestination()).isEqualTo(expectedDestination);
+		assertThat(task.getPayload().getClass()).isEqualTo(TestValue.class);
+	}
+
 	private static List<TestTask> createExpectedTasks(String prefix){
 		return IntStream.range(0, SUBSCRIBERS_AMOUNT)
 			.mapToObj(i -> {
@@ -130,4 +149,6 @@ class ChangeMonitoringImplTest {
 			return new TestTask(destinationPrefix + String.valueOf(counter++), null);
 		}
 	}
+
+	private static class TestValue implements Value {}
 }
