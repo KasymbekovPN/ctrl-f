@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DomainChangeNotifierImplTest {
 
+	@SneakyThrows
 	@Test
 	void shouldCheckCreation() {
 		TestExecutorService taskExecutor = new TestExecutorService();
@@ -24,6 +25,8 @@ class DomainChangeNotifierImplTest {
 		);
 		assertThat(notifier.getClass()).isEqualTo(DomainChangeNotifierImpl.class);
 		assertThat(taskExecutor.isSubmitCalled()).isTrue();
+
+		notifier.dispose();
 	}
 
 	@SneakyThrows
@@ -63,6 +66,7 @@ class DomainChangeNotifierImplTest {
 		assertThat(queue).isEmpty();
 	}
 
+	@SneakyThrows
 	@Test
 	void shouldCheckAppend_ifQueueIsOverflow() {
 		BlockingQueue<DomainChangeNotificationTask> queue = createQueue(1);
@@ -76,8 +80,11 @@ class DomainChangeNotifierImplTest {
 		boolean result = notifier.append(new DomainChangeNotificationTaskImpl(null, null));
 		assertThat(result).isFalse();
 		assertThat(queue.size()).isEqualTo(1);
+
+		notifier.dispose();
 	}
 
+	@SneakyThrows
 	@Test
 	void shouldCheckAppend() {
 		BlockingQueue<DomainChangeNotificationTask> queue = createQueue(1);
@@ -90,8 +97,11 @@ class DomainChangeNotifierImplTest {
 		boolean result = notifier.append(new DomainChangeNotificationTaskImpl(null, null));
 		assertThat(result).isTrue();
 		assertThat(queue.size()).isEqualTo(1);
+
+		notifier.dispose();
 	}
 
+	@SneakyThrows
 	@Test
 	void shouldCheckTaskExecution() {
 		ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -114,6 +124,8 @@ class DomainChangeNotifierImplTest {
 			throw new RuntimeException(e);
 		}
 		assertThat(sender.getCounter()).isEqualTo(expectedCounter);
+
+		notifier.dispose();
 	}
 
 	private static BlockingQueue<DomainChangeNotificationTask> createQueue(int size){
