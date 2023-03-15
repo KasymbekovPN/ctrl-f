@@ -11,8 +11,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import java.util.Map;
-
 @Controller
 @RequiredArgsConstructor
 public final class I18nController implements RequestController<EmptyRequest>{
