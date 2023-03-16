@@ -14,7 +14,7 @@ public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 	private final DomainChangeNotifier notifier;
 	private final SubscriptionHolder<String> subscriptionHolder;
 	private final Converter<D> onCreationConverter;
-	private final Converter<D> onUpdateConverter;
+	private final Converter<D> onUpdatingConverter;
 	private final Converter<D> onDeletingConverter;
 
 	@Override
@@ -30,7 +30,7 @@ public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 	public void traceUpdating(D domain) {
 		for (String subscriber : subscriptionHolder.getSubscribers()) {
 			notifier.append(
-				onUpdateConverter.convert(domain, subscriber)
+				onUpdatingConverter.convert(domain, subscriber)
 			);
 		}
 	}

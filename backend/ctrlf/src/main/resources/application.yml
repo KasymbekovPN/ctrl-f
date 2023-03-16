@@ -11,7 +11,7 @@ i18n:
       - en
 
 domain:
-  change.notifier.queue.size: 1_000
+  change.notifier.queue.capacity: 1_000
   monitoring.destination.tag:
     creation: /topic/tagCreationResponse/
     updating: /topic/tagUpdatingResponse/

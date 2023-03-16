@@ -128,8 +128,8 @@ class DomainChangeNotifierImplTest {
 		notifier.dispose();
 	}
 
-	private static BlockingQueue<DomainChangeNotificationTask> createQueue(int size){
-		return new ArrayBlockingQueue<>(size);
+	private static BlockingQueue<DomainChangeNotificationTask> createQueue(int capacity){
+		return new ArrayBlockingQueue<>(capacity);
 	}
 
 	@Getter

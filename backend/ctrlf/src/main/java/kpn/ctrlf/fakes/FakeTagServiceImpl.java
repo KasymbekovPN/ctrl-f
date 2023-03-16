@@ -1,8 +1,11 @@
 package kpn.ctrlf.fakes;
 
 import kpn.ctrlf.data.domain.Tag;
+import kpn.ctrlf.data.monitoring.ChangeMonitoring;
+import kpn.ctrlf.data.monitoring.ChangeMonitoringImpl;
 import kpn.lib.result.ImmutableResult;
 import kpn.lib.result.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -10,6 +13,9 @@ import java.util.*;
 // TODO: 05.02.2023 it is temporary variant
 @Component
 public final class FakeTagServiceImpl implements FakeTagService {
+	@Autowired
+	private ChangeMonitoring<Tag> changeMonitoring;
+
 	private static final Map<Long, Tag> INIT_MAP = new HashMap<>();
 	static {
 		for (long i = 0; i < 10; i++) {

@@ -18,10 +18,10 @@ import java.util.concurrent.ThreadFactory;
 @Configuration
 @ConfigurationProperties(prefix = "domain.change.notifier.queue")
 public class DomainChangeNotifierConfig {
-	private static final int DEFAULT_QUEUE_SIZE = 1_000;
+	private static final int DEFAULT_QUEUE_CAPACITY = 1_000;
 
 	@Setter
-	private int size;
+	private int capacity;
 
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
@@ -43,6 +43,6 @@ public class DomainChangeNotifierConfig {
 	}
 
 	private int calculateQueueSize() {
-		return size > 0 ? size : DEFAULT_QUEUE_SIZE;
+		return capacity > 0 ? capacity : DEFAULT_QUEUE_CAPACITY;
 	}
 }
