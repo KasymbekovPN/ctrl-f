@@ -12,7 +12,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class ChangeMonitoringImpl<D> implements ChangeMonitoring<D> {
 	private final DomainChangeNotifier notifier;
-	private final SubscriptionHolder<String> subscriptionHolder;
+	private final SubscriptionHolder<String> subscriptionHolder; // TODO: 16.03.2023 move to notifier
 	private final Converter<D> onCreationConverter;
 	private final Converter<D> onUpdatingConverter;
 	private final Converter<D> onDeletingConverter;
