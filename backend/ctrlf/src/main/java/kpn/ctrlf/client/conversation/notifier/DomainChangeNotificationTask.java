@@ -1,8 +1,8 @@
 package kpn.ctrlf.client.conversation.notifier;
 
-import kpn.ctrlf.client.conversation.response.value.Value;
+import kpn.ctrlf.client.conversation.response.Response;
 
 public interface DomainChangeNotificationTask {
 	String getDestination();
-	Value getPayload();
+	Response getPayload();
 }

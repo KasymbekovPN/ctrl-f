@@ -1,5 +1,6 @@
 package kpn.ctrlf.client.conversation.notifier;
 
+import kpn.ctrlf.client.conversation.response.OkResponse;
 import kpn.ctrlf.client.conversation.response.value.Value;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,14 +23,16 @@ class SenderImplTest {
 		SenderImpl sender = new SenderImpl(sendingOperations);
 
 		String expectedDestination = "some.destination";
-		TestValue expectedPayload = new TestValue("some.payload");
+		TestValue expectedValue = new TestValue("some.payload");
 
 		DomainChangeNotificationTaskImpl task
-			= new DomainChangeNotificationTaskImpl(expectedDestination, expectedPayload);
+			= new DomainChangeNotificationTaskImpl(expectedDestination, new OkResponse(expectedValue));
 		sender.send(task);
 
 		assertThat(sendingOperations.getDestination()).isEqualTo(expectedDestination);
-		assertThat(sendingOperations.getPayload()).isEqualTo(expectedPayload);
+		assertThat(sendingOperations.getPayload().getClass()).isEqualTo(OkResponse.class);
+		OkResponse payload = (OkResponse) sendingOperations.getPayload();
+		assertThat(payload.getValue()).isEqualTo(expectedValue);
 	}
 
 	@RequiredArgsConstructor

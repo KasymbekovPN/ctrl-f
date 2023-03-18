@@ -1,5 +1,7 @@
 package kpn.ctrlf.client.conversation.notifier;
 
+import kpn.ctrlf.client.conversation.response.OkResponse;
+import kpn.ctrlf.client.conversation.response.Response;
 import kpn.ctrlf.client.conversation.response.value.Value;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DomainChangeNotificationTaskImplTest {
 	private static final String DESTINATION = "some.destination";
-	private static final Value PAYLOAD = new TestValue(123);
+	private static final Response PAYLOAD = new OkResponse(new TestValue(123));
 
 	@Test
 	void shouldCheckDestinationGetting() {
@@ -19,7 +21,7 @@ class DomainChangeNotificationTaskImplTest {
 
 	@Test
 	void shouldCheckPayloadGetting() {
-		Value payload = new DomainChangeNotificationTaskImpl(DESTINATION, PAYLOAD).getPayload();
+		Response payload = new DomainChangeNotificationTaskImpl(DESTINATION, PAYLOAD).getPayload();
 		assertThat(payload).isEqualTo(PAYLOAD);
 	}
 

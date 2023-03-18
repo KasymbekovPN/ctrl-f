@@ -2,6 +2,8 @@ package kpn.ctrlf.data.monitoring;
 
 import kpn.ctrlf.client.conversation.notifier.DomainChangeNotificationTask;
 import kpn.ctrlf.client.conversation.notifier.DomainChangeNotifier;
+import kpn.ctrlf.client.conversation.response.OkResponse;
+import kpn.ctrlf.client.conversation.response.Response;
 import kpn.ctrlf.client.conversation.response.value.Value;
 import kpn.ctrlf.subscription.SubscriptionHolderImpl;
 import lombok.Getter;
@@ -9,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -92,7 +93,7 @@ class ChangeMonitoringImplTest {
 		DomainChangeNotificationTask task = converter.convert(new Object(), subscriber);
 
 		assertThat(task.getDestination()).isEqualTo(expectedDestination);
-		assertThat(task.getPayload().getClass()).isEqualTo(TestValue.class);
+		assertThat(task.getPayload().getClass()).isEqualTo(OkResponse.class);
 	}
 
 	private static List<TestTask> createExpectedTasks(String prefix){
@@ -120,7 +121,7 @@ class ChangeMonitoringImplTest {
 	@Getter
 	private static class TestTask implements DomainChangeNotificationTask {
 		private final String destination;
-		private final Value payload;
+		private final Response payload;
 
 		@Override
 		public boolean equals(Object o) {

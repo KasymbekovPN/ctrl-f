@@ -6,6 +6,7 @@ const mutateOnTagLoaded = (state, tags) => {
 };
 
 const mutateOnTagCreated = (state, tag) => {
+
 	if (!state.tags.has(tag.id)){
 		state.tags.set(tag.id, tag);
 	}

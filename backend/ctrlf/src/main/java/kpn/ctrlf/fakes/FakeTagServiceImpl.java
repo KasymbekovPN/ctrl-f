@@ -45,6 +45,7 @@ public final class FakeTagServiceImpl implements FakeTagService {
 		long id = storage.size();
 		Tag newTag = new Tag(id, name);
 		storage.put(id, newTag);
+		changeMonitoring.traceCreation(newTag);
 
 		return ImmutableResult.<Tag>ok(newTag);
 	}
@@ -75,6 +76,7 @@ public final class FakeTagServiceImpl implements FakeTagService {
 		}
 
 		storage.put(id, tag);
+		changeMonitoring.traceUpdating(tag);
 		return ImmutableResult.<Tag>ok(tag);
 	}
 
@@ -85,6 +87,7 @@ public final class FakeTagServiceImpl implements FakeTagService {
 //			.build();
 		// TODO: 11.03.2023 !!!
 		storage.remove(id);
+		changeMonitoring.traceDeleting(new Tag(id, null));
 		return ImmutableResult.<Long>ok(id);
 	}
 }
